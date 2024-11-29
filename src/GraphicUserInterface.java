@@ -24,7 +24,7 @@ public class GraphicUserInterface {
 
     private void loadData() {
 
-        try (var loadFile = new FileInputStream("../data/savedObjects.ser");
+        try (var loadFile = new FileInputStream("../data/data.dat");
                 var in = new ObjectInputStream(loadFile)) {
 
             adminsList = (LinkedList<Administrator>) in.readObject();
@@ -34,20 +34,23 @@ public class GraphicUserInterface {
 
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("No saved data found!");
-            adminsList = new LinkedList<>();
-            customersList = new LinkedList<>();
-            productList = new LinkedList<>();
+            adminsList = new LinkedList<Administrator>();
+            customersList = new LinkedList<Customer>();
+            productList = new LinkedList<Product>();
         }
     }
 
-    private void saveAndExit() {
-        try (var saveFile = new FileOutputStream("../data/savedObjects.ser");
+    private void saveAndExit(Scanner scanner) {
+
+        scanner.close();
+
+        try (var saveFile = new FileOutputStream("../data/data.dat");
                 var out = new ObjectOutputStream(saveFile)) {
 
             out.writeObject(adminsList);
             out.writeObject(customersList);
             out.writeObject(productList);
-            System.out.println("Data saved successfully.");
+            System.out.println("\nData saved successfully.");
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -58,41 +61,40 @@ public class GraphicUserInterface {
 
     private void loginInterface() {
 
-        System.out.println("Login interface\n");
+        Menu.separator();
+        System.out.println("Login");
         Scanner scanner = new Scanner(System.in);
 
         Account account = null;
         while (account == null) {
 
-            System.out.print("Enter account email or press '0' to exit: ");
+            System.out.print("Enter email or zero to exit: ");
             String email = scanner.nextLine();
 
             if (email.equals("0")) {
-                scanner.close();
-                this.saveAndExit();
+                this.saveAndExit(scanner);
             }
 
             account = searchAccount(email);
             if (account == null)
-                System.out.println("Email doesn't match!");
+                Menu.invalidOptionWarning("Email, Try again!");
         }
 
         boolean passwordValid = false;
         while (!passwordValid) {
 
-            System.out.println();
-            System.out.print("Enter account password or press '0' to exit: ");
+            // System.out.println();
+            System.out.print("Enter password or zero to exit: ");
             String password = scanner.nextLine();
 
             if (password.equals("0")) {
-                scanner.close();
-                this.saveAndExit();
+                this.saveAndExit(scanner);
             }
 
             if (account.passwordMatches(password)) {
                 passwordValid = true;
             } else
-                System.out.println("Wrong password, Try again!");
+                Menu.invalidOptionWarning("password, Try again!");
         }
 
         if (account instanceof Administrator) {
@@ -104,26 +106,15 @@ public class GraphicUserInterface {
     private void storeInterface(Administrator adminAccount, Scanner scanner) {
 
         while (true) {
-            System.out.println("Administrator Menu\n");
-            System.out.println("0 - Create new account");
-            System.out.println("1 - Create new product");
-            System.out.println("2 - Report (more expensive order)");
-            System.out.println("3 - Report (product with lowest inventory)");
-            System.out.println("4 - Exit\n");
-            System.out.println("5 - Display everything");
-            System.out.print("Option: ");
+            Menu.Administrator();
             String option = scanner.nextLine();
 
             switch (option) {
                 case "0":
-                    System.out.println("Chose an option");
-                    System.out.println("0 - to create a new admin");
-                    System.out.println("1 - to create a new customer");
-                    System.out.print("Option: ");
+                    Menu.createAccount();
+                    String choice = scanner.nextLine();
 
-                    String string = scanner.nextLine();
-
-                    switch (string) {
+                    switch (choice) {
                         case "0":
                             adminsList.add(adminAccount.createAdministrator(scanner));
                             break;
@@ -131,7 +122,7 @@ public class GraphicUserInterface {
                             customersList.add(adminAccount.createCustomer(scanner));
                             break;
                         default:
-                            System.out.println("invalid option!");
+                            Menu.invalidOptionWarning("option!");
                             break;
                     }
                     break;
@@ -139,52 +130,72 @@ public class GraphicUserInterface {
                     productList.add(adminAccount.createProduct(scanner));
                     break;
                 case "2":
-
+                    adminAccount.createReportMoreExpensiveOrder(customersList);
                     break;
                 case "3":
-
+                    // Report product with lowest inventory
+                    adminAccount.createReportLowestInventoryProduct(productList);
                     break;
                 case "4":
-                    scanner.close();
-                    this.saveAndExit();
+                    this.saveAndExit(scanner);
                     break;
                 case "5":
                     this.displayEverything();
                     break;
                 default:
-                    System.out.println("\nInvalid option!\n");
+                    Menu.invalidOptionWarning("option!");
                     break;
             }
         }
     }
 
-    private void storeInterface(Customer CustomerAccount, Scanner scanner) {
+    private void storeInterface(Customer customerAccount, Scanner scanner) {
 
         while (true) {
-            System.out.println("Customer Menu\n");
-            System.out.println("0 - Create new Order");
-            System.out.println("1 - View shopping cart");
-            System.out.println("2 - Finish current order");
-            System.out.println("3 - Exit\n");
-            System.out.print("Option: ");
+            Menu.Customer();
             String option = scanner.nextLine();
 
             switch (option) {
                 case "0":
+                    var shoppingCart = new ShoppingCart();
+                    String choice = "";
+                    while (!choice.equals("2")) {
+                        Menu.startNewOrder();
+                        choice = scanner.nextLine();
 
+                        switch (choice) {
+                            case "0":
+                                if (productList.size() == 0) {
+                                    System.out.println("Sorry, there are no products!");
+                                    choice = "";
+                                } else
+                                    shoppingCart.addBoughtProduct(
+                                            customerAccount.addProductToShoppingCart(productList, scanner));
+                                break;
+                            case "1":
+                                if (shoppingCart.getCartSize() == 0) {
+                                    System.out.println("There's nothing to see in the shopping cart!");
+                                    choice = "";
+                                } else
+                                    shoppingCart.viewShoppingCart();
+                                break;
+                            case "2":
+                                if (shoppingCart.getCartSize() == 0) {
+                                    System.out.println("Can not finish order, there's no product in shopping cart!");
+                                } else
+                                    customerAccount.finishOrder(shoppingCart);
+                                break;
+                            default:
+                                Menu.invalidOptionWarning("option!");
+                                break;
+                        }
+                    }
                     break;
                 case "1":
-
-                    break;
-                case "2":
-
-                    break;
-                case "3":
-                    scanner.close();
-                    this.saveAndExit();
+                    this.saveAndExit(scanner);
                     break;
                 default:
-                    System.out.println("\nInvalid option!\n");
+                    Menu.invalidOptionWarning("option!");
                     break;
             }
         }
@@ -204,12 +215,19 @@ public class GraphicUserInterface {
 
     private void displayEverything() {
 
+        Menu.separator();
+        System.out.println("Administrator(s)");
         for (var account : adminsList) {
             account.display();
         }
+        Menu.separator();
+        System.out.println("\nCustomer(s)");
         for (var account : customersList) {
             account.display();
+            Menu.separator();
         }
+        Menu.separator();
+        System.out.println("\nProduct(s)");
         for (var product : productList) {
             product.display();
         }

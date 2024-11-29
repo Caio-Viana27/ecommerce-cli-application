@@ -5,13 +5,12 @@ public abstract class Account implements Serializable {
     private String name;
     private String email;
     private String password;
-    static int numberOfAccounts = 0;
 
     // abstract void logIn();
 
     // abstract void logOut();
     public Account(String name, String email, String password, String typeOfAccount) {
-        this.id = new String(typeOfAccount + "" + numberOfAccounts++);
+        this.id = new String(typeOfAccount + "." + IdGenerator.radomIdGenerator());
         this.name = name;
         this.email = email;
         this.password = Account.passwordEncryption(password);
@@ -34,6 +33,7 @@ public abstract class Account implements Serializable {
     }
 
     public void display() {
+        System.out.println("\nid: " + id);
         System.out.println("Name: " + name);
         System.out.println("Email: " + email);
         System.out.println("password: " + password);
