@@ -21,7 +21,7 @@ public class Product implements Serializable {
         this.id_product = product.id_product;
         this.name = product.name;
         this.price = product.price;
-        this.inventory = Constant.NOT_APPLICABLE;
+        this.inventory = -1; // bought product has no need for inventory!
         this.description = product.description;
         this.category = product.category;
     }
@@ -32,7 +32,7 @@ public class Product implements Serializable {
 
     public static boolean validadeQuantity(int quantity, int inStorage) {
         if (quantity <= 0 || quantity > inStorage) {
-            Menu.invalidOptionWarning("quantity");
+            Menu.invalidWarning("quantity");
             return false;
         }
         return true;
@@ -43,6 +43,14 @@ public class Product implements Serializable {
         System.out.println("Name: " + name);
         System.out.println("Price: " + price);
         System.out.println("inventory: " + inventory);
+        System.out.println("Descrition: " + description);
+        System.out.println("Category: " + category);
+    }
+
+    public void display(int inventoryNotApplicable) {
+        System.out.println("\nProduct id: " + id_product);
+        System.out.println("Name: " + name);
+        System.out.println("Price: " + price);
         System.out.println("Descrition: " + description);
         System.out.println("Category: " + category);
     }

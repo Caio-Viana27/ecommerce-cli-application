@@ -77,13 +77,12 @@ public class GraphicUserInterface {
 
             account = searchAccount(email);
             if (account == null)
-                Menu.invalidOptionWarning("Email, Try again!");
+                Menu.invalidWarning("Email, Try again!");
         }
 
         boolean passwordValid = false;
         while (!passwordValid) {
 
-            // System.out.println();
             System.out.print("Enter password or zero to exit: ");
             String password = scanner.nextLine();
 
@@ -94,7 +93,7 @@ public class GraphicUserInterface {
             if (account.passwordMatches(password)) {
                 passwordValid = true;
             } else
-                Menu.invalidOptionWarning("password, Try again!");
+                Menu.invalidWarning("password, Try again!");
         }
 
         if (account instanceof Administrator) {
@@ -122,7 +121,7 @@ public class GraphicUserInterface {
                             customersList.add(adminAccount.createCustomer(scanner));
                             break;
                         default:
-                            Menu.invalidOptionWarning("option!");
+                            Menu.invalidWarning("option!");
                             break;
                     }
                     break;
@@ -133,7 +132,6 @@ public class GraphicUserInterface {
                     adminAccount.createReportMoreExpensiveOrder(customersList);
                     break;
                 case "3":
-                    // Report product with lowest inventory
                     adminAccount.createReportLowestInventoryProduct(productList);
                     break;
                 case "4":
@@ -143,7 +141,7 @@ public class GraphicUserInterface {
                     this.displayEverything();
                     break;
                 default:
-                    Menu.invalidOptionWarning("option!");
+                    Menu.invalidWarning("option!");
                     break;
             }
         }
@@ -186,7 +184,7 @@ public class GraphicUserInterface {
                                     customerAccount.finishOrder(shoppingCart);
                                 break;
                             default:
-                                Menu.invalidOptionWarning("option!");
+                                Menu.invalidWarning("option!");
                                 break;
                         }
                     }
@@ -195,7 +193,7 @@ public class GraphicUserInterface {
                     this.saveAndExit(scanner);
                     break;
                 default:
-                    Menu.invalidOptionWarning("option!");
+                    Menu.invalidWarning("option!");
                     break;
             }
         }

@@ -36,7 +36,7 @@ public class Customer extends Account {
 
             product = this.searchProductList(productList, id);
             if (product == null)
-                Menu.invalidOptionWarning("id");
+                Menu.invalidWarning("id");
             else
                 break;
         }

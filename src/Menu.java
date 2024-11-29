@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Menu {
 
-    public static void invalidOptionWarning(String string) {
+    public static void invalidWarning(String string) {
         System.out.println("Invalid " + string);
     }
 

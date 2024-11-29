@@ -11,7 +11,7 @@ public class BoughtProduct extends Product {
     }
 
     public void display() {
-        super.display();
+        super.display(-1);
         System.out.println("Quantity bought: " + quantityBought);
     }
 }

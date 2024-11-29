@@ -1,41 +1,53 @@
 import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
 
 public abstract class Account implements Serializable {
     private String id;
     private String name;
     private String email;
-    private String password;
+    private Password AccountPassword;
 
-    // abstract void logIn();
+    class Password implements Serializable {
+        private byte[] salt;
+        private String password;
 
-    // abstract void logOut();
+        public Password(String createdPassword) {
+            try {
+                this.salt = PasswordEncryption.generateSalt();
+                this.password = PasswordEncryption.generateEncryptedPassword(createdPassword, this.salt);
+            } catch (NoSuchAlgorithmException e) {
+                throw new RuntimeException("Error hashing password", e);
+            }
+        }
+
+        public boolean passwordMatches(String enteredPassword) {
+            return this.password.equals(PasswordEncryption.generateEncryptedPassword(enteredPassword, this.salt));
+        }
+
+        // public void display() {
+        // System.out.println("Password: " + password);
+        // }
+    }
+
     public Account(String name, String email, String password, String typeOfAccount) {
         this.id = new String(typeOfAccount + "." + IdGenerator.radomIdGenerator());
         this.name = name;
         this.email = email;
-        this.password = Account.passwordEncryption(password);
+        this.AccountPassword = new Password(password);
     }
 
     public boolean emailMatches(String email) {
         return this.email.equals(email);
     }
 
-    public boolean passwordMatches(String password) {
-        return this.password.equals(password);
-    }
-
-    private String passwordDecryption(String encryptedPassword) {
-        return encryptedPassword;
-    }
-
-    private static String passwordEncryption(String password) {
-        return password;
+    public boolean passwordMatches(String enteredPassword) {
+        return this.AccountPassword.passwordMatches(enteredPassword);
     }
 
     public void display() {
         System.out.println("\nid: " + id);
         System.out.println("Name: " + name);
         System.out.println("Email: " + email);
-        System.out.println("password: " + password);
+        // this.AccountPassword.display();
     }
 }
