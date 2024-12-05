@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.Scanner;
 
 public class Product implements Serializable {
     private String id_product;
@@ -30,12 +31,24 @@ public class Product implements Serializable {
         return this.id_product.equals(id);
     }
 
-    public static boolean validadeQuantity(int quantity, int inStorage) {
-        if (quantity <= 0 || quantity > inStorage) {
+    public static boolean validadeQuantity(int quantity, int inventory) {
+        if (quantity <= 0 || quantity > inventory) {
             Menu.invalidWarning("quantity");
             return false;
         }
         return true;
+    }
+
+    public int selectQuantity(Scanner scanner) {
+
+        while (true) {
+            System.out.print("\nHow many products you wish to buy? ");
+            int quantity = scanner.nextInt();
+            scanner.nextLine();
+
+            if (Product.validadeQuantity(quantity, this.inventory))
+                return quantity;
+        }
     }
 
     public void display() {
@@ -60,11 +73,11 @@ public class Product implements Serializable {
     }
 
     public int getInStorage() {
-        return inventory;
+        return this.inventory;
     }
 
-    public void setInStorage(int newStorage) {
-        this.inventory = newStorage;
+    public void setNewInventory(int quantity) {
+        this.inventory += quantity;
     }
 
     public boolean hasLowertInventory(Product product) {

@@ -6,12 +6,13 @@ import java.io.ObjectInputStream;
 import java.util.Scanner;
 import java.util.LinkedList;
 
-public class GraphicUserInterface {
+public class Program {
     private LinkedList<Administrator> adminsList;
     private LinkedList<Customer> customersList;
     private LinkedList<Product> productList;
 
     public void start() {
+        Menu.separator();
         this.loadData();
         if (adminsList.size() == 0)
             adminsList.add(this.createHardcodedAdmin());
@@ -61,14 +62,13 @@ public class GraphicUserInterface {
 
     private void loginInterface() {
 
-        Menu.separator();
         System.out.println("Login");
         Scanner scanner = new Scanner(System.in);
 
         Account account = null;
         while (account == null) {
 
-            System.out.print("Enter email or zero to exit: ");
+            Menu.enterOption("email");
             String email = scanner.nextLine();
 
             if (email.equals("0")) {
@@ -83,7 +83,7 @@ public class GraphicUserInterface {
         boolean passwordValid = false;
         while (!passwordValid) {
 
-            System.out.print("Enter password or zero to exit: ");
+            Menu.enterOption("password");
             String password = scanner.nextLine();
 
             if (password.equals("0")) {
@@ -115,7 +115,7 @@ public class GraphicUserInterface {
 
                     switch (choice) {
                         case "0":
-                            adminsList.add(adminAccount.createAdministrator(scanner));
+                            adminsList.add(adminAccount.createAdministrator(scanner, this));
                             break;
                         case "1":
                             customersList.add(adminAccount.createCustomer(scanner));
@@ -171,15 +171,15 @@ public class GraphicUserInterface {
                                             customerAccount.addProductToShoppingCart(productList, scanner));
                                 break;
                             case "1":
-                                if (shoppingCart.getCartSize() == 0) {
-                                    System.out.println("There's nothing to see in the shopping cart!");
+                                if (shoppingCart.isEmpty()) {
+                                    Menu.noProductWarning("");
                                     choice = "";
                                 } else
                                     shoppingCart.viewShoppingCart();
                                 break;
                             case "2":
-                                if (shoppingCart.getCartSize() == 0) {
-                                    System.out.println("Can not finish order, there's no product in shopping cart!");
+                                if (shoppingCart.isEmpty()) {
+                                    Menu.noProductWarning("Can not finish order, ");
                                 } else
                                     customerAccount.finishOrder(shoppingCart);
                                 break;
@@ -211,6 +211,15 @@ public class GraphicUserInterface {
         return null;
     }
 
+    public boolean emailAlreadyExist(String email) {
+
+        if (adminsList.size() == 0 && customersList.size() == 0)
+            return false;
+        if (this.searchAccount(email) == null)
+            return false;
+        return true;
+    }
+
     private void displayEverything() {
 
         Menu.separator();
@@ -219,13 +228,12 @@ public class GraphicUserInterface {
             account.display();
         }
         Menu.separator();
-        System.out.println("\nCustomer(s)");
+        System.out.println("Customer(s)");
         for (var account : customersList) {
             account.display();
-            Menu.separator();
         }
         Menu.separator();
-        System.out.println("\nProduct(s)");
+        System.out.println("Product(s)");
         for (var product : productList) {
             product.display();
         }

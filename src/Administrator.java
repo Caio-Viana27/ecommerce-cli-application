@@ -7,16 +7,25 @@ public class Administrator extends Account {
         super(name, email, password, "admin");
     }
 
-    public Administrator createAdministrator(Scanner scanner) {
+    public Administrator createAdministrator(Scanner scanner, Program program) {
 
         System.out.println("\nMenu create admin");
-        System.out.print("Set Name: ");
+        System.out.print("Name: ");
         String name = scanner.nextLine();
 
-        System.out.print("Set email: ");
-        String email = scanner.nextLine();
+        String email = null;
+        boolean validEmail = false;
+        while (!validEmail) {
+            System.out.print("Email: ");
+            email = scanner.nextLine();
 
-        System.out.print("Set password: ");
+            if (!program.emailAlreadyExist(email)) {
+                validEmail = true;
+            } else
+                Menu.invalidWarning("email [this email already exist]");
+        }
+
+        System.out.print("Password: ");
         String password = scanner.nextLine();
 
         return new Administrator(name, email, password);
@@ -25,16 +34,16 @@ public class Administrator extends Account {
     public Customer createCustomer(Scanner scanner) {
 
         System.out.println("\nMenu create customer");
-        System.out.print("Set Name: ");
+        System.out.print("Name: ");
         String name = scanner.nextLine();
 
-        System.out.print("Set email: ");
+        System.out.print("Email: ");
         String email = scanner.nextLine();
 
-        System.out.print("set password: ");
+        System.out.print("Password: ");
         String password = scanner.nextLine();
 
-        System.out.println("Set address");
+        System.out.println("Address");
         System.out.print("Postalcode: ");
         String postalCode = scanner.nextLine();
 
@@ -55,21 +64,21 @@ public class Administrator extends Account {
     public Product createProduct(Scanner scanner) {
 
         System.out.println("\nCreate product menu");
-        System.out.print("Product Name: ");
+        System.out.print("Name: ");
         String name = scanner.nextLine();
 
-        System.out.print("Product Price: ");
+        System.out.print("Price: ");
         double price = scanner.nextDouble();
         scanner.nextLine();
 
-        System.out.print("Product inventory: ");
+        System.out.print("Inventory: ");
         int availableProducts = scanner.nextInt();
         scanner.nextLine();
 
-        System.out.print("Products description: ");
+        System.out.print("Description: ");
         String description = scanner.nextLine();
 
-        System.out.print("Products category: ");
+        System.out.print("Category: ");
         String category = scanner.nextLine();
 
         return new Product(name, price, availableProducts, description, category);

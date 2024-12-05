@@ -23,10 +23,13 @@ public class Customer extends Account {
     public BoughtProduct addProductToShoppingCart(LinkedList<Product> productList, Scanner scanner) {
 
         Product product;
+        Menu.separator();
+        System.out.println("List of products");
+        System.out.println("To select a product type its id");
+        System.out.println(
+                "If no products were displayed, there are no producst with suficcent inventory, please press '-1'!");
+
         while (true) {
-            Menu.separator();
-            System.out.println("List of products");
-            System.out.println("To select a product type its id");
             for (var tempProd : productList) {
                 if (tempProd.getInStorage() > 0)
                     tempProd.display();
@@ -37,11 +40,11 @@ public class Customer extends Account {
             product = this.searchProductList(productList, id);
             if (product == null)
                 Menu.invalidWarning("id");
-            else
+            else if (id.equals("-1"))
                 break;
         }
-        int quantity = Menu.selectQuantity(scanner, product.getInStorage());
-        product.setInStorage(product.getInStorage() - quantity);
+        int quantity = product.selectQuantity(scanner);
+        product.setNewInventory(-quantity);
 
         return new BoughtProduct(product, quantity);
     }
@@ -54,7 +57,7 @@ public class Customer extends Account {
         super.display();
         System.out.println("Delivery address:");
         deliveryAddress.display();
-        System.out.println("Order history:");
+        System.out.println("\nOrder history:\n");
         this.orderHistoryDisplay();
     }
 

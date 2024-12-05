@@ -22,8 +22,8 @@ public class ShoppingCart implements Serializable {
         }
     }
 
-    public int getCartSize() {
-        return cart.size();
+    public boolean isEmpty() {
+        return cart.size() == 0;
     }
 
     public double getTotalPrice() {

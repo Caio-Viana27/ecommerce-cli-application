@@ -6,6 +6,14 @@ public class Menu {
         System.out.println("Invalid " + string);
     }
 
+    public static void enterOption(String string) {
+        System.out.print("Enter " + string + " or zero to exit: ");
+    }
+
+    public static void noProductWarning(String string) {
+        System.out.println(string + "no products in the shopping cart!");
+    }
+
     public static void separator() {
         System.out.println("\n=======================================================");
     }
@@ -45,17 +53,5 @@ public class Menu {
         System.out.println("1 - View shopping cart");
         System.out.println("2 - Finish order");
         System.out.print("Option: ");
-    }
-
-    public static int selectQuantity(Scanner scanner, int inStorage) {
-
-        while (true) {
-            System.out.print("\nHow many products you wish to buy? ");
-            int quantity = scanner.nextInt();
-            scanner.nextLine();
-
-            if (Product.validadeQuantity(quantity, inStorage))
-                return quantity;
-        }
     }
 }
