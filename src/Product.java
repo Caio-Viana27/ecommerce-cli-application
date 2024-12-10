@@ -72,8 +72,8 @@ public class Product implements Serializable {
         return price;
     }
 
-    public int getInStorage() {
-        return this.inventory;
+    public String getId() {
+        return this.id_product;
     }
 
     public void setNewInventory(int quantity) {
@@ -82,5 +82,9 @@ public class Product implements Serializable {
 
     public boolean hasLowertInventory(Product product) {
         return this.inventory <= product.inventory;
+    }
+
+    public boolean isAvailable() {
+        return inventory > 0;
     }
 }

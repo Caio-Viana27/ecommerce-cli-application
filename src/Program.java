@@ -1,21 +1,21 @@
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
-import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.IOException;
 import java.util.Scanner;
-import java.util.LinkedList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Program {
-    private LinkedList<Administrator> adminsList;
-    private LinkedList<Customer> customersList;
-    private LinkedList<Product> productList;
+    private HashMap<String, Account> accounts;
+    private HashMap<String, Product> products;
 
     public void start() {
         Menu.separator();
         this.loadData();
-        if (adminsList.size() == 0)
-            adminsList.add(this.createHardcodedAdmin());
+        if (accounts.isEmpty())
+            accounts.put("admin@gmail.com", createHardcodedAdmin());
         this.loginInterface();
     }
 
@@ -28,16 +28,14 @@ public class Program {
         try (var loadFile = new FileInputStream("../data/data.dat");
                 var in = new ObjectInputStream(loadFile)) {
 
-            adminsList = (LinkedList<Administrator>) in.readObject();
-            customersList = (LinkedList<Customer>) in.readObject();
-            productList = (LinkedList<Product>) in.readObject();
+            accounts = (HashMap<String, Account>) in.readObject();
+            products = (HashMap<String, Product>) in.readObject();
             System.out.println("Data loaded successfully!");
 
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("No saved data found!");
-            adminsList = new LinkedList<Administrator>();
-            customersList = new LinkedList<Customer>();
-            productList = new LinkedList<Product>();
+            accounts = new HashMap<String, Account>();
+            products = new HashMap<String, Product>();
         }
     }
 
@@ -48,9 +46,8 @@ public class Program {
         try (var saveFile = new FileOutputStream("../data/data.dat");
                 var out = new ObjectOutputStream(saveFile)) {
 
-            out.writeObject(adminsList);
-            out.writeObject(customersList);
-            out.writeObject(productList);
+            out.writeObject(accounts);
+            out.writeObject(products);
             System.out.println("\nData saved successfully.");
 
         } catch (IOException e) {
@@ -75,9 +72,9 @@ public class Program {
                 this.saveAndExit(scanner);
             }
 
-            account = searchAccount(email);
+            account = accounts.get(email);
             if (account == null)
-                Menu.invalidWarning("Email, Try again!");
+                Menu.invalidWarning("email, Try again!");
         }
 
         boolean passwordValid = false;
@@ -115,10 +112,10 @@ public class Program {
 
                     switch (choice) {
                         case "0":
-                            adminsList.add(adminAccount.createAdministrator(scanner, this));
+                            adminAccount.createAdministrator(scanner, accounts);
                             break;
                         case "1":
-                            customersList.add(adminAccount.createCustomer(scanner));
+                            adminAccount.createCustomer(scanner, accounts);
                             break;
                         default:
                             Menu.invalidWarning("option!");
@@ -126,13 +123,19 @@ public class Program {
                     }
                     break;
                 case "1":
-                    productList.add(adminAccount.createProduct(scanner));
+                    adminAccount.createProduct(scanner, products);
                     break;
                 case "2":
-                    adminAccount.createReportMoreExpensiveOrder(customersList);
+                    if (accounts.isEmpty())
+                        System.out.println("There are no customer accounts");
+                    else
+                        adminAccount.createReportMoreExpensiveOrder(accounts);
                     break;
                 case "3":
-                    adminAccount.createReportLowestInventoryProduct(productList);
+                    if (products.isEmpty())
+                        System.out.println("There are no products yet");
+                    else
+                        adminAccount.createReportLowestInventoryProduct(products);
                     break;
                 case "4":
                     this.saveAndExit(scanner);
@@ -163,12 +166,11 @@ public class Program {
 
                         switch (choice) {
                             case "0":
-                                if (productList.size() == 0) {
+                                if (products.isEmpty()) {
                                     System.out.println("Sorry, there are no products!");
                                     choice = "";
                                 } else
-                                    shoppingCart.addBoughtProduct(
-                                            customerAccount.addProductToShoppingCart(productList, scanner));
+                                    customerAccount.addProductToShoppingCart(products, shoppingCart, scanner);
                                 break;
                             case "1":
                                 if (shoppingCart.isEmpty()) {
@@ -199,43 +201,17 @@ public class Program {
         }
     }
 
-    private Account searchAccount(String email) {
-        for (Account account : adminsList) {
-            if (account.emailMatches(email))
-                return account;
-        }
-        for (Account account : customersList) {
-            if (account.emailMatches(email))
-                return account;
-        }
-        return null;
-    }
-
-    public boolean emailAlreadyExist(String email) {
-
-        if (adminsList.size() == 0 && customersList.size() == 0)
-            return false;
-        if (this.searchAccount(email) == null)
-            return false;
-        return true;
-    }
-
     private void displayEverything() {
 
         Menu.separator();
-        System.out.println("Administrator(s)");
-        for (var account : adminsList) {
-            account.display();
-        }
-        Menu.separator();
-        System.out.println("Customer(s)");
-        for (var account : customersList) {
-            account.display();
+        System.out.println("Acount(s)");
+        for (Map.Entry<String, Account> entry : accounts.entrySet()) {
+            entry.getValue().display();
         }
         Menu.separator();
         System.out.println("Product(s)");
-        for (var product : productList) {
-            product.display();
+        for (Map.Entry<String, Product> entry : products.entrySet()) {
+            entry.getValue().display();
         }
     }
 }

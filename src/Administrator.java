@@ -1,5 +1,6 @@
 import java.util.Scanner;
-import java.util.LinkedList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Administrator extends Account {
 
@@ -7,38 +8,40 @@ public class Administrator extends Account {
         super(name, email, password, "admin");
     }
 
-    public Administrator createAdministrator(Scanner scanner, Program program) {
+    private String getValidEmail(Scanner scanner, HashMap<String, Account> accounts) {
+
+        String email = null;
+        do {
+            System.out.print("Email: ");
+            email = scanner.nextLine();
+            if (accounts.get(email) != null)
+                Menu.invalidWarning("email [this email already exist]");
+        } while (accounts.get(email) != null);
+
+        return email;
+    }
+
+    public void createAdministrator(Scanner scanner, HashMap<String, Account> accounts) {
 
         System.out.println("\nMenu create admin");
         System.out.print("Name: ");
         String name = scanner.nextLine();
 
-        String email = null;
-        boolean validEmail = false;
-        while (!validEmail) {
-            System.out.print("Email: ");
-            email = scanner.nextLine();
-
-            if (!program.emailAlreadyExist(email)) {
-                validEmail = true;
-            } else
-                Menu.invalidWarning("email [this email already exist]");
-        }
+        String email = this.getValidEmail(scanner, accounts);
 
         System.out.print("Password: ");
         String password = scanner.nextLine();
 
-        return new Administrator(name, email, password);
+        accounts.put(email, new Administrator(name, email, password));
     }
 
-    public Customer createCustomer(Scanner scanner) {
+    public void createCustomer(Scanner scanner, HashMap<String, Account> accounts) {
 
         System.out.println("\nMenu create customer");
         System.out.print("Name: ");
         String name = scanner.nextLine();
 
-        System.out.print("Email: ");
-        String email = scanner.nextLine();
+        String email = this.getValidEmail(scanner, accounts);
 
         System.out.print("Password: ");
         String password = scanner.nextLine();
@@ -58,12 +61,12 @@ public class Administrator extends Account {
 
         Address myAddress = new Address(postalCode, Street, city, appartmentOrHouseNumber);
 
-        return new Customer(name, email, password, myAddress);
+        accounts.put(email, new Customer(name, email, password, myAddress));
     }
 
-    public Product createProduct(Scanner scanner) {
+    public void createProduct(Scanner scanner, HashMap<String, Product> products) {
 
-        System.out.println("\nCreate product menu");
+        System.out.println("\nMenu Create product");
         System.out.print("Name: ");
         String name = scanner.nextLine();
 
@@ -81,18 +84,19 @@ public class Administrator extends Account {
         System.out.print("Category: ");
         String category = scanner.nextLine();
 
-        return new Product(name, price, availableProducts, description, category);
+        Product newpProduct = new Product(name, price, availableProducts, description, category);
+        products.put(newpProduct.getId(), newpProduct);
     }
 
-    public void createReportMoreExpensiveOrder(LinkedList<Customer> customersList) {
-        if (customersList.size() == 0) {
-            System.out.println("There are no customer accounts");
-            return;
-        }
+    public void createReportMoreExpensiveOrder(HashMap<String, Account> accounts) {
+
         Order mostExpensiveOrder = null;
-        for (var customer : customersList) {
-            if (customer.hasHistoryOrder()) {
-                mostExpensiveOrder = customer.searchMoreExpensiveOrder(mostExpensiveOrder);
+        for (Map.Entry<String, Account> entry : accounts.entrySet()) {
+            if (entry.getValue() instanceof Customer) {
+                var customer = (Customer) entry.getValue();
+                if (customer.hasHistoryOrder()) {
+                    mostExpensiveOrder = customer.searchMoreExpensiveOrder(mostExpensiveOrder);
+                }
             }
         }
         if (mostExpensiveOrder == null) {
@@ -102,17 +106,13 @@ public class Administrator extends Account {
         mostExpensiveOrder.display();
     }
 
-    public void createReportLowestInventoryProduct(LinkedList<Product> productList) {
+    public void createReportLowestInventoryProduct(HashMap<String, Product> products) {
 
-        if (productList.size() == 0) {
-            System.out.println("There are no products yet");
-            return;
-        }
         Product lowestInventoryProduct = null;
 
-        for (var product : productList) {
-            if (lowestInventoryProduct == null || !lowestInventoryProduct.hasLowertInventory(product)) {
-                lowestInventoryProduct = product;
+        for (Map.Entry<String, Product> entry : products.entrySet()) {
+            if (lowestInventoryProduct == null || !lowestInventoryProduct.hasLowertInventory(entry.getValue())) {
+                lowestInventoryProduct = entry.getValue();
             }
         }
         lowestInventoryProduct.display();

@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class Menu {
 
     public static void invalidWarning(String string) {

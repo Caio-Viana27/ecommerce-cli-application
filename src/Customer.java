@@ -1,5 +1,7 @@
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.Map;
 
 public class Customer extends Account {
     private Address deliveryAddress;
@@ -11,42 +13,39 @@ public class Customer extends Account {
         this.orderHistory = new LinkedList<Order>();
     }
 
-    private Product searchProductList(LinkedList<Product> productList, String id) {
-        for (var product : productList) {
-            if (product.idMatches(id)) {
-                return product;
-            }
-        }
-        return null;
-    }
-
-    public BoughtProduct addProductToShoppingCart(LinkedList<Product> productList, Scanner scanner) {
+    public void addProductToShoppingCart(HashMap<String, Product> products,
+            ShoppingCart shoppingCart, Scanner scanner) {
 
         Product product;
         Menu.separator();
         System.out.println("List of products");
         System.out.println("To select a product type its id");
-        System.out.println(
-                "If no products were displayed, there are no producst with suficcent inventory, please press '-1'!");
 
+        for (Map.Entry<String, Product> entry : products.entrySet()) {
+            entry.getValue().display();
+        }
         while (true) {
-            for (var tempProd : productList) {
-                if (tempProd.getInStorage() > 0)
-                    tempProd.display();
-            }
+
             System.out.print("\nEnter id: ");
             String id = scanner.nextLine();
 
-            product = this.searchProductList(productList, id);
-            if (product == null)
-                Menu.invalidWarning("id");
-            else if (id.equals("-1"))
+            product = products.get(id);
+
+            if (product != null) {
                 break;
+            } else
+                Menu.invalidWarning("id");
         }
+
+        if (!product.isAvailable()) {
+            System.out.println("Sorry, the selected product has no inventory");
+            return;
+        }
+
         int quantity = product.selectQuantity(scanner);
         product.setNewInventory(-quantity);
 
-        return new BoughtProduct(product, quantity);
+        shoppingCart.addBoughtProduct(new BoughtProduct(product, quantity));
     }
 
     public void finishOrder(ShoppingCart shoppingCart) {
