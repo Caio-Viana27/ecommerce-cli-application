@@ -15,6 +15,10 @@ public class Message {
         System.out.println("There are no customer accounts");
     }
 
+    public static void thereAreNoOrders() {
+        System.out.println("There are no orders yet");
+    }
+
     public static void thereAreNoProducts() {
         System.out.println("There are no products yet");
     }

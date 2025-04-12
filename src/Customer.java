@@ -78,9 +78,14 @@ public class Customer extends Account {
         return !orderHistory.isEmpty();
     }
 
-    public Order searchMoreExpensiveOrder(Order currentMoreExpensive) {
+    public Order getMostExpensiveOrder() {
+        if (!hasOrderHistory())
+            return null;
+
+        Order currentMoreExpensive = null;
+
         for (Order order : orderHistory) {
-            if (currentMoreExpensive == null || !currentMoreExpensive.isMoreExpensiveOrder(order)) {
+            if (currentMoreExpensive == null || !currentMoreExpensive.isMoreExpensive(order)) {
                 currentMoreExpensive = order;
             }
         }

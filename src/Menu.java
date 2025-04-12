@@ -40,4 +40,8 @@ public class Menu {
         System.out.println("2 - Finish order");
         System.out.print("Option: ");
     }
+
+    public static void report(Program program, Report report) {
+        report.create(program);
+    }
 }

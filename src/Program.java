@@ -1,3 +1,4 @@
+import java.util.Collection;
 import java.util.Scanner;
 import java.util.Map;
 
@@ -99,13 +100,13 @@ public class Program {
                     if (accounts.isEmpty())
                         Message.thereAreNoCustomers();
                     else
-                        adminAccount.createReportMoreExpensiveOrder(accounts);
+                        Menu.report(this, new ReportMostExpensiveOrder());
                     break;
                 case "3":
                     if (products.isEmpty())
                         Message.thereAreNoProducts();
                     else
-                        adminAccount.createReportLowestInventoryProduct(products);
+                        Menu.report(this, new ReportLowestInventoryProduct());
                     break;
                 case "4":
                     if (data.save(accounts, products)) {
@@ -117,7 +118,7 @@ public class Program {
                     System.exit(0);
                     break;
                 case "5":
-                    displayEverything();
+                    Menu.report(this, new FullReport());
                     break;
                 default:
                     Message.invalidOption("option!");
@@ -182,19 +183,13 @@ public class Program {
                     break;
             }
         }
-    }//Menu.data
+    }
 
-    private void displayEverything() {
+    public Collection<Account> getAccounts() {
+        return accounts.values();
+    }
 
-        Menu.separator();
-        System.out.println("Acount(s)");
-        for (Map.Entry<String, Account> entry : accounts.entrySet()) {
-            entry.getValue().display();
-        }
-        Menu.separator();
-        System.out.println("Product(s)");
-        for (Map.Entry<String, Product> entry : products.entrySet()) {
-            entry.getValue().display();
-        }
+    public Collection<Product> getProducts() {
+        return products.values();
     }
 }

@@ -22,7 +22,9 @@ public class Order implements Serializable {
         shoppingCart.viewShoppingCart();
     }
 
-    public boolean isMoreExpensiveOrder(Order order) {
+    public boolean isMoreExpensive(Order order) {
+        if (order == null)
+            return true;
         return this.totalSpent >= order.totalSpent;
     }
 }

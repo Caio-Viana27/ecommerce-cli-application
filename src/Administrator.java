@@ -15,7 +15,7 @@ public class Administrator extends Account {
             System.out.print("Email: ");
             email = scanner.nextLine();
             if (accounts.get(email) != null)
-                Menu.invalidWarning("email [this email already exist]");
+                Message.invalidOption("email [this email already exist]");
         } while (accounts.get(email) != null);
 
         return email;
@@ -90,24 +90,6 @@ public class Administrator extends Account {
 
         Product newpProduct = new Product(name, price, availableProducts, description, category);
         products.put(newpProduct.getId(), newpProduct);
-    }
-
-    public void createReportMoreExpensiveOrder(Map<String, Account> accounts) {
-
-        Order mostExpensiveOrder = null;
-        for (Map.Entry<String, Account> entry : accounts.entrySet()) {
-            if (entry.getValue() instanceof Customer) {
-                var customer = (Customer) entry.getValue();
-                if (customer.hasHistoryOrder()) {
-                    mostExpensiveOrder = customer.searchMoreExpensiveOrder(mostExpensiveOrder);
-                }
-            }
-        }
-        if (mostExpensiveOrder == null) {
-            System.out.println("There are no orders yet");
-            return;
-        }
-        mostExpensiveOrder.display();
     }
 
     public void createReportLowestInventoryProduct(Map<String, Product> products) {
