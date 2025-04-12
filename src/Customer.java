@@ -13,7 +13,11 @@ public class Customer extends Account {
         this.orderHistory = new LinkedList<Order>();
     }
 
-    public void addProductToShoppingCart(HashMap<String, Product> products,
+    public void menu(Program program) {
+        program.storeMenu(this);
+    }
+
+    public void addProductToShoppingCart(Map<String, Product> products,
             ShoppingCart shoppingCart, Scanner scanner) {
 
         Product product;
@@ -34,11 +38,11 @@ public class Customer extends Account {
             if (product != null) {
                 break;
             } else
-                Menu.invalidWarning("id");
+                Message.invalidOption("id");
         }
 
         if (!product.isAvailable()) {
-            System.out.println("Sorry, the selected product has no inventory");
+            Message.productHasNoInventory();
             return;
         }
 
@@ -61,7 +65,7 @@ public class Customer extends Account {
     }
 
     private void orderHistoryDisplay() {
-        if (orderHistory.size() == 0) {
+        if (orderHistory.isEmpty()) {
             System.out.println("No order history yet");
             return;
         }
@@ -70,8 +74,8 @@ public class Customer extends Account {
         }
     }
 
-    public boolean hasHistoryOrder() {
-        return this.orderHistory.size() > 0;
+    public boolean hasOrderHistory() {
+        return !orderHistory.isEmpty();
     }
 
     public Order searchMoreExpensiveOrder(Order currentMoreExpensive) {

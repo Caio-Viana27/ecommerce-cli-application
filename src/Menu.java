@@ -1,17 +1,5 @@
 public class Menu {
 
-    public static void invalidWarning(String string) {
-        System.out.println("Invalid " + string);
-    }
-
-    public static void enterOption(String string) {
-        System.out.print("Enter " + string + " or zero to exit: ");
-    }
-
-    public static void noProductWarning(String string) {
-        System.out.println(string + "no products in the shopping cart!");
-    }
-
     public static void separator() {
         System.out.println("\n=======================================================");
     }

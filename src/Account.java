@@ -36,6 +36,8 @@ public abstract class Account implements Serializable {
         this.AccountPassword = new Password(password);
     }
 
+    public abstract void menu(Program program);
+
     public boolean emailMatches(String email) {
         return this.email.equals(email);
     }

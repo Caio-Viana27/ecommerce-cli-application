@@ -8,9 +8,9 @@ public class Administrator extends Account {
         super(name, email, password, "admin");
     }
 
-    private String getValidEmail(Scanner scanner, HashMap<String, Account> accounts) {
+    private String getValidEmail(Scanner scanner, Map<String, Account> accounts) {
 
-        String email = null;
+        String email;
         do {
             System.out.print("Email: ");
             email = scanner.nextLine();
@@ -21,13 +21,17 @@ public class Administrator extends Account {
         return email;
     }
 
-    public void createAdministrator(Scanner scanner, HashMap<String, Account> accounts) {
+    public void menu(Program program) {
+        program.storeMenu(this);
+    }
+
+    public void createAdministrator(Scanner scanner, Map<String, Account> accounts) {
 
         System.out.println("\nMenu create admin");
         System.out.print("Name: ");
         String name = scanner.nextLine();
 
-        String email = this.getValidEmail(scanner, accounts);
+        String email = getValidEmail(scanner, accounts);
 
         System.out.print("Password: ");
         String password = scanner.nextLine();
@@ -35,13 +39,13 @@ public class Administrator extends Account {
         accounts.put(email, new Administrator(name, email, password));
     }
 
-    public void createCustomer(Scanner scanner, HashMap<String, Account> accounts) {
+    public void createCustomer(Scanner scanner, Map<String, Account> accounts) {
 
         System.out.println("\nMenu create customer");
         System.out.print("Name: ");
         String name = scanner.nextLine();
 
-        String email = this.getValidEmail(scanner, accounts);
+        String email = getValidEmail(scanner, accounts);
 
         System.out.print("Password: ");
         String password = scanner.nextLine();
@@ -64,7 +68,7 @@ public class Administrator extends Account {
         accounts.put(email, new Customer(name, email, password, myAddress));
     }
 
-    public void createProduct(Scanner scanner, HashMap<String, Product> products) {
+    public void createProduct(Scanner scanner, Map<String, Product> products) {
 
         System.out.println("\nMenu Create product");
         System.out.print("Name: ");
@@ -88,7 +92,7 @@ public class Administrator extends Account {
         products.put(newpProduct.getId(), newpProduct);
     }
 
-    public void createReportMoreExpensiveOrder(HashMap<String, Account> accounts) {
+    public void createReportMoreExpensiveOrder(Map<String, Account> accounts) {
 
         Order mostExpensiveOrder = null;
         for (Map.Entry<String, Account> entry : accounts.entrySet()) {
@@ -106,7 +110,7 @@ public class Administrator extends Account {
         mostExpensiveOrder.display();
     }
 
-    public void createReportLowestInventoryProduct(HashMap<String, Product> products) {
+    public void createReportLowestInventoryProduct(Map<String, Product> products) {
 
         Product lowestInventoryProduct = null;
 

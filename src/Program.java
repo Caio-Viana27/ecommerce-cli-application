@@ -1,105 +1,75 @@
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-import java.io.ObjectInputStream;
-import java.io.IOException;
 import java.util.Scanner;
-import java.util.HashMap;
 import java.util.Map;
 
 public class Program {
-    private HashMap<String, Account> accounts;
-    private HashMap<String, Product> products;
+    private Map<String, Account> accounts;
+    private Map<String, Product> products;
+
+    Serialization data = new Serialization();
+    Scanner scanner = new Scanner(System.in);
 
     public void start() {
         Menu.separator();
-        this.loadData();
+
+        if (data.loadData(accounts, products)) {
+            Message.dataFound();
+        }
+        else {
+            Message.noDataFound();
+        }
+
         if (accounts.isEmpty())
             accounts.put("admin@gmail.com", createHardcodedAdmin());
-        this.loginInterface();
+
+        loginInterface();
     }
 
     private Administrator createHardcodedAdmin() {
         return new Administrator("admin", "admin@gmail.com", "admin");
     }
 
-    private void loadData() {
-
-        try (var loadFile = new FileInputStream("../data/data.dat");
-                var in = new ObjectInputStream(loadFile)) {
-
-            accounts = (HashMap<String, Account>) in.readObject();
-            products = (HashMap<String, Product>) in.readObject();
-            System.out.println("Data loaded successfully!");
-
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println("No saved data found!");
-            accounts = new HashMap<String, Account>();
-            products = new HashMap<String, Product>();
-        }
-    }
-
-    private void saveAndExit(Scanner scanner) {
-
-        scanner.close();
-
-        try (var saveFile = new FileOutputStream("../data/data.dat");
-                var out = new ObjectOutputStream(saveFile)) {
-
-            out.writeObject(accounts);
-            out.writeObject(products);
-            System.out.println("\nData saved successfully.");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        System.exit(0);
-    }
-
     private void loginInterface() {
 
-        System.out.println("Login");
-        Scanner scanner = new Scanner(System.in);
+        Message.login();
 
         Account account = null;
         while (account == null) {
 
-            Menu.enterOption("email");
+            Message.enterOption("email");
             String email = scanner.nextLine();
 
-            if (email.equals("0")) {
-                this.saveAndExit(scanner);
+            if ("0".equals(email)) {
+                scanner.close();
+                data.save(accounts, products);
             }
 
             account = accounts.get(email);
             if (account == null)
-                Menu.invalidWarning("email, Try again!");
+                Message.invalidOption("email, Try again!");
         }
 
         boolean passwordValid = false;
         while (!passwordValid) {
 
-            Menu.enterOption("password");
+            Message.enterOption("password");
             String password = scanner.nextLine();
 
-            if (password.equals("0")) {
-                this.saveAndExit(scanner);
+            if ("0".equals(password)) {
+                data.save(accounts, products);
             }
 
             if (account.passwordMatches(password)) {
                 passwordValid = true;
-            } else
-                Menu.invalidWarning("password, Try again!");
+            }
+            else {
+                Message.invalidOption("password, Try again!");
+            }
         }
 
-        if (account instanceof Administrator) {
-            this.storeInterface((Administrator) account, scanner);
-        } else
-            this.storeInterface((Customer) account, scanner);
+        account.menu(this);
     }
 
-    private void storeInterface(Administrator adminAccount, Scanner scanner) {
+    public void storeMenu(Administrator adminAccount) {
 
         while (true) {
             Menu.Administrator();
@@ -118,7 +88,7 @@ public class Program {
                             adminAccount.createCustomer(scanner, accounts);
                             break;
                         default:
-                            Menu.invalidWarning("option!");
+                            Message.invalidOption("option!");
                             break;
                     }
                     break;
@@ -127,30 +97,36 @@ public class Program {
                     break;
                 case "2":
                     if (accounts.isEmpty())
-                        System.out.println("There are no customer accounts");
+                        Message.thereAreNoCustomers();
                     else
                         adminAccount.createReportMoreExpensiveOrder(accounts);
                     break;
                 case "3":
                     if (products.isEmpty())
-                        System.out.println("There are no products yet");
+                        Message.thereAreNoProducts();
                     else
                         adminAccount.createReportLowestInventoryProduct(products);
                     break;
                 case "4":
-                    this.saveAndExit(scanner);
+                    if (data.save(accounts, products)) {
+                        Message.dataSaved();
+                    }
+                    else {
+                        Message.dataNotSaved();
+                    }
+                    System.exit(0);
                     break;
                 case "5":
-                    this.displayEverything();
+                    displayEverything();
                     break;
                 default:
-                    Menu.invalidWarning("option!");
+                    Message.invalidOption("option!");
                     break;
             }
         }
     }
 
-    private void storeInterface(Customer customerAccount, Scanner scanner) {
+    public void storeMenu(Customer customer) {
 
         while (true) {
             Menu.Customer();
@@ -160,6 +136,7 @@ public class Program {
                 case "0":
                     var shoppingCart = new ShoppingCart();
                     String choice = "";
+
                     while (!choice.equals("2")) {
                         Menu.startNewOrder();
                         choice = scanner.nextLine();
@@ -167,39 +144,45 @@ public class Program {
                         switch (choice) {
                             case "0":
                                 if (products.isEmpty()) {
-                                    System.out.println("Sorry, there are no products!");
+                                    Message.noProductsAvailable();
                                     choice = "";
                                 } else
-                                    customerAccount.addProductToShoppingCart(products, shoppingCart, scanner);
+                                    customer.addProductToShoppingCart(products, shoppingCart, scanner);
                                 break;
                             case "1":
                                 if (shoppingCart.isEmpty()) {
-                                    Menu.noProductWarning("");
+                                    Message.noProducts("");
                                     choice = "";
                                 } else
                                     shoppingCart.viewShoppingCart();
                                 break;
                             case "2":
                                 if (shoppingCart.isEmpty()) {
-                                    Menu.noProductWarning("Can not finish order, ");
+                                    Message.noProducts("Can not finish order, ");
                                 } else
-                                    customerAccount.finishOrder(shoppingCart);
+                                    customer.finishOrder(shoppingCart);
                                 break;
                             default:
-                                Menu.invalidWarning("option!");
+                                Message.invalidOption("option!");
                                 break;
                         }
                     }
                     break;
                 case "1":
-                    this.saveAndExit(scanner);
+                    if (data.save(accounts, products)) {
+                        Message.dataSaved();
+                    }
+                    else {
+                        Message.dataNotSaved();
+                    }
+                    System.exit(0);
                     break;
                 default:
-                    Menu.invalidWarning("option!");
+                    Message.invalidOption("option!");
                     break;
             }
         }
-    }
+    }//Menu.data
 
     private void displayEverything() {
 
