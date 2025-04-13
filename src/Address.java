@@ -14,9 +14,9 @@ public class Address implements Serializable {
     }
 
     public void display() {
-        System.out.println("Postalcode: " + postalcode);
-        System.out.println("Street: " + street);
-        System.out.println("City: " + city);
-        System.out.println("House number: " + appartmentOrHouseNumber);
+        System.out.println("    Postalcode: " + postalcode);
+        System.out.println("    Street: " + street);
+        System.out.println("    City: " + city);
+        System.out.println("    House number: " + appartmentOrHouseNumber);
     }
 }

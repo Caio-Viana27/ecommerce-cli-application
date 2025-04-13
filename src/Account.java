@@ -47,9 +47,8 @@ public abstract class Account implements Serializable {
     }
 
     public void display() {
-        System.out.println("\nid: " + id);
-        System.out.println("Name: " + name);
-        System.out.println("Email: " + email);
-        // this.AccountPassword.display();
+        System.out.println("    id: " + id);
+        System.out.println("    Name: " + name);
+        System.out.println("    Email: " + email + "\n");
     }
 }

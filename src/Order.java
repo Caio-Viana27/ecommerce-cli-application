@@ -16,9 +16,9 @@ public class Order implements Serializable {
     }
 
     public void display() {
-        System.out.println("\nOrder id: " + id_Order);
-        System.out.println("Total spent: " + totalSpent);
-        System.out.println("Date: " + orderDate);
+        System.out.println("    Order id: " + id_Order);
+        System.out.println("    Total spent: " + totalSpent);
+        System.out.println("    Date: " + orderDate + "\n");
         shoppingCart.viewShoppingCart();
     }
 

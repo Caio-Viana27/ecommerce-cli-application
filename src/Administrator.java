@@ -91,16 +91,4 @@ public class Administrator extends Account {
         Product newpProduct = new Product(name, price, availableProducts, description, category);
         products.put(newpProduct.getId(), newpProduct);
     }
-
-    public void createReportLowestInventoryProduct(Map<String, Product> products) {
-
-        Product lowestInventoryProduct = null;
-
-        for (Map.Entry<String, Product> entry : products.entrySet()) {
-            if (lowestInventoryProduct == null || !lowestInventoryProduct.hasLowertInventory(entry.getValue())) {
-                lowestInventoryProduct = entry.getValue();
-            }
-        }
-        lowestInventoryProduct.display();
-    }
 }

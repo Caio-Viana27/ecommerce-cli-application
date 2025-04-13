@@ -33,7 +33,7 @@ public class Product implements Serializable {
 
     public static boolean validadeQuantity(int quantity, int inventory) {
         if (quantity <= 0 || quantity > inventory) {
-            Menu.invalidWarning("quantity");
+            Message.invalidOption("quantity");
             return false;
         }
         return true;
@@ -52,20 +52,20 @@ public class Product implements Serializable {
     }
 
     public void display() {
-        System.out.println("\nProduct id: " + id_product);
-        System.out.println("Name: " + name);
-        System.out.println("Price: " + price);
-        System.out.println("inventory: " + inventory);
-        System.out.println("Descrition: " + description);
-        System.out.println("Category: " + category);
+        System.out.println("    Product id: " + id_product);
+        System.out.println("    Name: " + name);
+        System.out.println("    Price: " + price);
+        System.out.println("    inventory: " + inventory);
+        System.out.println("    Descrition: " + description);
+        System.out.println("    Category: " + category + "\n");
     }
 
     public void display(int inventoryNotApplicable) {
-        System.out.println("\nProduct id: " + id_product);
-        System.out.println("Name: " + name);
-        System.out.println("Price: " + price);
-        System.out.println("Descrition: " + description);
-        System.out.println("Category: " + category);
+        System.out.println("    Product id: " + id_product);
+        System.out.println("    Name: " + name);
+        System.out.println("    Price: " + price);
+        System.out.println("    Descrition: " + description);
+        System.out.println("    Category: " + category);
     }
 
     public double getPrice() {
@@ -80,7 +80,10 @@ public class Product implements Serializable {
         this.inventory += quantity;
     }
 
-    public boolean hasLowertInventory(Product product) {
+    public boolean hasLowerInventory(Product product) {
+        if (product == null)
+            return true;
+
         return this.inventory <= product.inventory;
     }
 

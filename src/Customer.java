@@ -1,4 +1,3 @@
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.Map;
@@ -17,7 +16,7 @@ public class Customer extends Account {
         program.storeMenu(this);
     }
 
-    public void addProductToShoppingCart(Map<String, Product> products,
+    public void addToShoppingCart(Map<String, Product> products,
             ShoppingCart shoppingCart, Scanner scanner) {
 
         Product product;
@@ -49,7 +48,7 @@ public class Customer extends Account {
         int quantity = product.selectQuantity(scanner);
         product.setNewInventory(-quantity);
 
-        shoppingCart.addBoughtProduct(new BoughtProduct(product, quantity));
+        shoppingCart.addProduct(new BoughtProduct(product, quantity));
     }
 
     public void finishOrder(ShoppingCart shoppingCart) {
@@ -58,15 +57,15 @@ public class Customer extends Account {
 
     public void display() {
         super.display();
-        System.out.println("Delivery address:");
+        System.out.println("    Delivery address:");
         deliveryAddress.display();
-        System.out.println("\nOrder history:\n");
-        this.orderHistoryDisplay();
+        System.out.println("\n    Order history:\n");
+        orderHistoryDisplay();
     }
 
     private void orderHistoryDisplay() {
         if (orderHistory.isEmpty()) {
-            System.out.println("No order history yet");
+            System.out.println("    No order history yet\n");
             return;
         }
         for (var order : orderHistory) {

@@ -1,53 +1,66 @@
 public class Message {
 
     public static void login() {
-        System.out.println("Login");
+        System.out.println("    Login");
     }
     public static void enterOption(String string) {
-        System.out.print("Enter " + string + " or zero to exit: ");
+        System.out.print("    Enter " + string + " or zero to exit: ");
     }
 
     public static void invalidOption(String string) {
-        System.out.println("Invalid " + string);
+        Menu.separator();
+        System.out.println("    Invalid " + string);
     }
 
     public static void thereAreNoCustomers() {
-        System.out.println("There are no customer accounts");
+        Menu.separator();
+        System.out.println("    There are no customer accounts");
     }
 
     public static void thereAreNoOrders() {
-        System.out.println("There are no orders yet");
+        Menu.separator();
+        System.out.println("    There are no orders yet");
     }
 
     public static void thereAreNoProducts() {
-        System.out.println("There are no products yet");
+        Menu.separator();
+        System.out.println("    There are no products yet");
     }
 
     public static void noProducts(String string) {
-        System.out.println(string + "no products in the shopping cart!");
+        Menu.separator();
+        System.out.println("    " + string + "no products in the shopping cart!");
     }
 
     public static void productHasNoInventory() {
-        System.out.println("Sorry, the selected product has no inventory");
+        Menu.separator();
+        System.out.println("    Sorry, the selected product has no inventory");
     }
 
     public static void noProductsAvailable() {
-        System.out.println("Sorry, there are no products!");
+        Menu.separator();
+        System.out.println("    Sorry, there are no products!");
     }
 
     public static void dataFound() {
-        System.out.println("Data loaded successfully!");
+        Menu.separator();
+        System.out.println("    Data loaded successfully!");
     }
 
     public static void dataNotSaved() {
-        System.out.println("No saved data found!");
+        Menu.separator();
+        System.out.println("    Unable to save data!");
+        Menu.separator();
     }
 
     public static void dataSaved() {
-        System.out.println("\nData saved successfully.");
+        Menu.separator();
+        System.out.println("    Data saved successfully.");
+        Menu.separator();
     }
 
     public static void noDataFound() {
-        System.out.println("No saved data found!");
+        Menu.separator();
+        System.out.println("    No saved data found!");
     }
 }

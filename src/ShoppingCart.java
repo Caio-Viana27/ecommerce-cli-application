@@ -11,7 +11,7 @@ public class ShoppingCart implements Serializable {
         cart = new LinkedList<BoughtProduct>();
     }
 
-    public void addBoughtProduct(BoughtProduct boughtProduct) {
+    public void addProduct(BoughtProduct boughtProduct) {
         totalPrice += boughtProduct.getPrice();
         cart.add(boughtProduct);
     }
@@ -23,7 +23,7 @@ public class ShoppingCart implements Serializable {
     }
 
     public boolean isEmpty() {
-        return cart.size() == 0;
+        return cart.isEmpty();
     }
 
     public double getTotalPrice() {
