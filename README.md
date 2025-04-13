@@ -14,6 +14,6 @@ Now clone this repository and move to ecommerce-cli-application in your director
 
 Type the following commands in the terminal to compile and run
 ```
-javac -d bin/ -cp `find -type f -name *.java`
+javac -d bin/ --source-path src/ `find -type f -name *.java`
 java -cp bin/ Main
 ```
