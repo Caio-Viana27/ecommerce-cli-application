@@ -16,11 +16,14 @@ public class Order implements Serializable {
         this.totalSpent = shoppingCart.getTotalPrice();
     }
 
-    public void display() {
-        System.out.println("    Order id: " + id_Order);
-        System.out.println("    Total spent: " + totalSpent);
-        System.out.println("    Date: " + orderDate + "\n");
-        shoppingCart.viewShoppingCart();
+    public String toString() {
+        String orderInfo;
+        orderInfo  = "    Order id: " + id_Order + "\n";
+        orderInfo += "    Total spent: " + totalSpent + "\n";
+        orderInfo += "    Date: " + orderDate + "\n";
+        orderInfo += "\n";
+        orderInfo += shoppingCart.toString();
+        return orderInfo;
     }
 
     public boolean isMoreExpensive(Order order) {

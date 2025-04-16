@@ -32,6 +32,14 @@ public class Administrator extends Account {
         program.storeMenu(this);
     }
 
+    @Override
+    public String toString() {
+        String adminInfo;
+        adminInfo = "<-- Administrator ------------------------------------------------------>\n\n";
+        adminInfo += super.toString();
+        return adminInfo;
+    }
+
     public void createAdministrator(Scanner scanner, Map<String, Account> accounts) {
 
         System.out.println("\nMenu create admin");
@@ -67,10 +75,10 @@ public class Administrator extends Account {
         System.out.print("city: ");
         String city = scanner.nextLine();
 
-        System.out.print("Appartment or house number: ");
-        String appartmentOrHouseNumber = scanner.nextLine();
+        System.out.print("Apartment or house number: ");
+        String apartmentOrHouseNumber = scanner.nextLine();
 
-        Address myAddress = new Address(postalCode, Street, city, appartmentOrHouseNumber);
+        Address myAddress = new Address(postalCode, Street, city, apartmentOrHouseNumber);
 
         accounts.put(email, new Customer(name, email, password, myAddress));
     }

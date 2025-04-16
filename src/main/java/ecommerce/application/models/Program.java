@@ -6,6 +6,7 @@ import ecommerce.application.FullReport;
 import ecommerce.application.views.Menu;
 import ecommerce.application.views.Message;
 
+import javax.swing.*;
 import java.util.Collection;
 import java.util.Scanner;
 import java.util.Map;
@@ -134,7 +135,6 @@ public class Program {
                     break;
                 case "4":
                     Menu.clearConsole();
-                    Menu.separator();
                     Menu.report(this, new FullReport());
                     break;
                 case "5":
@@ -193,7 +193,7 @@ public class Program {
                                 }
                                 else {
                                     Menu.separator();
-                                    shoppingCart.viewShoppingCart();
+                                    Menu.display(shoppingCart);
                                 }
                                 break;
                             case "2":

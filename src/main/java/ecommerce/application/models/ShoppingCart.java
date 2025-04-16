@@ -7,7 +7,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class ShoppingCart implements Serializable {
-
     private double totalPrice;
     private List<SoldProduct> cart;
 
@@ -21,10 +20,13 @@ public class ShoppingCart implements Serializable {
         cart.add(product);
     }
 
-    public void viewShoppingCart() {
+    public String toString() {
+        StringBuilder cartInfo = new StringBuilder();
         for (var product : cart) {
-            Menu.display(product);
+            cartInfo.append(product);
         }
+
+        return cartInfo.toString();
     }
 
     public boolean isEmpty() {

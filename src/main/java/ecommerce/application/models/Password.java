@@ -17,10 +17,10 @@ public class Password implements Serializable {
     }
 
     public boolean passwordMatches(String enteredPassword) {
-        return this.password.equals(PasswordEncryption.generateEncryptedPassword(enteredPassword, this.salt));
+        return password.equals(PasswordEncryption.generateEncryptedPassword(enteredPassword, this.salt));
     }
 
-    public void getPassword() {
-        System.out.println("Password: " + password);
+    public String getPassword() {
+        return password;
     }
 }

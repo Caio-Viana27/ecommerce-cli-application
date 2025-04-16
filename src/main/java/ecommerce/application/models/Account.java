@@ -3,27 +3,24 @@ package ecommerce.application.models;
 import java.io.Serializable;
 
 public abstract class Account implements Serializable {
-    private String id;
-    private String name;
-    private String email;
-    private Password AccountPassword;
+    private AccountInfo info;
 
     public Account(String name, String email, String password, String typeOfAccount) {
-        this.id = new String(typeOfAccount + "." + IdGenerator.radomIdGenerator());
-        this.name = name;
-        this.email = email;
-        this.AccountPassword = new Password(password);
+        info = new AccountInfo(name, email, password, typeOfAccount);
     }
 
     public abstract void menu(Program program);
 
     public boolean passwordMatches(String enteredPassword) {
-        return this.AccountPassword.passwordMatches(enteredPassword);
+        return info.passwordMatches(enteredPassword);
     }
 
-    public void display() {
-        System.out.println("    id: " + id);
-        System.out.println("    Name: " + name);
-        System.out.println("    Email: " + email + "\n");
+    public String toString() {
+        String accountInfo;
+        accountInfo =  "    id: " + info.getId() + "\n";
+        accountInfo += "    Name: " + info.getName() + "\n";
+        accountInfo += "    Email: " + info.getEmail() + "\n";
+        accountInfo += "\n";
+        return accountInfo;
     }
 }

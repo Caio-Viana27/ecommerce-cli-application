@@ -6,19 +6,23 @@ public class Address implements Serializable {
     private String postalcode;
     private String street;
     private String city;
-    private String appartmentOrHouseNumber;
+    private String apartmentOrHouseNumber;
 
-    public Address(String postalcode, String street, String city, String appartmentOrHouseNumber) {
+    public Address(String postalcode, String street, String city, String apartmentOrHouseNumber) {
         this.postalcode = postalcode;
         this.street = street;
         this.city = city;
-        this.appartmentOrHouseNumber = appartmentOrHouseNumber;
+        this.apartmentOrHouseNumber = apartmentOrHouseNumber;
     }
 
-    public void display() {
-        System.out.println("    Postalcode: " + postalcode);
-        System.out.println("    Street: " + street);
-        System.out.println("    City: " + city);
-        System.out.println("    House number: " + appartmentOrHouseNumber);
+    public String toString() {
+        String deliveryAddressInfo;
+        deliveryAddressInfo  = "    Delivery address:\n";
+        deliveryAddressInfo += "    Postalcode: " + postalcode + "\n";
+        deliveryAddressInfo += "    Street: " + street + "\n";
+        deliveryAddressInfo += "    City: " + city + "\n";
+        deliveryAddressInfo += "    House number: " + apartmentOrHouseNumber + "\n";
+        deliveryAddressInfo += "\n";
+        return deliveryAddressInfo;
     }
 }

@@ -1,8 +1,21 @@
 package ecommerce.application.models;
 
-public record SoldProduct(ProductInfo info, int quantitySold) {
+import java.io.Serializable;
+
+public record SoldProduct(ProductInfo info, int quantitySold) implements Serializable {
 
     public double getPrice() {
         return info.getPrice();
+    }
+
+    public String toString() {
+        String productInfo;
+        productInfo  = "    Id: " + info.getId() + "\n";
+        productInfo += "    Name: " + info.getName() + "\n";
+        productInfo += "    Description: " + info.getDescription() + "\n";
+        productInfo += "    Category: " + info.getCategory() + "\n";
+        productInfo += "    Price: " + info.getPrice() + "\n";
+        productInfo += "    Quantity: " + quantitySold + "\n";
+        return productInfo + "\n";
     }
 }

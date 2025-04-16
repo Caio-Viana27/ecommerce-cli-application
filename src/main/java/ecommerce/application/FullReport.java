@@ -8,10 +8,10 @@ public class FullReport implements IReport {
 
     public void create(Program program) {
         Menu.separator();
-        System.out.println("    Acount(s)\n");
+        System.out.println("    Account(s)\n");
 
         for (var account : program.getAccounts()) {
-            account.display();
+            Menu.display(account);
         }
         Menu.separator();
         System.out.println("    Product(s)\n");

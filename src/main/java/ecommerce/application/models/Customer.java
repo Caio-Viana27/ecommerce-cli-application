@@ -67,22 +67,27 @@ public class Customer extends Account {
         orderHistory.add(new Order(shoppingCart));
     }
 
-    public void display() {
-        super.display();
-        System.out.println("    Delivery address:");
-        deliveryAddress.display();
-        System.out.println("\n    Order history:\n");
-        orderHistoryDisplay();
+    @Override
+    public String toString() {
+        String customerInfo;
+        customerInfo  = "<-- Customer ----------------------------------------------------------->\n\n";
+        customerInfo += super.toString();
+        customerInfo += deliveryAddress.toString();
+        customerInfo += orderHistoryToString();
+        return customerInfo + "\n";
     }
 
-    private void orderHistoryDisplay() {
+    private String orderHistoryToString() {
         if (orderHistory.isEmpty()) {
-            System.out.println("    No order history yet\n");
-            return;
+            return "  [ No order history yet ]";
         }
+
+        StringBuilder orderHistoryInfo = new StringBuilder();
         for (var order : orderHistory) {
-            order.display();
+            orderHistoryInfo.append(order);
         }
+
+        return orderHistoryInfo.toString();
     }
 
     public boolean hasOrderHistory() {
