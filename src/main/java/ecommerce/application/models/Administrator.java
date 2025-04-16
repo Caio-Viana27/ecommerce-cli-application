@@ -24,7 +24,11 @@ public class Administrator extends Account {
         return email;
     }
 
+    @Override
     public void menu(Program program) {
+        if (program == null) {
+            throw new NullPointerException();
+        }
         program.storeMenu(this);
     }
 

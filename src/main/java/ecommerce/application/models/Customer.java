@@ -18,7 +18,12 @@ public class Customer extends Account {
         this.orderHistory = new LinkedList<Order>();
     }
 
+    @Override
     public void menu(Program program) {
+        if (program == null) {
+            throw new NullPointerException();
+        }
+
         program.storeMenu(this);
     }
 
@@ -55,7 +60,7 @@ public class Customer extends Account {
         int quantity = selectedProduct.selectQuantity(scanner);
         selectedProduct.setNewInventory(-quantity);
 
-        shoppingCart.addProduct(new SoldProduct(selectedProduct.getInfo(), selectedProduct.getId(), quantity));
+        shoppingCart.addProduct(new SoldProduct(selectedProduct.getInfo(), quantity));
     }
 
     public void finishOrder(ShoppingCart shoppingCart) {

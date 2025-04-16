@@ -5,13 +5,11 @@ import java.io.Serializable;
 import java.util.Scanner;
 
 public class Product implements Serializable {
-    private final String id_product;
     private ProductInfo info;
     private int inventory;
 
 
     public Product(String name, double price, int inStorage, String description, String category) {
-        this.id_product = new String("product." + IdGenerator.radomIdGenerator());
         info = new ProductInfo(name, price, description, category);
         this.inventory = inStorage;
     }
@@ -44,7 +42,7 @@ public class Product implements Serializable {
     @Override
     public String toString() {
         String productInfo;
-        productInfo =  "    Product id: " + id_product + "\n";
+        productInfo =  "    Product id: " + info.getId() + "\n";
         productInfo += "    Name: " + info.getName() + "\n";
         productInfo += "    Price: " + info.getPrice() + "\n";
         productInfo += "    inventory: " + inventory + "\n";
@@ -58,7 +56,7 @@ public class Product implements Serializable {
     }
 
     public String getId() {
-        return this.id_product;
+        return info.getId();
     }
 
     public void setNewInventory(int quantity) {

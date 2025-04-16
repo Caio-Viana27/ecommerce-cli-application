@@ -17,10 +17,6 @@ public abstract class Account implements Serializable {
 
     public abstract void menu(Program program);
 
-    public boolean emailMatches(String email) {
-        return email.equals(this.email);
-    }
-
     public boolean passwordMatches(String enteredPassword) {
         return this.AccountPassword.passwordMatches(enteredPassword);
     }
