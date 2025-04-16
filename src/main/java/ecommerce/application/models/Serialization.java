@@ -8,7 +8,7 @@ public class Serialization {
 
     public boolean loadData(Program program) {
 
-        try (var loadFile = new FileInputStream("../../data/data.dat");
+        try (var loadFile = new FileInputStream("data/data.dat");
              var in = new ObjectInputStream(loadFile)) {
 
             program.setAccounts((HashMap<String, Account>) in.readObject());

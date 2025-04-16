@@ -49,9 +49,9 @@ public class Program {
             String email = scanner.nextLine();
 
             if ("0".equals(email)) {
+                Menu.clearConsole();
                 data.save(accounts, products);
                 scanner.close();
-                Menu.clearConsole();
                 System.exit(0);
             }
 
