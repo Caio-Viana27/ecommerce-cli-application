@@ -17,7 +17,7 @@ public class FullReport implements IReport {
         System.out.println("    Product(s)\n");
 
         for (var product : program.getProducts()) {
-            product.display();
+            Menu.display(product);
         }
     }
 }

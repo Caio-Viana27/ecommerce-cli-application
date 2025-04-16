@@ -4,12 +4,13 @@ import ecommerce.application.views.Menu;
 import ecommerce.application.views.Message;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Map;
 
 public class Customer extends Account {
     private Address deliveryAddress;
-    private LinkedList<Order> orderHistory;
+    private List<Order> orderHistory;
 
     public Customer(String name, String email, String password, Address deliveryAddress) {
         super(name, email, password, "customer");
@@ -24,36 +25,37 @@ public class Customer extends Account {
     public void addToShoppingCart(Map<String, Product> products,
             ShoppingCart shoppingCart, Scanner scanner) {
 
-        Product product;
         Menu.separator();
         System.out.println("List of products");
         System.out.println("To select a product type its id");
 
-        for (Map.Entry<String, Product> entry : products.entrySet()) {
-            entry.getValue().display();
+        for (Product product : products.values()) {
+            Menu.display(product);
         }
+
+        Product selectedProduct;
         while (true) {
 
             System.out.print("\nEnter id: ");
             String id = scanner.nextLine();
 
-            product = products.get(id);
+            selectedProduct = products.get(id);
 
-            if (product != null) {
+            if (selectedProduct != null) {
                 break;
             } else
                 Message.invalidOption("id");
         }
 
-        if (!product.isAvailable()) {
+        if (!selectedProduct.isAvailable()) {
             Message.productHasNoInventory();
             return;
         }
 
-        int quantity = product.selectQuantity(scanner);
-        product.setNewInventory(-quantity);
+        int quantity = selectedProduct.selectQuantity(scanner);
+        selectedProduct.setNewInventory(-quantity);
 
-        shoppingCart.addProduct(new SoldProduct(product, quantity));
+        shoppingCart.addProduct(new SoldProduct(selectedProduct.getInfo(), selectedProduct.getId(), quantity));
     }
 
     public void finishOrder(ShoppingCart shoppingCart) {

@@ -1,45 +1,31 @@
 package ecommerce.application.models;
 
 import ecommerce.application.views.Message;
-
 import java.io.Serializable;
 import java.util.Scanner;
 
 public class Product implements Serializable {
-    private String id_product;
-    private String name;
-    private double price;
+    private final String id_product;
+    private ProductInfo info;
     private int inventory;
-    private String description;
-    private String category;
+
 
     public Product(String name, double price, int inStorage, String description, String category) {
         this.id_product = new String("product." + IdGenerator.radomIdGenerator());
-        this.name = name;
-        this.price = price;
+        info = new ProductInfo(name, price, description, category);
         this.inventory = inStorage;
-        this.description = description;
-        this.category = category;
     }
 
-    public Product(Product product) {
-        this.id_product = product.id_product;
-        this.name = product.name;
-        this.price = product.price;
-        this.inventory = -1; // bought product has no need for inventory!
-        this.description = product.description;
-        this.category = product.category;
-    }
+    public static boolean hasEnoughInventory(Product product , int quantity) {
+        if (product == null) {
+            return false;
+        }
 
-    public boolean idMatches(String id) {
-        return this.id_product.equals(id);
-    }
-
-    public static boolean validadeQuantity(int quantity, int inventory) {
-        if (quantity <= 0 || quantity > inventory) {
+        if (quantity <= 0 || quantity > product.inventory) {
             Message.invalidOption("quantity");
             return false;
         }
+
         return true;
     }
 
@@ -50,30 +36,25 @@ public class Product implements Serializable {
             int quantity = scanner.nextInt();
             scanner.nextLine();
 
-            if (Product.validadeQuantity(quantity, this.inventory))
+            if (Product.hasEnoughInventory(this, quantity))
                 return quantity;
         }
     }
 
-    public void display() {
-        System.out.println("    Product id: " + id_product);
-        System.out.println("    Name: " + name);
-        System.out.println("    Price: " + price);
-        System.out.println("    inventory: " + inventory);
-        System.out.println("    Descrition: " + description);
-        System.out.println("    Category: " + category + "\n");
+    @Override
+    public String toString() {
+        String productInfo;
+        productInfo =  "    Product id: " + id_product + "\n";
+        productInfo += "    Name: " + info.getName() + "\n";
+        productInfo += "    Price: " + info.getPrice() + "\n";
+        productInfo += "    inventory: " + inventory + "\n";
+        productInfo += "    Description: " + info.getDescription() + "\n";
+        productInfo += "    Category: " + info.getCategory() + "\n";
+        return productInfo;
     }
 
-    public void display(int inventoryNotApplicable) {
-        System.out.println("    Product id: " + id_product);
-        System.out.println("    Name: " + name);
-        System.out.println("    Price: " + price);
-        System.out.println("    Descrition: " + description);
-        System.out.println("    Category: " + category);
-    }
-
-    public double getPrice() {
-        return price;
+    public ProductInfo getInfo() {
+        return info;
     }
 
     public String getId() {

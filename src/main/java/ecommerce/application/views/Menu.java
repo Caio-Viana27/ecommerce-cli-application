@@ -3,6 +3,8 @@ package ecommerce.application.views;
 import ecommerce.application.interfaces.IReport;
 import ecommerce.application.models.Program;
 
+import java.sql.SQLOutput;
+
 public class Menu {
 
     public static void separator() {
@@ -50,6 +52,10 @@ public class Menu {
 
     public static void report(Program program, IReport report) {
         report.create(program);
+    }
+
+    public static void display(Object item) {
+        System.out.println(item.toString());
     }
 
     public static void clearConsole()
