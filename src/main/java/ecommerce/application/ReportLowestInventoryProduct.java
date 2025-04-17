@@ -3,7 +3,7 @@ package ecommerce.application;
 import ecommerce.application.interfaces.IReport;
 import ecommerce.application.models.Product;
 import ecommerce.application.models.Program;
-import ecommerce.application.views.Menu;
+import ecommerce.application.interfaces.Menu;
 import ecommerce.application.views.Message;
 
 public class ReportLowestInventoryProduct implements IReport {

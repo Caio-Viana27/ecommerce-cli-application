@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class Serialization {
 
-    public boolean loadData(Program program) {
+    public boolean load(Program program) {
 
         try (var loadFile = new FileInputStream("data/data.dat");
              var in = new ObjectInputStream(loadFile)) {

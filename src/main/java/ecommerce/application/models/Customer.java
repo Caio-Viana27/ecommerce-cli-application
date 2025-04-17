@@ -1,6 +1,5 @@
 package ecommerce.application.models;
 
-import ecommerce.application.views.Menu;
 import ecommerce.application.views.Message;
 
 import java.util.LinkedList;
@@ -9,34 +8,36 @@ import java.util.Scanner;
 import java.util.Map;
 
 public class Customer extends Account {
-    private Address deliveryAddress;
+    public AccountType type = AccountType.Customer;
+    private Address deliveryAddresses;
     private List<Order> orderHistory;
 
-    public Customer(String name, String email, String password, Address deliveryAddress) {
+    public Customer(String name, String email, String password, Address address) {
         super(name, email, password, "customer");
-        this.deliveryAddress = deliveryAddress;
+        //this.deliveryAddresses = new LinkedList<Address>();
+        deliveryAddresses = address;
         this.orderHistory = new LinkedList<Order>();
     }
 
     @Override
-    public void menu(Program program) {
-        if (program == null) {
-            throw new NullPointerException();
-        }
-
-        program.storeMenu(this);
+    public AccountType login() {
+        return type;
     }
+
+//    public void addDeliveryAddress(Address address) {
+//        deliveryAddresses.add(address);
+//    }
 
     public void addToShoppingCart(Map<String, Product> products,
             ShoppingCart shoppingCart, Scanner scanner) {
 
-        Menu.separator();
+//        Menu.separator();
         System.out.println("List of products");
         System.out.println("To select a product type its id");
 
-        for (Product product : products.values()) {
-            Menu.display(product);
-        }
+//        for (Product product : products.values()) {
+//            Menu.display(product);
+//        }
 
         Product selectedProduct;
         while (true) {
@@ -64,7 +65,7 @@ public class Customer extends Account {
     }
 
     public void finishOrder(ShoppingCart shoppingCart) {
-        orderHistory.add(new Order(shoppingCart));
+        orderHistory.add(new Order(shoppingCart, null));
     }
 
     @Override
@@ -72,7 +73,7 @@ public class Customer extends Account {
         String customerInfo;
         customerInfo  = "<-- Customer ----------------------------------------------------------->\n\n";
         customerInfo += super.toString();
-        customerInfo += deliveryAddress.toString();
+        customerInfo += deliveryAddresses.toString();
         customerInfo += orderHistoryToString();
         return customerInfo + "\n";
     }

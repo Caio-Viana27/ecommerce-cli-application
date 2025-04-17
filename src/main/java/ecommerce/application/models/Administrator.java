@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.util.Map;
 
 public class Administrator extends Account {
+    private AccountType type = AccountType.Administrator;
 
     public Administrator(String name, String email, String password) {
         super(name, email, password, "admin");
@@ -25,11 +26,8 @@ public class Administrator extends Account {
     }
 
     @Override
-    public void menu(Program program) {
-        if (program == null) {
-            throw new NullPointerException();
-        }
-        program.storeMenu(this);
+    public AccountType login() {
+        return type;
     }
 
     @Override

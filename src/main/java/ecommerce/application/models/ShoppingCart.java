@@ -1,7 +1,5 @@
 package ecommerce.application.models;
 
-import ecommerce.application.views.Menu;
-
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;

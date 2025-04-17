@@ -8,6 +8,7 @@ public record SoldProduct(ProductInfo info, int quantitySold) implements Seriali
         return info.getPrice();
     }
 
+    @Override
     public String toString() {
         String productInfo;
         productInfo  = "    Id: " + info.getId() + "\n";

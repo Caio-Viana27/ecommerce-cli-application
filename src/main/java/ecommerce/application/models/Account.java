@@ -9,7 +9,7 @@ public abstract class Account implements Serializable {
         info = new AccountInfo(name, email, password, typeOfAccount);
     }
 
-    public abstract void menu(Program program);
+    public abstract AccountType login();
 
     public boolean passwordMatches(String enteredPassword) {
         return info.passwordMatches(enteredPassword);

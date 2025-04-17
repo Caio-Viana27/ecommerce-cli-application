@@ -1,5 +1,7 @@
 package ecommerce.application.views;
 
+import ecommerce.application.interfaces.Menu;
+
 public class Message {
 
     public static void login() {
