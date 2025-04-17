@@ -65,8 +65,8 @@ public class Customer extends Account {
         shoppingCart.addProduct(new SoldProduct(selectedProduct.getInfo(), quantity));
     }
 
-    public void finishOrder(ShoppingCart shoppingCart) {
-        orderHistory.add(new Order(shoppingCart, null));
+    public void addOrder(Order order) {
+        orderHistory.add(order);
     }
 
     @Override

@@ -13,6 +13,12 @@ public class ShoppingCart implements Serializable {
         cart = new LinkedList<SoldProduct>();
     }
 
+    public ShoppingCart(Product product, int amount) {
+        totalPrice = 0;
+        cart = new LinkedList<SoldProduct>();
+        cart.add(new SoldProduct(product.getInfo(), amount));
+    }
+
     public void addProduct(SoldProduct product) {
         totalPrice += product.getPrice();
         cart.add(product);

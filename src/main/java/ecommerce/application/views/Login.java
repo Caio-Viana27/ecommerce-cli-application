@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 public class Login extends Menu {
     private static Login instance;
+    private Account logedAccount;
 
     private Map<AccountType, Menu> menus;
     private Map<String, Account> accounts;
@@ -21,12 +22,11 @@ public class Login extends Menu {
         menus = new HashMap<>();
     }
 
-    public Login init(Map<String, Account> accounts) {
+    public void init(Map<String, Account> accounts) {
         this.accounts = accounts;
         addMenu(AccountType.Customer, new CustomerMenu(scanner));
         addMenu(AccountType.Administrator, new AdministratorMenu(scanner));
         addMenu(AccountType.Seller, new SellerMenu(scanner));
-        return this;
     }
 
     private void addMenu(AccountType type, Menu menu) {
@@ -35,6 +35,7 @@ public class Login extends Menu {
 
     @Override
     public void draw() {
+        logedAccount = null;
         login();
     }
 
@@ -47,6 +48,8 @@ public class Login extends Menu {
         enterPassword(account);
 
         clearConsole();
+
+        logedAccount = account;
 
         menus.get(account.login()).draw();
     }
@@ -93,5 +96,9 @@ public class Login extends Menu {
 
     public static Login getInstance() {
         return instance;
+    }
+
+    public Account getLogedAccount() {
+        return logedAccount;
     }
 }

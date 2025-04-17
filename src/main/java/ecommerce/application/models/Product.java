@@ -14,17 +14,12 @@ public class Product implements Serializable {
         this.inventory = inStorage;
     }
 
-    public static boolean hasEnoughInventory(Product product , int quantity) {
+    public static boolean hasEnoughInventory(Product product , int amount) {
         if (product == null) {
             return false;
         }
 
-        if (quantity <= 0 || quantity > product.inventory) {
-            Message.invalidOption("quantity");
-            return false;
-        }
-
-        return true;
+        return amount > 0 && amount <= product.inventory;
     }
 
     public int selectQuantity(Scanner scanner) {

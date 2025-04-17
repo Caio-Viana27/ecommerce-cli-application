@@ -16,7 +16,7 @@ public class FullReport implements IReport {
         Menu.separator();
         System.out.println("    Product(s)\n");
 
-        for (var product : program.getProducts()) {
+        for (var product : program.getProductsList()) {
             Menu.display(product);
         }
     }

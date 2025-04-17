@@ -113,8 +113,12 @@ public class Program {
         return accounts.values();
     }
 
-    public Collection<Product> getProducts() {
+    public Collection<Product> getProductsList() {
         return products.values();
+    }
+
+    public Map<String, Product> getProductsMap() {
+        return products;
     }
 
     public void setAccounts(Map<String, Account> accounts) {

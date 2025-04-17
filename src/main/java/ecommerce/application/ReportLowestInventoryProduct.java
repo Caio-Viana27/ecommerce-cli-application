@@ -11,7 +11,7 @@ public class ReportLowestInventoryProduct implements IReport {
     public void create(Program program) {
         Product lowestInventoryProduct = null;
 
-        for (var product : program.getProducts()) {
+        for (var product : program.getProductsList()) {
             lowestInventoryProduct = getLowerInventoryProduct(lowestInventoryProduct, product);
         }
 

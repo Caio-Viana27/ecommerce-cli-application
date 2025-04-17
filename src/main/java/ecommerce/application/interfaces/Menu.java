@@ -26,7 +26,7 @@ public abstract class Menu implements Runnable {
         if (item == null) {
             throw new NullPointerException();
         }
-        System.out.println(item.toString());
+        System.out.println(item);
     }
 
     public static void clearConsole()

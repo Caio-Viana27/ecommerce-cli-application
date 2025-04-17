@@ -10,12 +10,27 @@ public class Order implements Serializable {
     private ShoppingCart shoppingCart;
     private double totalSpent;
 
-    public Order(ShoppingCart shoppingCart, Address deliveryAddress) {
+    public Order(ShoppingCart shoppingCart) {
         this.id_Order = new String("order." + IdGenerator.radomIdGenerator());
-        this.deliveryAddress = deliveryAddress;
+        this.deliveryAddress = null;
         this.orderDate = LocalDateTime.now();
         this.shoppingCart = shoppingCart;
         this.totalSpent = shoppingCart.getTotalPrice();
+    }
+
+    public Order(ShoppingCart shoppingCart, Address address) {
+        this.id_Order = new String("order." + IdGenerator.radomIdGenerator());
+        this.deliveryAddress = address;
+        this.orderDate = LocalDateTime.now();
+        this.shoppingCart = shoppingCart;
+        this.totalSpent = shoppingCart.getTotalPrice();
+    }
+
+    public void addProduct(Product product, int amount) {
+        if (shoppingCart == null) {
+            shoppingCart = new ShoppingCart();
+        }
+        shoppingCart.addProduct(new SoldProduct(product.getInfo(), amount));
     }
 
     public String toString() {
