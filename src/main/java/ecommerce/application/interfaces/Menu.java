@@ -5,11 +5,15 @@ import ecommerce.application.views.CustomerMenu;
 
 import java.util.Scanner;
 
-public abstract class Menu {
+public abstract class Menu implements Runnable {
     protected Scanner scanner;
 
     public Menu(Scanner scanner) {
         this.scanner = scanner;
+    }
+
+    public void run() {
+        draw();
     }
 
     public abstract void draw();

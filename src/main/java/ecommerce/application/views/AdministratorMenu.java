@@ -48,8 +48,8 @@ public class AdministratorMenu extends Menu {
         System.out.println("    Administrator Menu\n");
         System.out.println("    0 - Create new account");
         System.out.println("    1 - Create new product");
-        System.out.println("    2 - Generate Report (most expensive order)");
-        System.out.println("    3 - logout");
+        System.out.println("    2 - Generate Report");
+        System.out.println("    3 - Logout");
         System.out.println("    4 - Exit program");
         System.out.print(  "    Option: ");
 

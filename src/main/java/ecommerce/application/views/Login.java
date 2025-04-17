@@ -1,6 +1,6 @@
 package ecommerce.application.views;
 
-import ecommerce.application.models.Account;
+import ecommerce.application.interfaces.Account;
 import ecommerce.application.interfaces.Menu;
 import ecommerce.application.models.AccountType;
 import ecommerce.application.models.Program;

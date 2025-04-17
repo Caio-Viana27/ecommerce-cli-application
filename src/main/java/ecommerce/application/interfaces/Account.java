@@ -1,9 +1,12 @@
-package ecommerce.application.models;
+package ecommerce.application.interfaces;
+
+import ecommerce.application.models.AccountInfo;
+import ecommerce.application.models.AccountType;
 
 import java.io.Serializable;
 
 public abstract class Account implements Serializable {
-    private AccountInfo info;
+    protected AccountInfo info;
 
     public Account(String name, String email, String password, String typeOfAccount) {
         info = new AccountInfo(name, email, password, typeOfAccount);
@@ -15,6 +18,7 @@ public abstract class Account implements Serializable {
         return info.passwordMatches(enteredPassword);
     }
 
+    @Override
     public String toString() {
         String accountInfo;
         accountInfo =  "    id: " + info.getId() + "\n";

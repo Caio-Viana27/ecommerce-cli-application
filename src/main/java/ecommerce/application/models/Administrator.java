@@ -1,5 +1,6 @@
 package ecommerce.application.models;
 
+import ecommerce.application.interfaces.Account;
 import ecommerce.application.views.Message;
 
 import java.util.Scanner;

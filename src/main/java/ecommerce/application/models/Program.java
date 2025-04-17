@@ -1,5 +1,9 @@
 package ecommerce.application.models;
 
+import ecommerce.application.controllers.AdministratorController;
+import ecommerce.application.controllers.CustomerController;
+import ecommerce.application.controllers.OrderController;
+import ecommerce.application.interfaces.Account;
 import ecommerce.application.views.Message;
 import ecommerce.application.views.Login;
 
@@ -8,17 +12,29 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Program {
-    public static Program instance;
+    public static Program instance = null;
+    private Thread UIThread = null;
+
+    private AdministratorController administratorController = null;
+    private CustomerController customerController = null;
+    private OrderController orderController = null;
 
     private Map<String, Account> accounts;
     private Map<String, Product> products;
+
     private Login login;
 
     private final Serialization data = new Serialization();
     private final Scanner scanner = new Scanner(System.in);
 
     public Program() {
+        if (instance != null)
+            throw new RuntimeException();
+
         instance = this;
+        administratorController = new AdministratorController();
+        customerController = new CustomerController();
+        orderController = new OrderController();
     }
 
     public void init() {
@@ -26,12 +42,22 @@ public class Program {
         loadData();
 
         login = new Login(scanner);
+        login.init(accounts);
+        UIThread = new Thread(login, "UIThread");
 
-        run();
+        start();
     }
 
-    private void run() {
-        login.init(accounts).draw();
+    private void start() {
+        UIThread.start();
+
+        //login.init(accounts).draw();
+        try {
+            UIThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         exit();
     }
 
@@ -69,6 +95,18 @@ public class Program {
 
     public static Program getInstance() {
         return instance;
+    }
+
+    public AdministratorController getAdministratorController() {
+        return administratorController;
+    }
+
+    public CustomerController getCustomerController() {
+        return customerController;
+    }
+
+    public OrderController getOrderController() {
+        return orderController;
     }
 
     public Collection<Account> getAccounts() {

@@ -14,4 +14,8 @@ public class SelectProductMenu extends Menu {
     public void draw() {
 
     }
+
+    public void ProductMenu() {
+
+    }
 }

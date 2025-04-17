@@ -1,5 +1,7 @@
 package ecommerce.application.models;
 
+import ecommerce.application.interfaces.Account;
+
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
