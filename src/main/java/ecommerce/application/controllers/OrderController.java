@@ -1,6 +1,5 @@
 package ecommerce.application.controllers;
 
-import ecommerce.application.interfaces.Account;
 import ecommerce.application.interfaces.IController;
 import ecommerce.application.models.Customer;
 import ecommerce.application.models.Order;

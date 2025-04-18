@@ -4,20 +4,20 @@ import ecommerce.application.interfaces.Account;
 import ecommerce.application.interfaces.IAccountController;
 import ecommerce.application.models.Program;
 
-public class AccountController implements IAccountController {
-    private static AccountController instance = null;
+public class ProductController implements IAccountController {
+    private static ProductController instance = null;
 
-    public AccountController() {
+    public ProductController() {
         if (instance != null)
             throw new RuntimeException();
         instance = this;
     }
 
-    public static AccountController getInstance() {
+    public static ProductController getInstance() {
         return instance;
     }
 
-    public void insertNewAccount(Account newAccount) {
+    public void insertNewProduct(Account newAccount) {
         Program.getInstance().getAccountsMap().put(newAccount.getEmail(), newAccount);
     }
 }

@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Customer extends Account {
-    public AccountType type = AccountType.Customer;
+    public final AccountType type = AccountType.Customer;
     private Address deliveryAddresses;
     private List<Order> orderHistory;
 
