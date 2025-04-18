@@ -25,9 +25,13 @@ public class CustomerMenu extends Menu {
         Menu menu = new OrderMenu(scanner);
         addMenu("0", menu::draw);
 
-        addMenu("1", () -> { Login.getInstance().draw(); });
+        addMenu("1", () -> {
+            Login.getInstance().draw();
+        });
 
-        addMenu("2", () -> { Program.getInstance().exit(); });
+        addMenu("2", () -> {
+            Program.getInstance().exit();
+        });
     }
 
     public static CustomerMenu getInstance() {
@@ -49,7 +53,7 @@ public class CustomerMenu extends Menu {
         System.out.println("    0 - New order");
         System.out.println("    1 - Log out");
         System.out.println("    2 - Exit program");
-        System.out.print(  "    Option: ");
+        System.out.print("    Option: ");
 
         OnSelection menu = selectOption();
         menu.action();
@@ -72,40 +76,4 @@ public class CustomerMenu extends Menu {
         }
         return menuOption;
     }
-
-//    public void storeMenu(Customer customer) {
-//
-//        while (true) {
-//            Menu.Customer();
-//            String option = scanner.nextLine();
-//
-//            switch (option) {
-//                case "0":
-//                    Menu.clearConsole();
-//
-//                    var shoppingCart = new ShoppingCart();
-//                    String choice = "";
-//
-//                    break;
-//                case "1":
-//                    Menu.clearConsole();
-//                    loginInterface();
-//                    break;
-//                case "2":
-//                    Menu.clearConsole();
-//                    if (data.save(accounts, products)) {
-//                        Message.dataSaved();
-//                    }
-//                    else {
-//                        Message.dataNotSaved();
-//                    }
-//                    System.exit(0);
-//                    break;
-//                default:
-//                    Menu.clearConsole();
-//                    Message.invalidOption("option!");
-//                    break;
-//            }
-//        }
-//    }
 }

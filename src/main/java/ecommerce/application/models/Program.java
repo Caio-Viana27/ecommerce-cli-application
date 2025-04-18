@@ -1,7 +1,6 @@
 package ecommerce.application.models;
 
-import ecommerce.application.controllers.AdministratorController;
-import ecommerce.application.controllers.CustomerController;
+import ecommerce.application.controllers.AccountController;
 import ecommerce.application.controllers.OrderController;
 import ecommerce.application.interfaces.Account;
 import ecommerce.application.views.Message;
@@ -15,8 +14,7 @@ public class Program {
     public static Program instance = null;
     private Thread UIThread = null;
 
-    private AdministratorController administratorController = null;
-    private CustomerController customerController = null;
+    private AccountController accountController = null;
     private OrderController orderController = null;
 
     private Map<String, Account> accounts;
@@ -32,8 +30,7 @@ public class Program {
             throw new RuntimeException();
 
         instance = this;
-        administratorController = new AdministratorController();
-        customerController = new CustomerController();
+        accountController = new AccountController();
         orderController = new OrderController();
     }
 
@@ -97,24 +94,24 @@ public class Program {
         return instance;
     }
 
-    public AdministratorController getAdministratorController() {
-        return administratorController;
-    }
-
-    public CustomerController getCustomerController() {
-        return customerController;
+    public AccountController getAccountController() {
+        return accountController;
     }
 
     public OrderController getOrderController() {
         return orderController;
     }
 
-    public Collection<Account> getAccounts() {
+    public Collection<Account> getAccountsList() {
         return accounts.values();
     }
 
     public Collection<Product> getProductsList() {
         return products.values();
+    }
+
+    public Map<String, Account> getAccountsMap() {
+        return accounts;
     }
 
     public Map<String, Product> getProductsMap() {

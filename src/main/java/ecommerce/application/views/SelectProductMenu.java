@@ -54,7 +54,7 @@ public class SelectProductMenu extends Menu {
 
     private Product selectProduct(Map<String, Product> products) {
         while (true) {
-            System.out.print("    ID:");
+            System.out.print("    ID: ");
             String id = scanner.nextLine();
 
             if ("0".equals(id)) {
@@ -74,7 +74,7 @@ public class SelectProductMenu extends Menu {
 
     private int selectAmount(Product product) {
         while (true) {
-            System.out.print("    Amount:");
+            System.out.print("    Amount: ");
             String strAmount = scanner.nextLine();
 
             int amount;

@@ -13,17 +13,8 @@ public class Administrator extends Account {
         super(name, email, password, "admin");
     }
 
-    private String getValidEmail(Scanner scanner, Map<String, Account> accounts) {
-
-        String email;
-        do {
-            System.out.print("Email: ");
-            email = scanner.nextLine();
-            if (accounts.get(email) != null)
-                Message.invalidOption("email [this email already exist]");
-        } while (accounts.get(email) != null);
-
-        return email;
+    public Administrator(AccountInfo info) {
+        super(info);
     }
 
     @Override
@@ -37,49 +28,6 @@ public class Administrator extends Account {
         adminInfo = "<-- Administrator ------------------------------------------------------>\n\n";
         adminInfo += super.toString();
         return adminInfo;
-    }
-
-    public void createAdministrator(Scanner scanner, Map<String, Account> accounts) {
-
-        System.out.println("\nMenu create admin");
-        System.out.print("Name: ");
-        String name = scanner.nextLine();
-
-        String email = getValidEmail(scanner, accounts);
-
-        System.out.print("Password: ");
-        String password = scanner.nextLine();
-
-        accounts.put(email, new Administrator(name, email, password));
-    }
-
-    public void createCustomer(Scanner scanner, Map<String, Account> accounts) {
-
-        System.out.println("\nMenu create customer");
-        System.out.print("Name: ");
-        String name = scanner.nextLine();
-
-        String email = getValidEmail(scanner, accounts);
-
-        System.out.print("Password: ");
-        String password = scanner.nextLine();
-
-        System.out.println("Address");
-        System.out.print("Postalcode: ");
-        String postalCode = scanner.nextLine();
-
-        System.out.print("Street: ");
-        String Street = scanner.nextLine();
-
-        System.out.print("city: ");
-        String city = scanner.nextLine();
-
-        System.out.print("Apartment or house number: ");
-        String apartmentOrHouseNumber = scanner.nextLine();
-
-        Address myAddress = new Address(postalCode, Street, city, apartmentOrHouseNumber);
-
-        accounts.put(email, new Customer(name, email, password, myAddress));
     }
 
     public void createProduct(Scanner scanner, Map<String, Product> products) {

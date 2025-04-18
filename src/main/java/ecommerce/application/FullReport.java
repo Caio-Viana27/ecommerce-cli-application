@@ -10,7 +10,7 @@ public class FullReport implements IReport {
         Menu.separator();
         System.out.println("    Account(s)\n");
 
-        for (var account : program.getAccounts()) {
+        for (var account : program.getAccountsList()) {
             Menu.display(account);
         }
         Menu.separator();

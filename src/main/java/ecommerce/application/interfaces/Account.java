@@ -9,10 +9,18 @@ public abstract class Account implements Serializable {
     protected AccountInfo info;
 
     public Account(String name, String email, String password, String typeOfAccount) {
-        info = new AccountInfo(name, email, password, typeOfAccount);
+        info = new AccountInfo(name, email, password);
+    }
+
+    public Account(AccountInfo info) {
+        this.info = info;
     }
 
     public abstract AccountType login();
+
+    public String getEmail() {
+        return info.getEmail();
+    }
 
     public boolean passwordMatches(String enteredPassword) {
         return info.passwordMatches(enteredPassword);

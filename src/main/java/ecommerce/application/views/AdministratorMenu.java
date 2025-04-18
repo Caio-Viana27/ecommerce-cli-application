@@ -1,7 +1,6 @@
 package ecommerce.application.views;
 
 import ecommerce.application.interfaces.Menu;
-import ecommerce.application.interfaces.IReport;
 import ecommerce.application.interfaces.OnSelection;
 
 import ecommerce.application.models.Program;
@@ -11,10 +10,16 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class AdministratorMenu extends Menu {
+    private static AdministratorMenu instance;
     private Map<String, OnSelection> menuActions;
 
     public AdministratorMenu(Scanner scanner) {
         super(scanner);
+
+        if (instance != null) {
+            throw new RuntimeException();
+        }
+        instance = this;
 
         menuActions = new HashMap<>();
 
@@ -32,6 +37,10 @@ public class AdministratorMenu extends Menu {
         addMenu("3", () -> Login.getInstance().draw());
 
         addMenu("4", () -> Program.getInstance().exit());
+    }
+
+    public static AdministratorMenu getInstance() {
+        return instance;
     }
 
     private void addMenu(String option, OnSelection action) {
@@ -58,11 +67,9 @@ public class AdministratorMenu extends Menu {
     }
 
     private OnSelection selectMenuOption() {
+        OnSelection menuOption;
 
-        boolean validOption = false;
-        OnSelection menuOption = null;
-
-        while (!validOption) {
+        while (true) {
             String option = scanner.nextLine();
 
             menuOption = menuActions.get(option);
@@ -71,85 +78,8 @@ public class AdministratorMenu extends Menu {
                 Message.invalidOption("option!");
             }
             else {
-                validOption = true;
+                return menuOption;
             }
         }
-        return menuOption;
     }
-
-//    public void storeMenu(Administrator adminAccount) {
-//
-//        while (true) {
-//            Menu.Administrator();
-//            String option = scanner.nextLine();
-//
-//            switch (option) {
-//                case "0":
-//                    Menu.createAccount();
-//                    String choice = scanner.nextLine();
-//
-//                    switch (choice) {
-//                        case "0":
-//                            Menu.clearConsole();
-//                            adminAccount.createAdministrator(scanner, accounts);
-//                            break;
-//                        case "1":
-//                            Menu.clearConsole();
-//                            adminAccount.createCustomer(scanner, accounts);
-//                            break;
-//                        default:
-//                            Message.invalidOption("option!");
-//                            break;
-//                    }
-//                    Menu.clearConsole();
-//                    break;
-//                case "1":
-//                    Menu.clearConsole();
-//                    adminAccount.createProduct(scanner, products);
-//                    break;
-//                case "2":
-//                    Menu.clearConsole();
-//                    if (accounts.isEmpty()) {
-//                        Message.thereAreNoCustomers();
-//                    }
-//                    else {
-//                        Menu.separator();
-//                        Menu.report(this, new ReportMostExpensiveOrder());
-//                    }
-//                    break;
-//                case "3":
-//                    Menu.clearConsole();
-//                    if (products.isEmpty()) {
-//                        Message.thereAreNoProducts();
-//                    }
-//                    else {
-//                        Menu.separator();
-//                        Menu.report(this, new ReportLowestInventoryProduct());
-//                    }
-//                    break;
-//                case "4":
-//                    Menu.clearConsole();
-//                    Menu.report(this, new FullReport());
-//                    break;
-//                case "5":
-//                    Menu.clearConsole();
-//                    loginInterface();
-//                    break;
-//                case "6":
-//                    Menu.clearConsole();
-//                    if (data.save(accounts, products)) {
-//                        Message.dataSaved();
-//                    }
-//                    else {
-//                        Message.dataNotSaved();
-//                    }
-//                    System.exit(0);
-//                    break;
-//                default:
-//                    Menu.clearConsole();
-//                    Message.invalidOption("option!");
-//                    break;
-//            }
-//        }
-//    }
 }

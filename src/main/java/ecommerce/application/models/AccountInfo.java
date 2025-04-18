@@ -8,8 +8,8 @@ public class AccountInfo implements Serializable {
     private String email;
     private Password password;
 
-    public AccountInfo(String name, String email, String password, String typeOfAccount) {
-        id = new String(typeOfAccount + "." + IdGenerator.radomIdGenerator());
+    public AccountInfo(String name, String email, String password) {
+        id = "account" + IdGenerator.radomIdGenerator();
         this.name = name;
         this.email = email;
         this.password = new Password(password);
