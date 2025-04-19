@@ -13,7 +13,7 @@ public class Login extends Menu {
     private static Login instance;
     private Account logedAccount;
 
-    private Map<AccountType, Menu> menus;
+    private final Map<AccountType, Menu> menus;
     private Map<String, Account> accounts;
 
     public Login(Scanner scanner) {
@@ -40,6 +40,7 @@ public class Login extends Menu {
     }
 
     private void login() {
+        clearConsole();
         separator();
         Message.login();
 

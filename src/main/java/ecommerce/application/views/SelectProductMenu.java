@@ -22,6 +22,9 @@ public class SelectProductMenu extends Menu {
     }
 
     public void ProductMenu() {
+        clearConsole();
+        separator();
+
         Map<String, Product> products = Program.getInstance().getProductsMap();
 
         if (products.isEmpty()) {

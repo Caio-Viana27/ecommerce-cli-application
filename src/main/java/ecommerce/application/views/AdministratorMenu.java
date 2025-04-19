@@ -53,6 +53,7 @@ public class AdministratorMenu extends Menu {
     }
 
     private void administrator() {
+        clearConsole();
         separator();
         System.out.println("    Administrator Menu\n");
         System.out.println("    0 - Create new account");

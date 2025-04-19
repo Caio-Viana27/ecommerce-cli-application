@@ -14,4 +14,9 @@ public class SellerMenu extends Menu {
     public void draw() {
 
     }
+
+    private void seller() {
+        clearConsole();
+        separator();
+    }
 }

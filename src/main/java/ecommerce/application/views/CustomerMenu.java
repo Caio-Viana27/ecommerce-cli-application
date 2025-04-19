@@ -48,6 +48,7 @@ public class CustomerMenu extends Menu {
     }
 
     private void customer() {
+        clearConsole();
         separator();
         System.out.println("    Customer Menu\n");
         System.out.println("    0 - New order");

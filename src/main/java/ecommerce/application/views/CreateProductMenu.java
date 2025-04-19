@@ -18,8 +18,9 @@ public class CreateProductMenu extends Menu {
     }
 
     public void createProduct() {
-
-        System.out.println("\n    Menu Create product");
+        clearConsole();
+        separator();
+        System.out.println("    Menu Create product\n");
         System.out.print("    Name: ");
         String name = scanner.nextLine();
 

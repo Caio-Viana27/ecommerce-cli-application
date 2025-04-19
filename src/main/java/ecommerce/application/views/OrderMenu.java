@@ -46,6 +46,7 @@ public class OrderMenu extends Menu {
     }
 
     private void order() {
+        clearConsole();
         separator();
         System.out.println("    Menu order\n");
         System.out.println("    0 - Add product");
