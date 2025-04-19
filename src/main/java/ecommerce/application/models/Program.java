@@ -2,6 +2,7 @@ package ecommerce.application.models;
 
 import ecommerce.application.controllers.AccountController;
 import ecommerce.application.controllers.OrderController;
+import ecommerce.application.controllers.ProductController;
 import ecommerce.application.interfaces.Account;
 import ecommerce.application.views.Message;
 import ecommerce.application.views.Login;
@@ -15,6 +16,7 @@ public class Program {
     private Thread UIThread = null;
 
     private AccountController accountController = null;
+    private ProductController productController = null;
     private OrderController orderController = null;
 
     private Map<String, Account> accounts;
@@ -31,6 +33,7 @@ public class Program {
 
         instance = this;
         accountController = new AccountController();
+        productController = new ProductController();
         orderController = new OrderController();
     }
 
@@ -48,7 +51,6 @@ public class Program {
     private void start() {
         UIThread.start();
 
-        //login.init(accounts).draw();
         try {
             UIThread.join();
         } catch (InterruptedException e) {
@@ -96,6 +98,10 @@ public class Program {
 
     public AccountController getAccountController() {
         return accountController;
+    }
+
+    public ProductController getProductController() {
+        return productController;
     }
 
     public OrderController getOrderController() {

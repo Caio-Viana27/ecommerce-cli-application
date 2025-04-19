@@ -67,4 +67,8 @@ public class Message {
         Menu.separator();
         System.out.println("    No saved data found!");
     }
+
+    public static void inlineInvalidOption(String option) {
+        System.out.println("    invalid " + option + "!");
+    }
 }

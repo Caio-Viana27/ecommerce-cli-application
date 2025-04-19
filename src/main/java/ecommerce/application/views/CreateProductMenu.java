@@ -2,8 +2,8 @@ package ecommerce.application.views;
 
 import ecommerce.application.interfaces.Menu;
 import ecommerce.application.models.Product;
+import ecommerce.application.models.Program;
 
-import java.util.Map;
 import java.util.Scanner;
 
 public class CreateProductMenu extends Menu {
@@ -19,25 +19,55 @@ public class CreateProductMenu extends Menu {
 
     public void createProduct() {
 
-        System.out.println("\nMenu Create product");
-        System.out.print("Name: ");
+        System.out.println("\n    Menu Create product");
+        System.out.print("    Name: ");
         String name = scanner.nextLine();
 
-        System.out.print("Price: ");
-        double price = scanner.nextDouble();
-        scanner.nextLine();
+        double price = price();
 
-        System.out.print("Inventory: ");
-        int availableProducts = scanner.nextInt();
-        scanner.nextLine();
+        int inventory = inventory();
 
-        System.out.print("Description: ");
+        System.out.print("    Description: ");
         String description = scanner.nextLine();
 
-        System.out.print("Category: ");
+        System.out.print("    Category: ");
         String category = scanner.nextLine();
 
-        Product newpProduct = new Product(name, price, availableProducts, description, category);
-        products.put(newpProduct.getId(), newpProduct);
+        Product newpProduct = new Product(name, price, inventory, description, category);
+        Program.getInstance().getProductController().insertNewProduct(newpProduct);
+    }
+
+    private Double price() {
+        while (true) {
+            System.out.print("    Price: ");
+            String strPrice = scanner.nextLine();
+
+            try {
+                return Double.parseDouble(strPrice);
+
+            } catch (NumberFormatException e) {
+                Message.inlineInvalidOption("price");
+            }
+        }
+    }
+
+    private int inventory() {
+        while (true) {
+            System.out.print("    Inventory: ");
+            String strInventory = scanner.nextLine();
+
+            try {
+                int inventory = Integer.parseInt(strInventory);
+
+                if (inventory < 0) {
+                    Message.inlineInvalidOption("inventory");
+                }
+                else {
+                    return inventory;
+                }
+            } catch (NumberFormatException e) {
+                Message.inlineInvalidOption("inventory");
+            }
+        }
     }
 }

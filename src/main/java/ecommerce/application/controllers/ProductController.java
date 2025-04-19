@@ -2,7 +2,10 @@ package ecommerce.application.controllers;
 
 import ecommerce.application.interfaces.Account;
 import ecommerce.application.interfaces.IAccountController;
+import ecommerce.application.models.Administrator;
+import ecommerce.application.models.Product;
 import ecommerce.application.models.Program;
+import ecommerce.application.views.AdministratorMenu;
 
 public class ProductController implements IAccountController {
     private static ProductController instance = null;
@@ -17,7 +20,9 @@ public class ProductController implements IAccountController {
         return instance;
     }
 
-    public void insertNewProduct(Account newAccount) {
-        Program.getInstance().getAccountsMap().put(newAccount.getEmail(), newAccount);
+    public void insertNewProduct(Product newProduct) {
+        Program.getInstance().getProductsMap().put(newProduct.getId(), newProduct);
+
+        AdministratorMenu.getInstance().draw();
     }
 }
