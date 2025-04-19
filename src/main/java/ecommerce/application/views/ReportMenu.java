@@ -66,7 +66,7 @@ public class ReportMenu extends Menu {
     private void drawReportMostExpensiveOrder() {
         clearConsole();
 
-        new ReportMostExpensiveOrder().create(Program.getInstance());
+        new ReportMostExpensiveOrder().generate(Program.getInstance());
 
         Message.pressAnyKeyToExit();
         scanner.nextLine();
@@ -77,7 +77,7 @@ public class ReportMenu extends Menu {
     private void drawReportProductWithLowestInventory() {
         clearConsole();
 
-        new ReportLowestInventoryProduct().create(Program.getInstance());
+        new ReportLowestInventoryProduct().generate(Program.getInstance());
 
         Message.pressAnyKeyToExit();
         scanner.nextLine();
@@ -88,7 +88,7 @@ public class ReportMenu extends Menu {
     private void drawFullReport() {
         clearConsole();
 
-        new FullReport().create(Program.getInstance());
+        new FullReport().generate(Program.getInstance());
 
         Message.pressAnyKeyToExit();
         scanner.nextLine();

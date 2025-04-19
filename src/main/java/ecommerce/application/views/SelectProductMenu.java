@@ -1,12 +1,9 @@
 package ecommerce.application.views;
 
-import ecommerce.application.controllers.OrderController;
 import ecommerce.application.interfaces.Menu;
 import ecommerce.application.models.Product;
 import ecommerce.application.models.Program;
-import ecommerce.application.models.ShoppingCart;
 
-import java.util.Collection;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -53,6 +50,8 @@ public class SelectProductMenu extends Menu {
         int amount = selectAmount(product);
 
         Program.getInstance().getOrderController().newOrder(product, amount);
+
+        OrderMenu.getInstance().draw();
     }
 
     private Product selectProduct(Map<String, Product> products) {

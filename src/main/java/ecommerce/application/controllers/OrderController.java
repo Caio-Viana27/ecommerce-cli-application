@@ -5,9 +5,7 @@ import ecommerce.application.models.Customer;
 import ecommerce.application.models.Order;
 import ecommerce.application.models.Product;
 import ecommerce.application.models.ShoppingCart;
-import ecommerce.application.views.CustomerMenu;
 import ecommerce.application.views.Login;
-import ecommerce.application.views.OrderMenu;
 
 public class OrderController implements IController {
     private static OrderController instance = null;
@@ -29,19 +27,20 @@ public class OrderController implements IController {
         }
 
         order.addProduct(product, amount);
-        OrderMenu.getInstance().draw();
     }
 
-    public void closeOrder() {
-        if (order == null) {
-            OrderMenu.getInstance().draw();
-        }
-
+    public boolean closeOrder() {
         Customer account = (Customer) Login.getInstance().getLogedAccount();
+
+        if (order == null)
+            return false;
+        if (order.isEmpty())
+            return false;
+
         account.addOrder(order);
         order = null;
 
-        CustomerMenu.getInstance().draw();
+        return true;
     }
 
     public Order getCurrentOrder() {

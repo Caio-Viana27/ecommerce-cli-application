@@ -3,7 +3,6 @@ package ecommerce.application.controllers;
 import ecommerce.application.interfaces.IAccountController;
 import ecommerce.application.models.Product;
 import ecommerce.application.models.Program;
-import ecommerce.application.views.AdministratorMenu;
 
 public class ProductController implements IAccountController {
     private static ProductController instance = null;
@@ -20,7 +19,5 @@ public class ProductController implements IAccountController {
 
     public void insertNewProduct(Product newProduct) {
         Program.getInstance().getProductsMap().put(newProduct.getId(), newProduct);
-
-        AdministratorMenu.getInstance().draw();
     }
 }

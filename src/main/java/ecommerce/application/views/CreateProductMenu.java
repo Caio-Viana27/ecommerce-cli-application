@@ -36,9 +36,11 @@ public class CreateProductMenu extends Menu {
 
         Product newpProduct = new Product(name, price, inventory, description, category);
         Program.getInstance().getProductController().insertNewProduct(newpProduct);
+
+        AdministratorMenu.getInstance().draw();
     }
 
-    private Double price() {
+    private double price() {
         while (true) {
             System.out.print("    Price: ");
             String strPrice = scanner.nextLine();

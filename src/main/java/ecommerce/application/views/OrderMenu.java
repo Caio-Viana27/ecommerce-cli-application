@@ -28,8 +28,21 @@ public class OrderMenu extends Menu {
 
         addMenu("1", this::viewOrder);
 
-        OrderController controller = OrderController.getInstance();
-        addMenu("2", controller::closeOrder);
+        addMenu("2", () -> {
+            clearConsole();
+
+            OrderController controller = OrderController.getInstance();
+            if (controller.closeOrder()) {
+                Message.orderFinished();
+            }
+            else {
+                Message.noProducts();
+            }
+            Message.pressAnyKeyToExit();
+            scanner.nextLine();
+
+            CustomerMenu.getInstance().draw();
+        });
     }
 
     public static OrderMenu getInstance() {
@@ -72,6 +85,9 @@ public class OrderMenu extends Menu {
     }
 
     private void viewOrder() {
+        clearConsole();
+        separator();
+
         Order order = OrderController.getInstance().getCurrentOrder();
 
         if (order == null) {
@@ -80,6 +96,10 @@ public class OrderMenu extends Menu {
         }
 
         display(order);
+
+        Message.pressAnyKeyToExit();
+        scanner.nextLine();
+
         draw();
     }
 }

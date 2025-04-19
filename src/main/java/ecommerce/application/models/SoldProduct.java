@@ -2,7 +2,7 @@ package ecommerce.application.models;
 
 import java.io.Serializable;
 
-public record SoldProduct(ProductInfo info, int quantitySold) implements Serializable {
+public record SoldProduct(ProductInfo info, int amount) implements Serializable {
 
     public double getPrice() {
         return info.getPrice();
@@ -16,7 +16,7 @@ public record SoldProduct(ProductInfo info, int quantitySold) implements Seriali
         productInfo += "    Description: " + info.getDescription() + "\n";
         productInfo += "    Category: " + info.getCategory() + "\n";
         productInfo += "    Price: " + info.getPrice() + "\n";
-        productInfo += "    Quantity: " + quantitySold + "\n";
+        productInfo += "    Quantity: " + amount + "\n";
         return productInfo + "\n";
     }
 }

@@ -48,7 +48,7 @@ public class Customer extends Account {
 
     private String orderHistoryToString() {
         if (orderHistory.isEmpty()) {
-            return "  [ No order history yet ]";
+            return "  [ User has no order history yet ]";
         }
 
         StringBuilder orderHistoryInfo = new StringBuilder();

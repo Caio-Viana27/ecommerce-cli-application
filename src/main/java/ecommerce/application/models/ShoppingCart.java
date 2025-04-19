@@ -5,25 +5,27 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class ShoppingCart implements Serializable {
-    private double totalPrice;
+    private double value;
     private List<SoldProduct> cart;
 
     public ShoppingCart() {
-        totalPrice = 0;
-        cart = new LinkedList<SoldProduct>();
+        value = 0;
+        cart = new LinkedList<>();
     }
 
     public ShoppingCart(Product product, int amount) {
-        totalPrice = 0;
-        cart = new LinkedList<SoldProduct>();
+        value = product.getPrice();
+
+        cart = new LinkedList<>();
         cart.add(new SoldProduct(product.getInfo(), amount));
     }
 
     public void addProduct(SoldProduct product) {
-        totalPrice += product.getPrice();
+        value += (product.info().getPrice() * product.amount());
         cart.add(product);
     }
 
+    @Override
     public String toString() {
         StringBuilder cartInfo = new StringBuilder();
         for (var product : cart) {
@@ -37,7 +39,7 @@ public class ShoppingCart implements Serializable {
         return cart.isEmpty();
     }
 
-    public double getTotalPrice() {
-        return totalPrice;
+    public double getValue() {
+        return value;
     }
 }

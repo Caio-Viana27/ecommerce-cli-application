@@ -1,8 +1,6 @@
 package ecommerce.application.models;
 
-import ecommerce.application.views.Message;
 import java.io.Serializable;
-import java.util.Scanner;
 
 public class Product implements Serializable {
     private ProductInfo info;
@@ -20,18 +18,6 @@ public class Product implements Serializable {
         }
 
         return amount > 0 && amount <= product.inventory;
-    }
-
-    public int selectQuantity(Scanner scanner) {
-
-        while (true) {
-            System.out.print("\nHow many products you wish to buy? ");
-            int quantity = scanner.nextInt();
-            scanner.nextLine();
-
-            if (Product.hasEnoughInventory(this, quantity))
-                return quantity;
-        }
     }
 
     @Override
@@ -54,8 +40,12 @@ public class Product implements Serializable {
         return info.getId();
     }
 
+    public double getPrice() {
+        return info.getPrice();
+    }
+
     public void setNewInventory(int quantity) {
-        this.inventory += quantity;
+        this.inventory -= quantity;
     }
 
     public boolean hasLowerInventory(Product product) {

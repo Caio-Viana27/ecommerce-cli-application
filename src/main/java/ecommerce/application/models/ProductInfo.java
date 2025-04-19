@@ -10,7 +10,7 @@ public class ProductInfo implements Serializable {
     private double price;
 
     public ProductInfo(String name, double price, String description, String category) {
-        this.id = new String("product." + IdGenerator.radomIdGenerator());
+        this.id = "product." + IdGenerator.radomIdGenerator();
         this.name = name;
         this.price = price;
         this.description = description;

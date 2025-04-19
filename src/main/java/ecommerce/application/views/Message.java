@@ -31,9 +31,9 @@ public class Message {
         System.out.println("    There are no products yet");
     }
 
-    public static void noProducts(String string) {
+    public static void noProducts() {
         Menu.separator();
-        System.out.println("    " + string + "no products in the shopping cart!");
+        System.out.println("    There are no products in the shopping cart!");
     }
 
     public static void productHasNoInventory() {
@@ -68,12 +68,13 @@ public class Message {
         System.out.println("    No saved data found!");
     }
 
-    public static void inlineInvalidOption(String option) {
-        System.out.println("    invalid " + option + "!");
-    }
-
     public static void pressAnyKeyToExit() {
         Menu.separator();
         System.out.print("    Press enter to exit! ");
+    }
+
+    public static void orderFinished() {
+        Menu.separator();
+        System.out.println("    Order finished!");
     }
 }
