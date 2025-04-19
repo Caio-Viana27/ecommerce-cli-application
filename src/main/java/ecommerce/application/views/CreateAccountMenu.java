@@ -37,7 +37,7 @@ public class CreateAccountMenu extends Menu {
         System.out.println("    Create Account\n");
         System.out.println("    0 - Create new Administrator");
         System.out.println("    1 - Create new Customer");
-        System.out.println("    2 - Return");
+        System.out.println("    2 - Return\n");
 
         OnSelection menu = selectOption();
         menu.action();

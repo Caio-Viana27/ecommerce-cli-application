@@ -60,8 +60,7 @@ public class AdministratorMenu extends Menu {
         System.out.println("    1 - Create new product");
         System.out.println("    2 - Generate Report");
         System.out.println("    3 - Logout");
-        System.out.println("    4 - Exit program");
-        System.out.print(  "    Option: ");
+        System.out.println("    4 - Exit program\n");
 
         OnSelection menu = selectMenuOption();
         menu.action();
@@ -71,6 +70,7 @@ public class AdministratorMenu extends Menu {
         OnSelection menuOption;
 
         while (true) {
+            System.out.print("    Option: ");
             String option = scanner.nextLine();
 
             menuOption = menuActions.get(option);

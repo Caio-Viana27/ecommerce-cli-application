@@ -8,7 +8,8 @@ import ecommerce.application.views.Message;
 
 public class ReportLowestInventoryProduct implements IReport {
 
-    public void create(Program program) {
+    @Override
+    public void generate(Program program) {
         Product lowestInventoryProduct = null;
 
         for (var product : program.getProductsList()) {
@@ -20,6 +21,7 @@ public class ReportLowestInventoryProduct implements IReport {
             return;
         }
 
+        Menu.separator();
         Menu.display(lowestInventoryProduct);
     }
 

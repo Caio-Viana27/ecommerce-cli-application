@@ -51,30 +51,24 @@ public class OrderMenu extends Menu {
         System.out.println("    Menu order\n");
         System.out.println("    0 - Add product");
         System.out.println("    1 - View order");
-        System.out.println("    2 - Finish order");
-        System.out.print(  "    Option: ");
+        System.out.println("    2 - Finish order\n");
 
         OnSelection menu = selectOption();
         menu.action();
     }
 
     private OnSelection selectOption() {
-        boolean validOption = false;
-        OnSelection menuOption = null;
-
-        while (!validOption) {
+        while (true) {
+            System.out.print("    Option: ");
             String option = scanner.nextLine();
 
-            menuOption = menuOptions.get(option);
+            OnSelection menuOption = menuOptions.get(option);
 
-            if (menuOption == null) {
-                Message.invalidOption("option!");
+            if (menuOption != null) {
+                return menuOption;
             }
-            else {
-                validOption = true;
-            }
+            Message.invalidOption("option!");
         }
-        return menuOption;
     }
 
     private void viewOrder() {

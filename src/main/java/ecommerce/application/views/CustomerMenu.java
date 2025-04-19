@@ -25,13 +25,9 @@ public class CustomerMenu extends Menu {
         Menu menu = new OrderMenu(scanner);
         addMenu("0", menu::draw);
 
-        addMenu("1", () -> {
-            Login.getInstance().draw();
-        });
+        addMenu("1", () -> Login.getInstance().draw());
 
-        addMenu("2", () -> {
-            Program.getInstance().exit();
-        });
+        addMenu("2", () -> Program.getInstance().exit());
     }
 
     public static CustomerMenu getInstance() {
@@ -53,28 +49,23 @@ public class CustomerMenu extends Menu {
         System.out.println("    Customer Menu\n");
         System.out.println("    0 - New order");
         System.out.println("    1 - Log out");
-        System.out.println("    2 - Exit program");
-        System.out.print("    Option: ");
+        System.out.println("    2 - Exit program\n");
 
         OnSelection menu = selectOption();
         menu.action();
     }
 
     private OnSelection selectOption() {
-        boolean validOption = false;
-        OnSelection menuOption = null;
-
-        while (!validOption) {
+        while (true) {
+            System.out.print("    Option: ");
             String option = scanner.nextLine();
 
-            menuOption = menuOptions.get(option);
+            OnSelection menuOption = menuOptions.get(option);
 
-            if (menuOption == null) {
-                Message.invalidOption("");
-            } else {
-                validOption = true;
+            if (menuOption != null) {
+                return menuOption;
             }
+            Message.invalidOption("option");
         }
-        return menuOption;
     }
 }

@@ -42,7 +42,7 @@ public class ReportMenu extends Menu {
         System.out.println("    0 - Report (most expensive order)");
         System.out.println("    1 - Report (product with lowest inventory)");
         System.out.println("    2 - Full Report");
-        System.out.println("    3 - Return");
+        System.out.println("    3 - Return\n");
 
         OnSelection report = selectReportOption();
         report.action();
@@ -65,31 +65,34 @@ public class ReportMenu extends Menu {
 
     private void drawReportMostExpensiveOrder() {
         clearConsole();
-        separator();
+
         new ReportMostExpensiveOrder().create(Program.getInstance());
-        pressAnyKeyToExit();
+
+        Message.pressAnyKeyToExit();
+        scanner.nextLine();
+
         draw();
     }
 
     private void drawReportProductWithLowestInventory() {
         clearConsole();
-        separator();
+
         new ReportLowestInventoryProduct().create(Program.getInstance());
-        pressAnyKeyToExit();
+
+        Message.pressAnyKeyToExit();
+        scanner.nextLine();
+
         draw();
     }
 
     private void drawFullReport() {
         clearConsole();
-        separator();
-        new FullReport().create(Program.getInstance());
-        pressAnyKeyToExit();
-        draw();
-    }
 
-    private void pressAnyKeyToExit() {
-        separator();
-        System.out.print("    Press enter to exit! ");
+        new FullReport().create(Program.getInstance());
+
+        Message.pressAnyKeyToExit();
         scanner.nextLine();
+
+        draw();
     }
 }

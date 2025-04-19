@@ -47,7 +47,7 @@ public class CreateProductMenu extends Menu {
                 return Double.parseDouble(strPrice);
 
             } catch (NumberFormatException e) {
-                Message.inlineInvalidOption("price");
+                Message.invalidOption("price");
             }
         }
     }
@@ -61,13 +61,13 @@ public class CreateProductMenu extends Menu {
                 int inventory = Integer.parseInt(strInventory);
 
                 if (inventory < 0) {
-                    Message.inlineInvalidOption("inventory");
+                    Message.invalidOption("inventory");
                 }
                 else {
                     return inventory;
                 }
             } catch (NumberFormatException e) {
-                Message.inlineInvalidOption("inventory");
+                Message.invalidOption("inventory");
             }
         }
     }

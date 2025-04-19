@@ -71,4 +71,9 @@ public class Message {
     public static void inlineInvalidOption(String option) {
         System.out.println("    invalid " + option + "!");
     }
+
+    public static void pressAnyKeyToExit() {
+        Menu.separator();
+        System.out.print("    Press enter to exit! ");
+    }
 }

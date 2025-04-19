@@ -9,7 +9,8 @@ import ecommerce.application.views.Message;
 
 public class ReportMostExpensiveOrder implements IReport {
 
-    public void create(Program program) {
+    @Override
+    public void generate(Program program) {
         Order mostExpensiveOrder = null;
 
         for (var account : program.getAccountsList()) {
@@ -33,6 +34,7 @@ public class ReportMostExpensiveOrder implements IReport {
             return;
         }
 
+        Menu.separator();
         Menu.display(mostExpensiveOrder);
     }
 }

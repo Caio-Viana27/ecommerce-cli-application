@@ -6,13 +6,15 @@ import ecommerce.application.interfaces.Menu;
 
 public class FullReport implements IReport {
 
-    public void create(Program program) {
+    @Override
+    public void generate(Program program) {
         Menu.separator();
         System.out.println("    Account(s)\n");
 
         for (var account : program.getAccountsList()) {
             Menu.display(account);
         }
+
         Menu.separator();
         System.out.println("    Product(s)\n");
 
