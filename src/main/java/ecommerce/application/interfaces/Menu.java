@@ -1,17 +1,15 @@
 package ecommerce.application.interfaces;
 
-import ecommerce.application.views.Message;
-
 import java.util.Scanner;
 
 public abstract class Menu implements Runnable {
     protected Scanner scanner;
-    protected Message message;
 
     public Menu(Scanner scanner) {
         this.scanner = scanner;
     }
 
+    @Override
     public void run() {
         draw();
     }

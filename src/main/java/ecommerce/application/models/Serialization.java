@@ -1,39 +1,40 @@
 package ecommerce.application.models;
 
+import ecommerce.application.controllers.AccountController;
+import ecommerce.application.controllers.ProductController;
 import ecommerce.application.interfaces.Account;
 
 import java.io.*;
 import java.util.HashMap;
-import java.util.Map;
 
 public class Serialization {
 
-    public boolean load(Program program) {
+    public boolean load(AccountController accountController, ProductController productController) {
 
         try (var loadFile = new FileInputStream("data/data.dat");
              var in = new ObjectInputStream(loadFile)) {
 
-            program.setAccounts((HashMap<String, Account>) in.readObject());
-            program.setProducts((HashMap<String, Product>) in.readObject());
+            accountController.setAccounts((HashMap<String, Account>) in.readObject());
+            productController.setProducts((HashMap<String, Product>) in.readObject());
 
             return true;
 
         } catch (IOException | ClassNotFoundException e) {
 
-            program.setAccounts(new HashMap<String, Account>());
-            program.setProducts(new HashMap<String, Product>());
+            accountController.setAccounts(new HashMap<String, Account>());
+            productController.setProducts(new HashMap<String, Product>());
 
             return false;
         }
     }
 
-    public boolean save(Map<String, Account> accounts, Map<String, Product> products) {
+    public boolean save(AccountController accountController, ProductController productController) {
 
         try (var saveFile = new FileOutputStream("data/data.dat");
              var out = new ObjectOutputStream(saveFile)) {
 
-            out.writeObject(accounts);
-            out.writeObject(products);
+            out.writeObject(accountController.getAccountsMap());
+            out.writeObject(productController.getProductsMap());
 
             return true;
 

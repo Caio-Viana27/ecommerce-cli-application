@@ -1,11 +1,14 @@
 package ecommerce.application.controllers;
 
-import ecommerce.application.interfaces.IAccountController;
+import ecommerce.application.interfaces.IController;
 import ecommerce.application.models.Product;
-import ecommerce.application.models.Program;
 
-public class ProductController implements IAccountController {
+import java.util.Collection;
+import java.util.Map;
+
+public class ProductController implements IController {
     private static ProductController instance = null;
+    private Map<String, Product> products;
 
     public ProductController() {
         if (instance != null)
@@ -18,6 +21,18 @@ public class ProductController implements IAccountController {
     }
 
     public void insertNewProduct(Product newProduct) {
-        Program.getInstance().getProductsMap().put(newProduct.getId(), newProduct);
+        products.put(newProduct.getId(), newProduct);
+    }
+
+    public Collection<Product> getProductsList() {
+        return products.values();
+    }
+
+    public Map<String, Product> getProductsMap() {
+        return products;
+    }
+
+    public void setProducts(Map<String, Product> products) {
+        this.products = products;
     }
 }

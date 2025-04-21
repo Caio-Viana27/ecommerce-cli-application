@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class CustomerMenu extends Menu {
     private static CustomerMenu instance = null;
-    private Map<String, OnSelection> menuOptions;
+    private final Map<String, OnSelection> menuOptions;
 
     public CustomerMenu(Scanner scanner) {
         super(scanner);

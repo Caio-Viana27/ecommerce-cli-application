@@ -1,5 +1,6 @@
 package ecommerce.application.views;
 
+import ecommerce.application.controllers.AccountController;
 import ecommerce.application.interfaces.Account;
 import ecommerce.application.interfaces.Menu;
 import ecommerce.application.models.AccountType;
@@ -12,18 +13,13 @@ import java.util.Scanner;
 public class Login extends Menu {
     private static Login instance;
     private Account logedAccount;
-
     private final Map<AccountType, Menu> menus;
-    private Map<String, Account> accounts;
 
     public Login(Scanner scanner) {
         super(scanner);
         instance = this;
         menus = new HashMap<>();
-    }
 
-    public void init(Map<String, Account> accounts) {
-        this.accounts = accounts;
         addMenu(AccountType.Customer, new CustomerMenu(scanner));
         addMenu(AccountType.Administrator, new AdministratorMenu(scanner));
         addMenu(AccountType.Seller, new SellerMenu(scanner));
@@ -40,11 +36,13 @@ public class Login extends Menu {
     }
 
     private void login() {
+        AccountController accountController = Program.getInstance().getAccountController();
+
         clearConsole();
         separator();
         Message.login();
 
-        Account account = selectAccount();
+        Account account = selectAccount(accountController.getAccountsMap());
 
         enterPassword(account);
 
@@ -55,7 +53,7 @@ public class Login extends Menu {
         menus.get(account.login()).draw();
     }
 
-    private Account selectAccount() {
+    private Account selectAccount(Map<String, Account> accounts) {
         Account account = null;
         while (account == null) {
 
