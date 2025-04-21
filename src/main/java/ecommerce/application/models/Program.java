@@ -8,7 +8,7 @@ import ecommerce.application.views.Login;
 
 import java.util.Scanner;
 
-import static ecommerce.application.models.TestData.InsertTestData;
+import ecommerce.application.models.TestData;
 
 public class Program {
     public static Program instance = null;
@@ -49,7 +49,7 @@ public class Program {
             Message.dataFound();
         }
         else {
-            InsertTestData(accountController, productController);
+            TestData.insertTestData(accountController, productController);
             Message.noDataFound();
         }
     }

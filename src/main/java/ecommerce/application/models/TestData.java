@@ -9,7 +9,7 @@ public class TestData {
         return new Administrator("admin", "admin@gmail.com", "admin");
     }
 
-    public static void InsertTestData(AccountController accountController, ProductController productController) {
+    public static void insertTestData(AccountController accountController, ProductController productController) {
         accountController.getAccountsMap().put("admin@gmail.com", createHardcodedAdmin());
         accountController.getAccountsMap().put("Mateus@gmail.com",
                 new Customer("Mateus", "Mateus@gmail.com", "mateus",
