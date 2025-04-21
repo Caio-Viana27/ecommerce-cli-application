@@ -8,8 +8,6 @@ import ecommerce.application.views.Login;
 
 import java.util.Scanner;
 
-import ecommerce.application.models.TestData;
-
 public class Program {
     public static Program instance = null;
 
@@ -27,7 +25,7 @@ public class Program {
         instance = this;
     }
 
-    public void start() {
+    public void init() {
         loadData();
 
         Login login = new Login(scanner);

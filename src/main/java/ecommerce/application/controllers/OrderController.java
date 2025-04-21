@@ -1,13 +1,13 @@
 package ecommerce.application.controllers;
 
-import ecommerce.application.interfaces.IController;
+import ecommerce.application.interfaces.Controller;
 import ecommerce.application.models.Customer;
 import ecommerce.application.models.Order;
 import ecommerce.application.models.Product;
 import ecommerce.application.models.ShoppingCart;
 import ecommerce.application.views.Login;
 
-public class OrderController implements IController {
+public class OrderController implements Controller {
     private static OrderController instance = null;
     private Order order = null;
 

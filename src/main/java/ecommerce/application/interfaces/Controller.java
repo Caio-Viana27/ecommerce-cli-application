@@ -1,5 +1,5 @@
 package ecommerce.application.interfaces;
 
-public interface IController {
+public interface Controller {
 
 }

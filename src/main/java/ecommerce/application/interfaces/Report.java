@@ -1,6 +1,6 @@
 package ecommerce.application.interfaces;
 
-public interface IReport {
+public interface Report {
 
     void generate();
 }

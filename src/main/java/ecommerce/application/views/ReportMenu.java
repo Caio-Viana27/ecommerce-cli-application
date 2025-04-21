@@ -3,10 +3,8 @@ package ecommerce.application.views;
 import ecommerce.application.FullReport;
 import ecommerce.application.ReportLowestInventoryProduct;
 import ecommerce.application.ReportMostExpensiveOrder;
-import ecommerce.application.interfaces.IReport;
 import ecommerce.application.interfaces.Menu;
 import ecommerce.application.interfaces.OnSelection;
-import ecommerce.application.models.Program;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -66,7 +64,7 @@ public class ReportMenu extends Menu {
     private void drawReportMostExpensiveOrder() {
         clearConsole();
 
-        new ReportMostExpensiveOrder().generate(Program.getInstance());
+        new ReportMostExpensiveOrder().generate();
 
         Message.pressAnyKeyToExit();
         scanner.nextLine();
@@ -77,7 +75,7 @@ public class ReportMenu extends Menu {
     private void drawReportProductWithLowestInventory() {
         clearConsole();
 
-        new ReportLowestInventoryProduct().generate(Program.getInstance());
+        new ReportLowestInventoryProduct().generate();
 
         Message.pressAnyKeyToExit();
         scanner.nextLine();
@@ -88,7 +86,7 @@ public class ReportMenu extends Menu {
     private void drawFullReport() {
         clearConsole();
 
-        new FullReport().generate(Program.getInstance());
+        new FullReport().generate();
 
         Message.pressAnyKeyToExit();
         scanner.nextLine();

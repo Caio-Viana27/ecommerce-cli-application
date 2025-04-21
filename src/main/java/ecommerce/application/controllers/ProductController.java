@@ -1,12 +1,12 @@
 package ecommerce.application.controllers;
 
-import ecommerce.application.interfaces.IController;
+import ecommerce.application.interfaces.Controller;
 import ecommerce.application.models.Product;
 
 import java.util.Collection;
 import java.util.Map;
 
-public class ProductController implements IController {
+public class ProductController implements Controller {
     private static ProductController instance = null;
     private Map<String, Product> products;
 

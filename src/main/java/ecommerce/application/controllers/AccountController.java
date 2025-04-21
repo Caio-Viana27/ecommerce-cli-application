@@ -1,14 +1,12 @@
 package ecommerce.application.controllers;
 
 import ecommerce.application.interfaces.Account;
-import ecommerce.application.interfaces.IController;
-import ecommerce.application.models.Product;
-import ecommerce.application.models.Program;
+import ecommerce.application.interfaces.Controller;
 
 import java.util.Collection;
 import java.util.Map;
 
-public class AccountController implements IController {
+public class AccountController implements Controller {
     private static AccountController instance = null;
     private Map<String, Account> accounts;
 

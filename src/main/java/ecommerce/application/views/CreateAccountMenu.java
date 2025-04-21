@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class CreateAccountMenu extends Menu {
-    private Map<String, OnSelection> menuOptions;
+    private final Map<String, OnSelection> menuOptions;
 
     public CreateAccountMenu(Scanner scanner) {
         super(scanner);
@@ -94,7 +94,7 @@ public class CreateAccountMenu extends Menu {
     }
 
     private String createAccountEmail() {
-        Map<String, Account> accounts = Program.getInstance().getAccountsMap();
+        Map<String, Account> accounts = Program.getInstance().getAccountController().getAccountsMap();
 
         String email;
         do {

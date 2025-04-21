@@ -22,7 +22,7 @@ public class SelectProductMenu extends Menu {
         clearConsole();
         separator();
 
-        Map<String, Product> products = Program.getInstance().getProductsMap();
+        Map<String, Product> products = Program.getInstance().getProductController().getProductsMap();
 
         if (products.isEmpty()) {
             Message.noProductsAvailable();

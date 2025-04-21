@@ -1,19 +1,19 @@
 package ecommerce.application;
 
-import ecommerce.application.interfaces.IReport;
+import ecommerce.application.interfaces.Report;
 import ecommerce.application.models.Customer;
 import ecommerce.application.models.Order;
 import ecommerce.application.models.Program;
 import ecommerce.application.interfaces.Menu;
 import ecommerce.application.views.Message;
 
-public class ReportMostExpensiveOrder implements IReport {
+public class ReportMostExpensiveOrder implements Report {
 
     @Override
-    public void generate(Program program) {
+    public void generate() {
         Order mostExpensiveOrder = null;
 
-        for (var account : program.getAccountsList()) {
+        for (var account : Program.getInstance().getAccountController().getAccountsList()) {
             Order CustomerMostExpensiveOrder = null;
 
             if (account instanceof Customer customer) {

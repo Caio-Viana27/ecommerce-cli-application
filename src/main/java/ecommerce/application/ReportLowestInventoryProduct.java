@@ -1,18 +1,18 @@
 package ecommerce.application;
 
-import ecommerce.application.interfaces.IReport;
+import ecommerce.application.interfaces.Report;
 import ecommerce.application.models.Product;
-import ecommerce.application.models.Program;
 import ecommerce.application.interfaces.Menu;
+import ecommerce.application.models.Program;
 import ecommerce.application.views.Message;
 
-public class ReportLowestInventoryProduct implements IReport {
+public class ReportLowestInventoryProduct implements Report {
 
     @Override
-    public void generate(Program program) {
+    public void generate() {
         Product lowestInventoryProduct = null;
 
-        for (var product : program.getProductsList()) {
+        for (var product : Program.getInstance().getProductController().getProductsList()) {
             lowestInventoryProduct = getLowerInventoryProduct(lowestInventoryProduct, product);
         }
 

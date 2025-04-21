@@ -1,24 +1,24 @@
 package ecommerce.application;
 
-import ecommerce.application.interfaces.IReport;
-import ecommerce.application.models.Program;
+import ecommerce.application.interfaces.Report;
 import ecommerce.application.interfaces.Menu;
+import ecommerce.application.models.Program;
 
-public class FullReport implements IReport {
+public class FullReport implements Report {
 
     @Override
-    public void generate(Program program) {
+    public void generate() {
         Menu.separator();
         System.out.println("    Account(s)\n");
 
-        for (var account : program.getAccountsList()) {
+        for (var account : Program.getInstance().getAccountController().getAccountsList()) {
             Menu.display(account);
         }
 
         Menu.separator();
         System.out.println("    Product(s)\n");
 
-        for (var product : program.getProductsList()) {
+        for (var product : Program.getInstance().getProductController().getProductsList()) {
             Menu.display(product);
         }
     }
