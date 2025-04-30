@@ -5,7 +5,7 @@ import ecommerce.application.models.Customer;
 import ecommerce.application.models.Order;
 import ecommerce.application.models.Product;
 import ecommerce.application.models.ShoppingCart;
-import ecommerce.application.views.Login;
+import ecommerce.application.views.SignInMenu;
 
 public class OrderController implements Controller {
     private static OrderController instance = null;
@@ -30,7 +30,7 @@ public class OrderController implements Controller {
     }
 
     public boolean closeOrder() {
-        Customer account = (Customer) Login.getInstance().getLogedAccount();
+        Customer account = (Customer) SignInMenu.getInstance().getLogedAccount();
 
         if (order == null)
             return false;

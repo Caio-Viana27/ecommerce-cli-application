@@ -23,11 +23,6 @@ public class Customer extends Account {
         this.orderHistory = new LinkedList<>();
     }
 
-    @Override
-    public AccountType login() {
-        return type;
-    }
-
 //    public void addDeliveryAddress(Address address) {
 //        deliveryAddresses.add(address);
 //    }

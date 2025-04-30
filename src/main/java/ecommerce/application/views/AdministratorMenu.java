@@ -34,7 +34,7 @@ public class AdministratorMenu extends Menu {
         menu = new ReportMenu(scanner);
         addMenu("2", menu::draw);
 
-        addMenu("3", () -> Login.getInstance().draw());
+        addMenu("3", () -> SignInMenu.getInstance().draw());
 
         addMenu("4", () -> Program.getInstance().exit());
     }

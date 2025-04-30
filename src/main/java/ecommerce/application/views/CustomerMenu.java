@@ -25,7 +25,7 @@ public class CustomerMenu extends Menu {
         Menu menu = new OrderMenu(scanner);
         addMenu("0", menu::draw);
 
-        addMenu("1", () -> Login.getInstance().draw());
+        addMenu("1", () -> SignInMenu.getInstance().draw());
 
         addMenu("2", () -> Program.getInstance().exit());
     }

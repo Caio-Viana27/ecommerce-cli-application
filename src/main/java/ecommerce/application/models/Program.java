@@ -4,7 +4,7 @@ import ecommerce.application.controllers.AccountController;
 import ecommerce.application.controllers.OrderController;
 import ecommerce.application.controllers.ProductController;
 import ecommerce.application.views.Message;
-import ecommerce.application.views.Login;
+import ecommerce.application.views.SignInMenu;
 
 import java.util.Scanner;
 
@@ -18,19 +18,23 @@ public class Program {
     private final Serialization data = new Serialization();
     private final Scanner scanner = new Scanner(System.in);
 
-    public Program() {
-        if (instance != null)
-            throw new RuntimeException();
-
+    private Program() {
         instance = this;
+    }
+
+    public static Program instantiate() {
+        if (instance != null)
+            return instance;
+
+        return new Program();
     }
 
     public void init() {
         loadData();
 
-        Login login = new Login(scanner);
+        SignInMenu signInMenu = new SignInMenu(scanner);
 
-        Thread UIThread = new Thread(login, "UIThread");
+        Thread UIThread = new Thread(signInMenu, "UIThread");
         UIThread.start();
 
         try {

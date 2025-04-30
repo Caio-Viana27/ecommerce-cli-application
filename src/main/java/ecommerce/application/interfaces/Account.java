@@ -16,8 +16,6 @@ public abstract class Account implements Serializable {
         this.info = info;
     }
 
-    public abstract AccountType login();
-
     public String getEmail() {
         return info.getEmail();
     }

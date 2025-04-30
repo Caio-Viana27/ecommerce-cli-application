@@ -14,11 +14,6 @@ public class Administrator extends Account {
     }
 
     @Override
-    public AccountType login() {
-        return type;
-    }
-
-    @Override
     public String toString() {
         String adminInfo;
         adminInfo = "<-- Administrator ------------------------------------------------------>\n\n";
