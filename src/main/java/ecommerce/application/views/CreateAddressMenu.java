@@ -6,8 +6,7 @@ import java.util.Scanner;
 
 public class CreateAddressMenu extends Menu {
 
-    public CreateAddressMenu(Scanner scanner) {
-        super(scanner);
+    public CreateAddressMenu() {
     }
 
     @Override

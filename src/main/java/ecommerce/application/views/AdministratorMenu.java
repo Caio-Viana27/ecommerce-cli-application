@@ -13,8 +13,7 @@ public class AdministratorMenu extends Menu {
     private static AdministratorMenu instance;
     private Map<String, OnSelection> menuActions;
 
-    public AdministratorMenu(Scanner scanner) {
-        super(scanner);
+    public AdministratorMenu() {
 
         if (instance != null) {
             throw new RuntimeException();
@@ -25,16 +24,16 @@ public class AdministratorMenu extends Menu {
 
         Menu menu;
 
-        menu = new CreateAccountMenu(scanner);
+        menu = new CreateAccountMenu();
         addMenu("0", menu::draw);
 
-        menu = new CreateProductMenu(scanner);
+        menu = new CreateProductMenu();
         addMenu("1", menu::draw);
 
-        menu = new ReportMenu(scanner);
+        menu = new ReportMenu();
         addMenu("2", menu::draw);
 
-        addMenu("3", () -> SignInMenu.getInstance().draw());
+        addMenu("3", () -> LoginMenu.getInstance().draw());
 
         addMenu("4", () -> Program.getInstance().exit());
     }

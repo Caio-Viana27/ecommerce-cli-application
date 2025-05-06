@@ -1,6 +1,7 @@
 package ecommerce.application.views;
 
 import ecommerce.application.controllers.AccountController;
+import ecommerce.application.controllers.LoginMethod;
 import ecommerce.application.interfaces.Account;
 import ecommerce.application.interfaces.Menu;
 import ecommerce.application.models.Administrator;
@@ -11,19 +12,18 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class SignInMenu extends Menu {
-    private static SignInMenu instance = null;
+public class LoginMenu extends Menu {
+    private static LoginMenu instance = null;
     private Account logedAccount;
     private final Map<Class<? extends Account>, Menu> menus;
 
-    public SignInMenu(Scanner scanner) {
-        super(scanner);
+    public LoginMenu() {
         instance = this;
         menus = new HashMap<>();
 
-        addMenu(Customer.class, new CustomerMenu(scanner));
-        addMenu(Administrator.class, new AdministratorMenu(scanner));
-        //addMenu(Seller.class, new SellerMenu(scanner));
+        addMenu(Customer.class, new CustomerMenu());
+        addMenu(Administrator.class, new AdministratorMenu());
+        //addMenu(Seller.class, new SellerMenu());
     }
 
     private void addMenu(Class<? extends Account> accountClass, Menu menu) {
@@ -59,7 +59,7 @@ public class SignInMenu extends Menu {
         while (account == null) {
 
             Message.enterOption("email");
-            String email = super.scanner.nextLine();
+            String email = scanner.nextLine();
 
             if ("0".equals(email)) {
                 clearConsole();
@@ -78,7 +78,7 @@ public class SignInMenu extends Menu {
         while (!passwordValid) {
 
             Message.enterOption("password");
-            String password = super.scanner.nextLine();
+            String password = scanner.nextLine();
 
             if ("0".equals(password)) {
                 clearConsole();
@@ -94,11 +94,29 @@ public class SignInMenu extends Menu {
         }
     }
 
-    public static SignInMenu getInstance() {
+    public static LoginMenu getInstance() {
         return instance;
     }
 
     public Account getLogedAccount() {
         return logedAccount;
+    }
+
+    public static LoginMethod getLoginMethod() {
+        Message.loginMethod();
+        while (true) {
+            System.out.print("option: ");
+            String option = scanner.nextLine();
+
+            option.toUpperCase();
+
+            if ("N".equals(option)) {
+                return new SignUp();
+            }
+            if ("Y".equals(option)) {
+                return new SignIn();
+            }
+            Message.invalidOption("option!");
+        }
     }
 }

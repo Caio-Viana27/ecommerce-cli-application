@@ -12,8 +12,7 @@ import java.util.Scanner;
 public class CreateAccountMenu extends Menu {
     private final Map<String, OnSelection> menuOptions;
 
-    public CreateAccountMenu(Scanner scanner) {
-        super(scanner);
+    public CreateAccountMenu() {
 
         menuOptions = new HashMap<>();
 

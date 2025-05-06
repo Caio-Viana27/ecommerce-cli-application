@@ -12,8 +12,7 @@ public class CustomerMenu extends Menu {
     private static CustomerMenu instance = null;
     private final Map<String, OnSelection> menuOptions;
 
-    public CustomerMenu(Scanner scanner) {
-        super(scanner);
+    public CustomerMenu() {
 
         if (instance != null)
             throw new RuntimeException();
@@ -22,10 +21,10 @@ public class CustomerMenu extends Menu {
 
         menuOptions = new HashMap<>();
 
-        Menu menu = new OrderMenu(scanner);
+        Menu menu = new OrderMenu();
         addMenu("0", menu::draw);
 
-        addMenu("1", () -> SignInMenu.getInstance().draw());
+        addMenu("1", () -> LoginMenu.getInstance().draw());
 
         addMenu("2", () -> Program.getInstance().exit());
     }

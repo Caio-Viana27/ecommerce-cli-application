@@ -3,10 +3,9 @@ package ecommerce.application.interfaces;
 import java.util.Scanner;
 
 public abstract class Menu implements Runnable {
-    protected Scanner scanner;
+    protected static final Scanner scanner = new Scanner(System.in);
 
-    public Menu(Scanner scanner) {
-        this.scanner = scanner;
+    public Menu() {
     }
 
     @Override
@@ -40,5 +39,9 @@ public abstract class Menu implements Runnable {
         } catch (final Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void closeScanner() {
+        scanner.close();
     }
 }

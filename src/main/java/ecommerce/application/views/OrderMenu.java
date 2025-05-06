@@ -13,8 +13,7 @@ public class OrderMenu extends Menu {
     public static OrderMenu instance;
     private Map<String, OnSelection> menuOptions;
 
-    public OrderMenu(Scanner scanner) {
-        super(scanner);
+    public OrderMenu() {
 
         if (instance != null) {
             throw new RuntimeException();
@@ -23,7 +22,7 @@ public class OrderMenu extends Menu {
 
         menuOptions = new HashMap<>();
 
-        Menu menu = new SelectProductMenu(scanner);
+        Menu menu = new SelectProductMenu();
         addMenu("0", menu::draw);
 
         addMenu("1", this::viewOrder);

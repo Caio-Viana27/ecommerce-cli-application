@@ -77,4 +77,9 @@ public class Message {
         Menu.separator();
         System.out.println("    Order finished!");
     }
+
+    public static void loginMethod() {
+        Menu.separator();
+        System.out.println("    Do you have a registered account (Y/N)?");
+    }
 }

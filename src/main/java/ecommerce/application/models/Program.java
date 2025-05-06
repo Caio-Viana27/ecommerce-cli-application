@@ -1,12 +1,12 @@
 package ecommerce.application.models;
 
 import ecommerce.application.controllers.AccountController;
+import ecommerce.application.controllers.LoginMethod;
 import ecommerce.application.controllers.OrderController;
 import ecommerce.application.controllers.ProductController;
+import ecommerce.application.interfaces.Menu;
 import ecommerce.application.views.Message;
-import ecommerce.application.views.SignInMenu;
-
-import java.util.Scanner;
+import ecommerce.application.views.LoginMenu;
 
 public class Program {
     public static Program instance = null;
@@ -16,23 +16,14 @@ public class Program {
     private final OrderController orderController = new OrderController();
 
     private final Serialization data = new Serialization();
-    private final Scanner scanner = new Scanner(System.in);
-
-    private Program() {
-        instance = this;
-    }
-
-    public static Program instantiate() {
-        if (instance != null)
-            return instance;
-
-        return new Program();
-    }
 
     public void init() {
         loadData();
 
-        SignInMenu signInMenu = new SignInMenu(scanner);
+        LoginMethod loginMethod = getLoginMethod();
+        //loginMethod.draw();
+
+        LoginMenu signInMenu = new LoginMenu();
 
         Thread UIThread = new Thread(signInMenu, "UIThread");
         UIThread.start();
@@ -67,11 +58,18 @@ public class Program {
 
     public void exit() {
         saveData();
-        scanner.close();
+        Menu.closeScanner();
         System.exit(0);
     }
 
+    private LoginMethod getLoginMethod() {
+        return LoginMenu.getLoginMethod();
+    }
+
     public static Program getInstance() {
+        if (instance == null) {
+            instance = new Program();
+        }
         return instance;
     }
 

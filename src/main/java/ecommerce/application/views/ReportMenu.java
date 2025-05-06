@@ -13,8 +13,7 @@ import java.util.Scanner;
 public class ReportMenu extends Menu {
     private final Map<String, OnSelection> menuOptions;
 
-    public ReportMenu(Scanner scanner) {
-        super(scanner);
+    public ReportMenu() {
 
         menuOptions = new HashMap<>();
 

@@ -8,8 +8,7 @@ import java.util.Scanner;
 
 public class CreateProductMenu extends Menu {
 
-    public CreateProductMenu(Scanner scanner) {
-        super(scanner);
+    public CreateProductMenu() {
     }
 
     @Override

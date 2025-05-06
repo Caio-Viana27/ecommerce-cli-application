@@ -1,21 +1,17 @@
 package ecommerce.application.views;
 
+import ecommerce.application.controllers.LoginMethod;
 import ecommerce.application.interfaces.Menu;
 
 import java.util.Scanner;
 
-public class SellerMenu extends Menu {
+public class SignIn extends Menu implements LoginMethod {
 
-    public SellerMenu() {
+    public SignIn() {
     }
 
     @Override
     public void draw() {
 
-    }
-
-    private void seller() {
-        clearConsole();
-        separator();
     }
 }
