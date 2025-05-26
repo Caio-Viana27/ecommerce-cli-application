@@ -10,7 +10,6 @@ import ecommerce.application.models.Program;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class LoginMenu extends Menu {
     private static LoginMenu instance = null;
@@ -108,7 +107,7 @@ public class LoginMenu extends Menu {
             System.out.print("option: ");
             String option = scanner.nextLine();
 
-            option.toUpperCase();
+            option = option.toUpperCase();
 
             if ("N".equals(option)) {
                 return new SignUp();

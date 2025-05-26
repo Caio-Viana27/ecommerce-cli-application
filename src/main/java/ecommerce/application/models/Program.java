@@ -17,15 +17,12 @@ public class Program {
 
     private final Serialization data = new Serialization();
 
-    public void init() {
+    public void init() throws Exception {
         loadData();
 
-        LoginMethod loginMethod = getLoginMethod();
-        //loginMethod.draw();
+        Menu loginMenu = MenuManager.instance().getMenu(LoginMenu.class);
 
-        LoginMenu signInMenu = new LoginMenu();
-
-        Thread UIThread = new Thread(signInMenu, "UIThread");
+        Thread UIThread = new Thread(loginMenu, "UIThread");
         UIThread.start();
 
         try {
@@ -56,14 +53,19 @@ public class Program {
         }
     }
 
+    private LoginMethod getLoginMethod() {
+        return LoginMenu.getLoginMethod();
+    }
+
+    private LoginMenu createLoginMenu(LoginMethod loginMethod) {
+
+        return null;
+    }
+
     public void exit() {
         saveData();
         Menu.closeScanner();
         System.exit(0);
-    }
-
-    private LoginMethod getLoginMethod() {
-        return LoginMenu.getLoginMethod();
     }
 
     public static Program getInstance() {
