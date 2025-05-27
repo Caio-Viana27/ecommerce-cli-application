@@ -1,4 +1,4 @@
-package ecommerce.application.models;
+package ecommerce.application.models.product;
 
 import java.io.Serializable;
 import java.util.LinkedList;

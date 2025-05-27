@@ -1,7 +1,7 @@
 package ecommerce.application.controllers;
 
 import ecommerce.application.interfaces.Controller;
-import ecommerce.application.models.Product;
+import ecommerce.application.models.product.Product;
 
 import java.util.Collection;
 import java.util.Map;

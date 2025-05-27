@@ -1,10 +1,10 @@
 package ecommerce.application.controllers;
 
 import ecommerce.application.interfaces.Controller;
-import ecommerce.application.models.Customer;
-import ecommerce.application.models.Order;
-import ecommerce.application.models.Product;
-import ecommerce.application.models.ShoppingCart;
+import ecommerce.application.models.account.Customer;
+import ecommerce.application.models.product.Order;
+import ecommerce.application.models.product.Product;
+import ecommerce.application.models.product.ShoppingCart;
 import ecommerce.application.views.SignInMenu;
 
 public class OrderController implements Controller {

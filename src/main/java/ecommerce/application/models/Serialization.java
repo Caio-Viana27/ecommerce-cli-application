@@ -3,6 +3,7 @@ package ecommerce.application.models;
 import ecommerce.application.controllers.AccountController;
 import ecommerce.application.controllers.ProductController;
 import ecommerce.application.interfaces.Account;
+import ecommerce.application.models.product.Product;
 
 import java.io.*;
 import java.util.HashMap;

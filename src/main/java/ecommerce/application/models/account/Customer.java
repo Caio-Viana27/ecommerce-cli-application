@@ -1,12 +1,12 @@
-package ecommerce.application.models;
+package ecommerce.application.models.account;
 
 import ecommerce.application.interfaces.Account;
+import ecommerce.application.models.product.Order;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class Customer extends Account {
-    public final AccountType type = AccountType.Customer;
     private Address deliveryAddresses;
     private List<Order> orderHistory;
 

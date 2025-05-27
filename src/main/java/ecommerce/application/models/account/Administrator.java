@@ -1,10 +1,8 @@
-package ecommerce.application.models;
+package ecommerce.application.models.account;
 
 import ecommerce.application.interfaces.Account;
 
 public class Administrator extends Account {
-    private final AccountType type = AccountType.Administrator;
-
     public Administrator(String name, String email, String password) {
         super(name, email, password, "admin");
     }

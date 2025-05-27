@@ -2,7 +2,6 @@ package ecommerce.application.views;
 
 import ecommerce.application.interfaces.Menu;
 import ecommerce.application.interfaces.OnSelection;
-import ecommerce.application.models.MenuManager;
 import ecommerce.application.models.Program;
 
 import java.util.HashMap;

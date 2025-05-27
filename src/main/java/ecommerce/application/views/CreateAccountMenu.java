@@ -4,6 +4,10 @@ import ecommerce.application.interfaces.Account;
 import ecommerce.application.interfaces.Menu;
 import ecommerce.application.interfaces.OnSelection;
 import ecommerce.application.models.*;
+import ecommerce.application.models.account.AccountInfo;
+import ecommerce.application.models.account.Administrator;
+import ecommerce.application.models.account.Customer;
+import ecommerce.application.models.account.Seller;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,10 +30,6 @@ public class CreateAccountMenu extends Menu {
 
     @Override
     public void draw() {
-        createAccount();
-    }
-
-    private void createAccount() {
         clearConsole();
         separator();
         System.out.println("    Create Account\n");
@@ -70,6 +70,8 @@ public class CreateAccountMenu extends Menu {
     }
 
     private void createCustomer() {
+        clearConsole();
+        separator();
         System.out.println("    Menu create customer\n");
 
         AccountInfo info = createAccountInfo();
@@ -108,4 +110,33 @@ public class CreateAccountMenu extends Menu {
 
         return email;
     }
+
+    public Class<? extends Account> selectAccountType() {
+
+        while (true) {
+            clearConsole();
+            separator();
+            System.out.println("    Select account type\n");
+            System.out.println("    0 - Customer");
+            System.out.println("    1 - Seller");
+            System.out.println("    2 - Exit\n");
+            System.out.print(  "    Option: ");
+
+            String option = scanner.nextLine();
+
+            if ("2".equals(option)) {
+                Program.getInstance().exit();
+            }
+            if ("1".equals(option)) {
+                return Seller.class;
+            }
+            if ("2".equals(option)) {
+                return Customer.class;
+            }
+
+            Message.invalidOption("option!");
+        }
+    }
+
+    public CreateAccountMenu(Class<? extends Account>)
 }

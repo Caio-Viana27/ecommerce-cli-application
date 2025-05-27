@@ -2,6 +2,10 @@ package ecommerce.application.models;
 
 import ecommerce.application.controllers.AccountController;
 import ecommerce.application.controllers.ProductController;
+import ecommerce.application.models.account.Address;
+import ecommerce.application.models.account.Administrator;
+import ecommerce.application.models.account.Customer;
+import ecommerce.application.models.product.Product;
 
 public class TestData {
 

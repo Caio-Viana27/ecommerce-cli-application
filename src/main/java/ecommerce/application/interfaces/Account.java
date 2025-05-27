@@ -1,7 +1,6 @@
 package ecommerce.application.interfaces;
 
-import ecommerce.application.models.AccountInfo;
-import ecommerce.application.models.AccountType;
+import ecommerce.application.models.account.AccountInfo;
 
 import java.io.Serializable;
 

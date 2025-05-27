@@ -5,7 +5,6 @@ import ecommerce.application.ReportLowestInventoryProduct;
 import ecommerce.application.ReportMostExpensiveOrder;
 import ecommerce.application.interfaces.Menu;
 import ecommerce.application.interfaces.OnSelection;
-import ecommerce.application.models.MenuManager;
 
 import java.util.HashMap;
 import java.util.Map;

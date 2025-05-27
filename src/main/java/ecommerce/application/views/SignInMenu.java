@@ -3,9 +3,10 @@ package ecommerce.application.views;
 import ecommerce.application.controllers.AccountController;
 import ecommerce.application.interfaces.Account;
 import ecommerce.application.interfaces.Menu;
-import ecommerce.application.models.Administrator;
-import ecommerce.application.models.Customer;
-import ecommerce.application.models.Program;
+import ecommerce.application.models.*;
+import ecommerce.application.models.account.Administrator;
+import ecommerce.application.models.account.Customer;
+import ecommerce.application.models.account.Seller;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +23,7 @@ public class SignInMenu extends Menu {
 
         addMenu(Customer.class, new CustomerMenu());
         addMenu(Administrator.class, new AdministratorMenu());
-        //addMenu(Seller.class, new SellerMenu());
+        addMenu(Seller.class, new SellerMenu());
     }
 
     private void addMenu(Class<? extends Account> accountClass, Menu menu) {
@@ -32,17 +33,12 @@ public class SignInMenu extends Menu {
     @Override
     public void draw() {
         logedAccount = null;
-        login();
-    }
 
-    private void login() {
         AccountController accountController = Program.getInstance().getAccountController();
 
         clearConsole();
         separator();
         Message.login();
-
-        
 
         Account account = selectAccount(accountController.getAccountsMap());
 
@@ -53,6 +49,32 @@ public class SignInMenu extends Menu {
         logedAccount = account;
 
         menus.get(account.getClass()).draw();
+    }
+
+    public static Menu selectLoginMethod() {
+
+        while (true) {
+            clearConsole();
+            separator();
+            System.out.println("    Select a login method\n");
+            System.out.println("    0 - Sign in");
+            System.out.println("    1 - Sing up");
+            System.out.println("    2 - Exit\n");
+            System.out.print(  "    option: ");
+
+            String option = scanner.nextLine();
+
+            if ("2".equals(option)) {
+                Program.getInstance().exit();
+            }
+            if ("1".equals(option)) {
+                return MenuManager.instance().getMenu(SignUpMenu.class);
+            }
+            if ("0".equals(option)) {
+                return MenuManager.instance().getMenu(SignInMenu.class);
+            }
+            Message.invalidOption("option!");
+        }
     }
 
     private Account selectAccount(Map<String, Account> accounts) {
@@ -101,23 +123,5 @@ public class SignInMenu extends Menu {
 
     public Account getLogedAccount() {
         return logedAccount;
-    }
-
-    public void getLoginMethod() {
-        Message.loginMethod();
-        while (true) {
-            System.out.print("option: ");
-            String option = scanner.nextLine();
-
-            option = option.toUpperCase();
-
-            if ("N".equals(option)) {
-                //return new SignUpMenu();
-            }
-            if ("Y".equals(option)) {
-                //return new SignIn();
-            }
-            Message.invalidOption("option!");
-        }
     }
 }

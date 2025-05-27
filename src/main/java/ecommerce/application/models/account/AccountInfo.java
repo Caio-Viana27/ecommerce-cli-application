@@ -1,4 +1,7 @@
-package ecommerce.application.models;
+package ecommerce.application.models.account;
+
+import ecommerce.application.models.IdGenerator;
+import ecommerce.application.models.Password;
 
 import java.io.Serializable;
 

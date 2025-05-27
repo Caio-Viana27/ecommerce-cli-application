@@ -1,8 +1,8 @@
 package ecommerce.application;
 
 import ecommerce.application.interfaces.Report;
-import ecommerce.application.models.Customer;
-import ecommerce.application.models.Order;
+import ecommerce.application.models.account.Customer;
+import ecommerce.application.models.product.Order;
 import ecommerce.application.models.Program;
 import ecommerce.application.interfaces.Menu;
 import ecommerce.application.views.Message;
