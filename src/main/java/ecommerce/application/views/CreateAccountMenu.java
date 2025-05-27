@@ -7,7 +7,6 @@ import ecommerce.application.models.*;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class CreateAccountMenu extends Menu {
     private final Map<String, OnSelection> menuOptions;
@@ -18,7 +17,7 @@ public class CreateAccountMenu extends Menu {
 
         addMenu("0", this::createAdministrator);
         addMenu("1", this::createCustomer);
-        addMenu("2", AdministratorMenu.getInstance()::draw);
+        addMenu("2",  MenuManager.instance().getMenu(AdministratorMenu.class)::draw);
     }
 
     private void addMenu(String option, OnSelection action) {
@@ -67,7 +66,7 @@ public class CreateAccountMenu extends Menu {
 
         Program.getInstance().getAccountController().insertNewAccount(new Administrator(info));
 
-        AdministratorMenu.getInstance().draw();
+        MenuManager.instance().getMenu(SignInMenu.class).draw();
     }
 
     private void createCustomer() {
@@ -77,7 +76,7 @@ public class CreateAccountMenu extends Menu {
 
         Program.getInstance().getAccountController().insertNewAccount(new Customer(info));
 
-        AdministratorMenu.getInstance().draw();
+        MenuManager.instance().getMenu(SignInMenu.class).draw();
     }
 
     private AccountInfo createAccountInfo() {

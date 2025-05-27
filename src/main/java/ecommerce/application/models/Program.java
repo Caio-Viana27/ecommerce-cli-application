@@ -1,12 +1,11 @@
 package ecommerce.application.models;
 
 import ecommerce.application.controllers.AccountController;
-import ecommerce.application.controllers.LoginMethod;
 import ecommerce.application.controllers.OrderController;
 import ecommerce.application.controllers.ProductController;
 import ecommerce.application.interfaces.Menu;
 import ecommerce.application.views.Message;
-import ecommerce.application.views.LoginMenu;
+import ecommerce.application.views.SignInMenu;
 
 public class Program {
     public static Program instance = null;
@@ -20,7 +19,7 @@ public class Program {
     public void init() throws Exception {
         loadData();
 
-        Menu loginMenu = MenuManager.instance().getMenu(LoginMenu.class);
+        Menu loginMenu = MenuManager.instance().getMenu(SignInMenu.class);
 
         Thread UIThread = new Thread(loginMenu, "UIThread");
         UIThread.start();
@@ -51,15 +50,6 @@ public class Program {
         else {
             Message.dataNotSaved();
         }
-    }
-
-    private LoginMethod getLoginMethod() {
-        return LoginMenu.getLoginMethod();
-    }
-
-    private LoginMenu createLoginMenu(LoginMethod loginMethod) {
-
-        return null;
     }
 
     public void exit() {

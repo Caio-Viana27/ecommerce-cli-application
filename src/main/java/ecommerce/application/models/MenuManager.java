@@ -8,14 +8,14 @@ import java.util.Map;
 
 public class MenuManager {
     private static MenuManager instance = null;
-    private Map<Class<? extends Menu>, Menu> menusMap;
+    private final Map<Class<? extends Menu>, Menu> menusMap;
 
     private MenuManager() {
         menusMap = new HashMap<>();
 
-        menusMap.put(LoginMenu.class, new LoginMenu());
+        menusMap.put(SignInMenu.class, new SignInMenu());
         menusMap.put(SignIn.class, new SignIn());
-        menusMap.put(SignUp.class, new SignUp());
+        menusMap.put(SignUpMenu.class, new SignUpMenu());
         menusMap.put(AdministratorMenu.class, new AdministratorMenu());
         menusMap.put(CustomerMenu.class, new CustomerMenu());
         menusMap.put(SellerMenu.class, new SellerMenu());
@@ -34,9 +34,9 @@ public class MenuManager {
         return instance;
     }
 
-    public Menu getMenu(Class<? extends Menu> key) throws Exception{
+    public Menu getMenu(Class<? extends Menu> key) {
         if (!menusMap.containsKey(key)) {
-            throw new Exception();
+            return null; // create exception logic
         }
 
         return menusMap.get(key);

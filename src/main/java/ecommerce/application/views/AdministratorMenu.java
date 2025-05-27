@@ -3,43 +3,28 @@ package ecommerce.application.views;
 import ecommerce.application.interfaces.Menu;
 import ecommerce.application.interfaces.OnSelection;
 
+import ecommerce.application.models.MenuManager;
 import ecommerce.application.models.Program;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class AdministratorMenu extends Menu {
-    private static AdministratorMenu instance;
-    private Map<String, OnSelection> menuActions;
+    private final Map<String, OnSelection> menuActions;
 
     public AdministratorMenu() {
 
-        if (instance != null) {
-            throw new RuntimeException();
-        }
-        instance = this;
-
         menuActions = new HashMap<>();
 
-        Menu menu;
+        addMenu("0", MenuManager.instance().getMenu(CreateAccountMenu.class)::draw);
 
-        menu = new CreateAccountMenu();
-        addMenu("0", menu::draw);
+        addMenu("1", MenuManager.instance().getMenu(CreateProductMenu.class)::draw);
 
-        menu = new CreateProductMenu();
-        addMenu("1", menu::draw);
+        addMenu("2", MenuManager.instance().getMenu(ReportMenu.class)::draw);
 
-        menu = new ReportMenu();
-        addMenu("2", menu::draw);
-
-        addMenu("3", () -> LoginMenu.getInstance().draw());
+        addMenu("3", MenuManager.instance().getMenu(SignInMenu.class)::draw);
 
         addMenu("4", () -> Program.getInstance().exit());
-    }
-
-    public static AdministratorMenu getInstance() {
-        return instance;
     }
 
     private void addMenu(String option, OnSelection action) {

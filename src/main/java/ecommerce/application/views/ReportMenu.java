@@ -5,22 +5,21 @@ import ecommerce.application.ReportLowestInventoryProduct;
 import ecommerce.application.ReportMostExpensiveOrder;
 import ecommerce.application.interfaces.Menu;
 import ecommerce.application.interfaces.OnSelection;
+import ecommerce.application.models.MenuManager;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class ReportMenu extends Menu {
     private final Map<String, OnSelection> menuOptions;
 
     public ReportMenu() {
-
         menuOptions = new HashMap<>();
 
         addMenu("0", this::drawReportMostExpensiveOrder);
         addMenu("1", this::drawReportProductWithLowestInventory);
         addMenu("2", this::drawFullReport);
-        addMenu("3", AdministratorMenu.getInstance()::draw);
+        addMenu("3", MenuManager.instance().getMenu(AdministratorMenu.class)::draw);
     }
 
     private void addMenu(String option, OnSelection action) {

@@ -1,7 +1,6 @@
 package ecommerce.application.views;
 
 import ecommerce.application.controllers.AccountController;
-import ecommerce.application.controllers.LoginMethod;
 import ecommerce.application.interfaces.Account;
 import ecommerce.application.interfaces.Menu;
 import ecommerce.application.models.Administrator;
@@ -11,12 +10,13 @@ import ecommerce.application.models.Program;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginMenu extends Menu {
-    private static LoginMenu instance = null;
-    private Account logedAccount;
-    private final Map<Class<? extends Account>, Menu> menus;
+public class SignInMenu extends Menu {
+    private static SignInMenu instance = null;
 
-    public LoginMenu() {
+    private final Map<Class<? extends Account>, Menu> menus;
+    private Account logedAccount;
+
+    public SignInMenu() {
         instance = this;
         menus = new HashMap<>();
 
@@ -41,6 +41,8 @@ public class LoginMenu extends Menu {
         clearConsole();
         separator();
         Message.login();
+
+        
 
         Account account = selectAccount(accountController.getAccountsMap());
 
@@ -93,7 +95,7 @@ public class LoginMenu extends Menu {
         }
     }
 
-    public static LoginMenu getInstance() {
+    public static SignInMenu getInstance() {
         return instance;
     }
 
@@ -101,7 +103,7 @@ public class LoginMenu extends Menu {
         return logedAccount;
     }
 
-    public static LoginMethod getLoginMethod() {
+    public void getLoginMethod() {
         Message.loginMethod();
         while (true) {
             System.out.print("option: ");
@@ -110,10 +112,10 @@ public class LoginMenu extends Menu {
             option = option.toUpperCase();
 
             if ("N".equals(option)) {
-                return new SignUp();
+                //return new SignUpMenu();
             }
             if ("Y".equals(option)) {
-                return new SignIn();
+                //return new SignIn();
             }
             Message.invalidOption("option!");
         }

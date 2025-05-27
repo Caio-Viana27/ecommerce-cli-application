@@ -1,11 +1,11 @@
 package ecommerce.application.views;
 
 import ecommerce.application.interfaces.Menu;
+import ecommerce.application.models.MenuManager;
 import ecommerce.application.models.Product;
 import ecommerce.application.models.Program;
 
 import java.util.Map;
-import java.util.Scanner;
 
 public class SelectProductMenu extends Menu {
 
@@ -25,7 +25,7 @@ public class SelectProductMenu extends Menu {
 
         if (products.isEmpty()) {
             Message.noProductsAvailable();
-            OrderMenu.getInstance().draw();
+            MenuManager.instance().getMenu(OrderMenu.class).draw();
         }
 
         separator();
@@ -42,7 +42,7 @@ public class SelectProductMenu extends Menu {
         Product product = selectProduct(products);
 
         if (product == null) {
-            OrderMenu.getInstance().draw();
+            MenuManager.instance().getMenu(OrderMenu.class).draw();
         }
 
         System.out.println("    Select the amount:");
@@ -50,7 +50,7 @@ public class SelectProductMenu extends Menu {
 
         Program.getInstance().getOrderController().newOrder(product, amount);
 
-        OrderMenu.getInstance().draw();
+        MenuManager.instance().getMenu(OrderMenu.class).draw();
     }
 
     private Product selectProduct(Map<String, Product> products) {

@@ -1,10 +1,9 @@
 package ecommerce.application.views;
 
 import ecommerce.application.interfaces.Menu;
+import ecommerce.application.models.MenuManager;
 import ecommerce.application.models.Product;
 import ecommerce.application.models.Program;
-
-import java.util.Scanner;
 
 public class CreateProductMenu extends Menu {
 
@@ -36,7 +35,7 @@ public class CreateProductMenu extends Menu {
         Product newpProduct = new Product(name, price, inventory, description, category);
         Program.getInstance().getProductController().insertNewProduct(newpProduct);
 
-        AdministratorMenu.getInstance().draw();
+        MenuManager.instance().getMenu(SignInMenu.class).draw();
     }
 
     private double price() {

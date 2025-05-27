@@ -2,35 +2,23 @@ package ecommerce.application.views;
 
 import ecommerce.application.interfaces.Menu;
 import ecommerce.application.interfaces.OnSelection;
+import ecommerce.application.models.MenuManager;
 import ecommerce.application.models.Program;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class CustomerMenu extends Menu {
-    private static CustomerMenu instance = null;
     private final Map<String, OnSelection> menuOptions;
 
     public CustomerMenu() {
-
-        if (instance != null)
-            throw new RuntimeException();
-
-        instance = this;
-
         menuOptions = new HashMap<>();
 
-        Menu menu = new OrderMenu();
-        addMenu("0", menu::draw);
+        addMenu("0", MenuManager.instance().getMenu(OrderMenu.class)::draw);
 
-        addMenu("1", () -> LoginMenu.getInstance().draw());
+        addMenu("1", MenuManager.instance().getMenu(SignInMenu.class)::draw);
 
-        addMenu("2", () -> Program.getInstance().exit());
-    }
-
-    public static CustomerMenu getInstance() {
-        return instance;
+        addMenu("2", Program.getInstance()::exit);
     }
 
     private void addMenu(String option, OnSelection action) {

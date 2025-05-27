@@ -3,27 +3,19 @@ package ecommerce.application.views;
 import ecommerce.application.controllers.OrderController;
 import ecommerce.application.interfaces.Menu;
 import ecommerce.application.interfaces.OnSelection;
+import ecommerce.application.models.MenuManager;
 import ecommerce.application.models.Order;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class OrderMenu extends Menu {
-    public static OrderMenu instance;
-    private Map<String, OnSelection> menuOptions;
+    private final Map<String, OnSelection> menuOptions;
 
     public OrderMenu() {
-
-        if (instance != null) {
-            throw new RuntimeException();
-        }
-        instance = this;
-
         menuOptions = new HashMap<>();
 
-        Menu menu = new SelectProductMenu();
-        addMenu("0", menu::draw);
+        addMenu("0", MenuManager.instance().getMenu(SelectProductMenu.class)::draw);
 
         addMenu("1", this::viewOrder);
 
@@ -40,12 +32,8 @@ public class OrderMenu extends Menu {
             Message.pressAnyKeyToExit();
             scanner.nextLine();
 
-            CustomerMenu.getInstance().draw();
+            MenuManager.instance().getMenu(CustomerMenu.class).draw();
         });
-    }
-
-    public static OrderMenu getInstance() {
-        return instance;
     }
 
     private void addMenu(String option, OnSelection action) {
