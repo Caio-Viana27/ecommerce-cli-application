@@ -1,12 +1,19 @@
 package ecommerce.application.interfaces;
 
 import ecommerce.application.models.Password;
+import ecommerce.application.models.account.AccountInfo;
 import ecommerce.application.models.account.Address;
 
-public interface Builder {
-    public Builder setName(String name);
-    public Builder setEmail(String email);
-    public Builder setPassword(Password password);
-    public Builder setCNPJ(String cnpj);
-    public Builder addAddress(Address address);
+public abstract class Builder {
+    public abstract Builder reset();
+
+    public Builder setAccountInfo(AccountInfo info) {
+        return this;
+    }
+    public Builder setCNPJ(String cnpj) {
+        return this;
+    }
+    public Builder addAddress(Address address) {
+        return this;
+    }
 }

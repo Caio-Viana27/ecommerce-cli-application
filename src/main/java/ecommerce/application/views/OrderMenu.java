@@ -13,11 +13,11 @@ public class OrderMenu extends Menu {
 
     public OrderMenu() {
         menuOptions = new HashMap<>();
+    }
 
+    public void init() {
         addMenu("0", MenuManager.instance().getMenu(SelectProductMenu.class)::draw);
-
         addMenu("1", this::viewOrder);
-
         addMenu("2", () -> {
             clearConsole();
 
@@ -41,10 +41,11 @@ public class OrderMenu extends Menu {
 
     @Override
     public void draw() {
-        order();
+        init();
+        menu();
     }
 
-    private void order() {
+    private void menu() {
         clearConsole();
         separator();
         System.out.println("    Menu order\n");

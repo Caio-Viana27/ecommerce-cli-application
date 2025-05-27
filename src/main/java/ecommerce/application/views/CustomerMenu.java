@@ -12,11 +12,11 @@ public class CustomerMenu extends Menu {
 
     public CustomerMenu() {
         menuOptions = new HashMap<>();
+    }
 
+    public void init() {
         addMenu("0", MenuManager.instance().getMenu(OrderMenu.class)::draw);
-
         addMenu("1", MenuManager.instance().getMenu(SignInMenu.class)::draw);
-
         addMenu("2", Program.getInstance()::exit);
     }
 
@@ -26,10 +26,11 @@ public class CustomerMenu extends Menu {
 
     @Override
     public void draw() {
-        customer();
+        init();
+        menu();
     }
 
-    private void customer() {
+    private void menu() {
         clearConsole();
         separator();
         System.out.println("    Customer Menu\n");

@@ -12,17 +12,14 @@ public class AdministratorMenu extends Menu {
     private final Map<String, OnSelection> menuActions;
 
     public AdministratorMenu() {
-
         menuActions = new HashMap<>();
+    }
 
+    public void init() {
         addMenu("0", MenuManager.instance().getMenu(CreateAccountMenu.class)::draw);
-
         addMenu("1", MenuManager.instance().getMenu(CreateProductMenu.class)::draw);
-
         addMenu("2", MenuManager.instance().getMenu(ReportMenu.class)::draw);
-
         addMenu("3", MenuManager.instance().getMenu(SignInMenu.class)::draw);
-
         addMenu("4", () -> Program.getInstance().exit());
     }
 
@@ -32,10 +29,11 @@ public class AdministratorMenu extends Menu {
 
     @Override
     public void draw() {
-        administrator();
+        init();
+        menu();
     }
 
-    private void administrator() {
+    private void menu() {
         clearConsole();
         separator();
         System.out.println("    Administrator Menu\n");

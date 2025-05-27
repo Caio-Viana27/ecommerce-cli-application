@@ -13,7 +13,6 @@ public class MenuManager {
         menusMap = new HashMap<>();
 
         menusMap.put(SignInMenu.class, new SignInMenu());
-        menusMap.put(SignIn.class, new SignIn());
         menusMap.put(SignUpMenu.class, new SignUpMenu());
         menusMap.put(AdministratorMenu.class, new AdministratorMenu());
         menusMap.put(CustomerMenu.class, new CustomerMenu());

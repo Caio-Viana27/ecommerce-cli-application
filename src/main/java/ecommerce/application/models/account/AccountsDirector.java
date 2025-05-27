@@ -10,7 +10,11 @@ public class AccountsDirector {
         this.builder = builder;
     }
 
-    public void createAccount() {
-
+    public void createAccount(AccountInfo info, String email, Address address, String cnpj) {
+        builder.reset()
+                .setAccountInfo(info)
+                .setEmail(email)
+                .setCNPJ(cnpj)
+                .addAddress(address);
     }
 }

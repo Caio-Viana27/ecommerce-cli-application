@@ -1,4 +1,15 @@
 package ecommerce.application.models.account;
 
-public class CustomerBuilder {
+import ecommerce.application.interfaces.Builder;
+
+public class CustomerBuilder extends Builder {
+
+    @Override
+    public Builder reset() {
+        return this;
+    }
+
+    public Customer getCustomer() {
+        return null; //new Customer()
+    }
 }

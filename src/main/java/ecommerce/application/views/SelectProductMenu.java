@@ -13,10 +13,10 @@ public class SelectProductMenu extends Menu {
 
     @Override
     public void draw() {
-        ProductMenu();
+        menu();
     }
 
-    public void ProductMenu() {
+    public void menu() {
         clearConsole();
         separator();
 
