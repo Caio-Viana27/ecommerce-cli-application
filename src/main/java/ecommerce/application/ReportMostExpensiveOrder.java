@@ -13,7 +13,7 @@ public class ReportMostExpensiveOrder implements Report {
     public void generate() {
         Order mostExpensiveOrder = null;
 
-        for (var account : Program.getInstance().getAccountController().getAccountsList()) {
+        for (var account : Program.Instance().getAccountController().getAccountsList()) {
             Order CustomerMostExpensiveOrder = null;
 
             if (account instanceof Customer customer) {

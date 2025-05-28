@@ -7,18 +7,9 @@ import java.util.Collection;
 import java.util.Map;
 
 public class AccountController implements Controller {
-    private static AccountController instance = null;
     private Map<String, Account> accounts;
 
-    public AccountController() {
-        if (instance != null)
-            throw new RuntimeException();
-        instance = this;
-    }
-
-    public static AccountController getInstance() {
-        return instance;
-    }
+    public AccountController() {}
 
     public void insertNewAccount(Account newAccount) {
         accounts.put(newAccount.getEmail(), newAccount);

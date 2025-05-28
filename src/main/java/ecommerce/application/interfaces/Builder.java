@@ -1,6 +1,5 @@
 package ecommerce.application.interfaces;
 
-import ecommerce.application.models.Password;
 import ecommerce.application.models.account.AccountInfo;
 import ecommerce.application.models.account.Address;
 

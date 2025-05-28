@@ -20,7 +20,7 @@ public class AdministratorMenu extends Menu {
         addMenu("1", MenuManager.instance().getMenu(CreateProductMenu.class)::draw);
         addMenu("2", MenuManager.instance().getMenu(ReportMenu.class)::draw);
         addMenu("3", MenuManager.instance().getMenu(SignInMenu.class)::draw);
-        addMenu("4", () -> Program.getInstance().exit());
+        addMenu("4", () -> Program.Instance().exit());
     }
 
     private void addMenu(String option, OnSelection action) {

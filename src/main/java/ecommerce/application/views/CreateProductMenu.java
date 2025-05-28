@@ -32,7 +32,7 @@ public class CreateProductMenu extends Menu {
         String category = scanner.nextLine();
 
         Product newpProduct = new Product(name, price, inventory, description, category);
-        Program.getInstance().getProductController().insertNewProduct(newpProduct);
+        Program.Instance().getProductController().insertNewProduct(newpProduct);
 
         MenuManager.instance().getMenu(SignInMenu.class).draw();
     }

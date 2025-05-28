@@ -20,7 +20,7 @@ public class SelectProductMenu extends Menu {
         clearConsole();
         separator();
 
-        Map<String, Product> products = Program.getInstance().getProductController().getProductsMap();
+        Map<String, Product> products = Program.Instance().getProductController().getProductsMap();
 
         if (products.isEmpty()) {
             Message.noProductsAvailable();
@@ -47,7 +47,7 @@ public class SelectProductMenu extends Menu {
         System.out.println("    Select the amount:");
         int amount = selectAmount(product);
 
-        Program.getInstance().getOrderController().newOrder(product, amount);
+        Program.Instance().getOrderController().newOrder(product, amount);
 
         MenuManager.instance().getMenu(OrderMenu.class).draw();
     }

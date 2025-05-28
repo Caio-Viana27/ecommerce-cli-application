@@ -3,12 +3,15 @@ package ecommerce.application.models;
 import ecommerce.application.controllers.AccountController;
 import ecommerce.application.controllers.OrderController;
 import ecommerce.application.controllers.ProductController;
+import ecommerce.application.interfaces.Account;
 import ecommerce.application.interfaces.Menu;
 import ecommerce.application.views.Message;
 import ecommerce.application.views.SignInMenu;
 
 public class Program {
     public static Program instance = null;
+
+    private Account loggedAccount = null;
 
     private final AccountController accountController = new AccountController();
     private final ProductController productController = new ProductController();
@@ -59,11 +62,17 @@ public class Program {
         System.exit(0);
     }
 
-    public static Program getInstance() {
+    public static Program Instance() {
         if (instance == null) {
             instance = new Program();
         }
         return instance;
+    }
+
+    public void setLoggedAccount(Account account) { loggedAccount = account; }
+
+    public Account getLoggedAccount() {
+        return loggedAccount;
     }
 
     public AccountController getAccountController() {

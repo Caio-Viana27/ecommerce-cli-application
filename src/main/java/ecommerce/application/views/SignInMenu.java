@@ -12,15 +12,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SignInMenu extends Menu {
-    private static SignInMenu instance = null;
-
     private final Map<Class<? extends Account>, Menu> menus;
-    private Account logedAccount;
 
     public SignInMenu() {
-        instance = this;
         menus = new HashMap<>();
+    }
 
+    public void init() {
         addMenu(Customer.class, new CustomerMenu());
         addMenu(Administrator.class, new AdministratorMenu());
         addMenu(Seller.class, new SellerMenu());
@@ -30,11 +28,19 @@ public class SignInMenu extends Menu {
         menus.put(accountClass, menu);
     }
 
+    public Menu getMenu(Class<? extends Account> key) {
+        return menus.get(key);
+    }
+
     @Override
     public void draw() {
-        logedAccount = null;
+        init();
+        Program.Instance().setLoggedAccount(null);
+        menu();
+    }
 
-        AccountController accountController = Program.getInstance().getAccountController();
+    private void menu() {
+        AccountController accountController = Program.Instance().getAccountController();
 
         clearConsole();
         separator();
@@ -46,7 +52,7 @@ public class SignInMenu extends Menu {
 
         clearConsole();
 
-        logedAccount = account;
+        Program.Instance().setLoggedAccount(account);
 
         menus.get(account.getClass()).draw();
     }
@@ -65,7 +71,7 @@ public class SignInMenu extends Menu {
             String option = scanner.nextLine();
 
             if ("2".equals(option)) {
-                Program.getInstance().exit();
+                Program.Instance().exit();
             }
             if ("1".equals(option)) {
                 return MenuManager.instance().getMenu(SignUpMenu.class);
@@ -86,7 +92,7 @@ public class SignInMenu extends Menu {
 
             if ("0".equals(email)) {
                 clearConsole();
-                Program.getInstance().exit();
+                Program.Instance().exit();
             }
 
             account = accounts.get(email);
@@ -105,7 +111,7 @@ public class SignInMenu extends Menu {
 
             if ("0".equals(password)) {
                 clearConsole();
-                Program.getInstance().exit();
+                Program.Instance().exit();
             }
 
             if (account.passwordMatches(password)) {
@@ -115,13 +121,5 @@ public class SignInMenu extends Menu {
                 Message.invalidOption("password, Try again!");
             }
         }
-    }
-
-    public static SignInMenu getInstance() {
-        return instance;
-    }
-
-    public Account getLogedAccount() {
-        return logedAccount;
     }
 }

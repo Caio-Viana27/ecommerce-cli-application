@@ -3,6 +3,7 @@ package ecommerce.application.views;
 import ecommerce.application.controllers.OrderController;
 import ecommerce.application.interfaces.Menu;
 import ecommerce.application.interfaces.OnSelection;
+import ecommerce.application.models.Program;
 import ecommerce.application.models.product.Order;
 
 import java.util.HashMap;
@@ -21,7 +22,7 @@ public class OrderMenu extends Menu {
         addMenu("2", () -> {
             clearConsole();
 
-            OrderController controller = OrderController.getInstance();
+            OrderController controller = Program.instance.getOrderController();
             if (controller.closeOrder()) {
                 Message.orderFinished();
             }
@@ -75,7 +76,7 @@ public class OrderMenu extends Menu {
         clearConsole();
         separator();
 
-        Order order = OrderController.getInstance().getCurrentOrder();
+        Order order = Program.instance.getOrderController().getCurrentOrder();
 
         if (order == null) {
             Message.thereAreNoOrders();

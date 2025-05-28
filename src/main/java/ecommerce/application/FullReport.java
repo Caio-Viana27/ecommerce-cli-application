@@ -11,14 +11,14 @@ public class FullReport implements Report {
         Menu.separator();
         System.out.println("    Account(s)\n");
 
-        for (var account : Program.getInstance().getAccountController().getAccountsList()) {
+        for (var account : Program.Instance().getAccountController().getAccountsList()) {
             Menu.display(account);
         }
 
         Menu.separator();
         System.out.println("    Product(s)\n");
 
-        for (var product : Program.getInstance().getProductController().getProductsList()) {
+        for (var product : Program.Instance().getProductController().getProductsList()) {
             Menu.display(product);
         }
     }

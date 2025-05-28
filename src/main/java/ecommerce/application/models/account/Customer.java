@@ -10,6 +10,8 @@ public class Customer extends Account {
     private Address deliveryAddresses;
     private List<Order> orderHistory;
 
+    public Customer() {}
+
     public Customer(String name, String email, String password, Address address) {
         super(name, email, password, "customer");
         //this.deliveryAddresses = new LinkedList<Address>();
@@ -29,16 +31,6 @@ public class Customer extends Account {
 
     public void addOrder(Order order) {
         orderHistory.add(order);
-    }
-
-    @Override
-    public String toString() {
-        String customerInfo;
-        customerInfo  = "<-- Customer ----------------------------------------------------------->\n\n";
-        customerInfo += super.toString();
-        customerInfo += deliveryAddresses.toString();
-        customerInfo += orderHistoryToString();
-        return customerInfo + "\n";
     }
 
     private String orderHistoryToString() {
@@ -70,5 +62,15 @@ public class Customer extends Account {
             }
         }
         return currentMoreExpensive;
+    }
+
+    @Override
+    public String toString() {
+        String customerInfo;
+        customerInfo  = "<-- Customer ----------------------------------------------------------->\n\n";
+        customerInfo += super.toString();
+        customerInfo += deliveryAddresses.toString();
+        customerInfo += orderHistoryToString();
+        return customerInfo + "\n";
     }
 }

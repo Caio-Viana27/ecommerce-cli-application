@@ -12,7 +12,7 @@ public class ReportLowestInventoryProduct implements Report {
     public void generate() {
         Product lowestInventoryProduct = null;
 
-        for (var product : Program.getInstance().getProductController().getProductsList()) {
+        for (var product : Program.Instance().getProductController().getProductsList()) {
             lowestInventoryProduct = getLowerInventoryProduct(lowestInventoryProduct, product);
         }
 

@@ -7,18 +7,9 @@ import java.util.Collection;
 import java.util.Map;
 
 public class ProductController implements Controller {
-    private static ProductController instance = null;
     private Map<String, Product> products;
 
-    public ProductController() {
-        if (instance != null)
-            throw new RuntimeException();
-        instance = this;
-    }
-
-    public static ProductController getInstance() {
-        return instance;
-    }
+    public ProductController() {}
 
     public void insertNewProduct(Product newProduct) {
         products.put(newProduct.getId(), newProduct);

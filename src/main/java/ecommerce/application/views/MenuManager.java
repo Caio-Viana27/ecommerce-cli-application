@@ -34,7 +34,7 @@ public class MenuManager {
 
     public Menu getMenu(Class<? extends Menu> key) {
         if (!menusMap.containsKey(key)) {
-            return null; // create exception logic
+            throw new NullPointerException();
         }
 
         return menusMap.get(key);

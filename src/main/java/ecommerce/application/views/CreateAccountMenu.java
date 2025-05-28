@@ -17,9 +17,19 @@ public class CreateAccountMenu extends Menu {
     }
 
     public void init() {
-        addMenu("0", this::createAdministrator);
-        addMenu("1", this::createCustomer);
-        addMenu("2",  MenuManager.instance().getMenu(AdministratorMenu.class)::draw);
+        addMenu("0", () -> {
+            var _ignoreReturn = this.createAdministrator();
+            MenuManager.instance().getMenu(SignInMenu.class).draw();
+        });
+        addMenu("1", () -> {
+            var _ignoreReturn = this.createCustomer();
+            MenuManager.instance().getMenu(SignInMenu.class).draw();
+        });
+        addMenu("2", () -> {
+            var _ignoreReturn = this.createSeller();
+            MenuManager.instance().getMenu(SignInMenu.class).draw();
+        });
+        addMenu("3",  MenuManager.instance().getMenu(AdministratorMenu.class)::draw);
     }
 
     private void addMenu(String option, OnSelection action) {
@@ -38,7 +48,8 @@ public class CreateAccountMenu extends Menu {
         System.out.println("    Create Account\n");
         System.out.println("    0 - Create new Administrator");
         System.out.println("    1 - Create new Customer");
-        System.out.println("    2 - Return\n");
+        System.out.println("    2 - Create new Seller");
+        System.out.println("    3 - Return\n");
 
         OnSelection menu = selectOption();
         menu.action();
@@ -60,76 +71,57 @@ public class CreateAccountMenu extends Menu {
         }
     }
 
-    private void createAdministrator() {
+    private Administrator createAdministrator() {
         clearConsole();
         separator();
-        System.out.println("    Menu create admin\n");
+        System.out.println("    Menu create administrator\n");
 
-        AccountInfo info = createAccountInfo();
+        AccountInfo accountInfo = createAccountInfo();
 
-        Program.getInstance().getAccountController().insertNewAccount(new Administrator(info));
+        var builder = new AdministratorBuilder();
+        var director = new AccountsDirector(builder);
+        director.createAccount(accountInfo, null, null);
+        Administrator administrator = builder.getAdministrator();
 
-        MenuManager.instance().getMenu(SignInMenu.class).draw();
+        Program.Instance().getAccountController().insertNewAccount(administrator);
+
+        return administrator;
     }
 
-    private void createCustomer() {
+    public Customer createCustomer() {
         clearConsole();
         separator();
         System.out.println("    Menu create customer\n");
 
-        AccountInfo info = createAccountInfo();
-
-        Program.getInstance().getAccountController().insertNewAccount(new Customer(info));
-
-        MenuManager.instance().getMenu(SignInMenu.class).draw();
-    }
-
-    public Account createAccount(CustomerBuilder builder) {
         AccountInfo accountInfo = createAccountInfo();
-
         //Address address = createAddress();
 
+        var builder = new CustomerBuilder();
         var director = new AccountsDirector(builder);
         director.createAccount(accountInfo, null, null);
+        Customer customer = builder.getCustomer();
 
-        return builder.getCustomer();
+        Program.Instance().getAccountController().insertNewAccount(customer);
+
+        return customer;
     }
-    public Account createAccount(SellerBuilder builder) {
+
+    public Seller createSeller() {
+        clearConsole();
+        separator();
+        System.out.println("    Menu create seller\n");
+
         AccountInfo accountInfo = createAccountInfo();
+        //Address address = createAddress();
 
-        //CNPJ cnpj = createCNPJ();
-
+        var builder = new SellerBuilder();
         var director = new AccountsDirector(builder);
         director.createAccount(accountInfo, null, null);
+        Seller seller = builder.getSeller();
 
-        return builder.getSeller();
-    }
+        Program.Instance().getAccountController().insertNewAccount(seller);
 
-    public Class<? extends Account> selectAccountType() {
-
-        while (true) {
-            clearConsole();
-            separator();
-            System.out.println("    Select account type\n");
-            System.out.println("    0 - Customer");
-            System.out.println("    1 - Seller");
-            System.out.println("    2 - Exit\n");
-            System.out.print(  "    Option: ");
-
-            String option = scanner.nextLine();
-
-            if ("2".equals(option)) {
-                Program.getInstance().exit();
-            }
-            if ("1".equals(option)) {
-                return Seller.class;
-            }
-            if ("0".equals(option)) {
-                return Customer.class;
-            }
-
-            Message.invalidOption("option!");
-        }
+        return seller;
     }
 
     private AccountInfo createAccountInfo() {
@@ -145,7 +137,7 @@ public class CreateAccountMenu extends Menu {
     }
 
     private String createAccountEmail() {
-        Map<String, Account> accounts = Program.getInstance().getAccountController().getAccountsMap();
+        Map<String, Account> accounts = Program.Instance().getAccountController().getAccountsMap();
 
         String email;
         do {

@@ -1,25 +1,18 @@
 package ecommerce.application.controllers;
 
 import ecommerce.application.interfaces.Controller;
+import ecommerce.application.models.Program;
 import ecommerce.application.models.account.Customer;
 import ecommerce.application.models.product.Order;
 import ecommerce.application.models.product.Product;
 import ecommerce.application.models.product.ShoppingCart;
+import ecommerce.application.views.MenuManager;
 import ecommerce.application.views.SignInMenu;
 
 public class OrderController implements Controller {
-    private static OrderController instance = null;
     private Order order = null;
 
-    public OrderController() {
-        if (instance != null)
-            throw new RuntimeException();
-        instance = this;
-    }
-
-    public static OrderController getInstance() {
-        return instance;
-    }
+    public OrderController() {}
 
     public void newOrder(Product product, int amount) {
         if (order == null) {
@@ -30,7 +23,8 @@ public class OrderController implements Controller {
     }
 
     public boolean closeOrder() {
-        Customer account = (Customer) SignInMenu.getInstance().getLogedAccount();
+        var menu = (SignInMenu) MenuManager.instance().getMenu(SignInMenu.class);
+        Customer account = (Customer) Program.Instance().getLoggedAccount();
 
         if (order == null)
             return false;

@@ -7,6 +7,8 @@ import java.io.Serializable;
 public abstract class Account implements Serializable {
     protected AccountInfo info;
 
+    public Account() {}
+
     public Account(String name, String email, String password, String typeOfAccount) {
         info = new AccountInfo(name, email, password);
     }
