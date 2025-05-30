@@ -16,7 +16,7 @@ public class Administrator extends Account {
     @Override
     public String toString() {
         String adminInfo;
-        adminInfo = "<-- Administrator ------------------------------------------------------>\n\n";
+        adminInfo = "<== Administrator ======================================================>\n\n";
         adminInfo += super.toString();
         return adminInfo;
     }

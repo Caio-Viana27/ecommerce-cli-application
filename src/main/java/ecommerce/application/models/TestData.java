@@ -2,7 +2,6 @@ package ecommerce.application.models;
 
 import ecommerce.application.controllers.AccountController;
 import ecommerce.application.controllers.ProductController;
-import ecommerce.application.models.account.Address;
 import ecommerce.application.models.account.Administrator;
 import ecommerce.application.models.account.Customer;
 import ecommerce.application.models.product.Product;
@@ -17,22 +16,22 @@ public class TestData {
         accountController.getAccountsMap().put("admin@gmail.com", createHardcodedAdmin());
         accountController.getAccountsMap().put("Mateus@gmail.com",
                 new Customer("Mateus", "Mateus@gmail.com", "mateus",
-                        new Address("21332534", "Rua dos Guarapes", "Madre de Deus", "12")));
+                        new Address(new PostalCode("21332534"), "Rua dos Guarapes", "Madre de Deus", "12")));
         accountController.getAccountsMap().put("ana@gmail.com",
                 new Customer("Ana Souza", "ana@gmail.com", "ana",
-                        new Address("01001000", "Avenida Paulista", "São Paulo", "100")));
+                        new Address(new PostalCode("01001000"), "Avenida Paulista", "São Paulo", "100")));
         accountController.getAccountsMap().put("joao@hotmail.com",
                 new Customer("João Lima", "joao@hotmail.com", "joao",
-                        new Address("30140071", "Rua Rio de Janeiro", "Belo Horizonte", "202")));
+                        new Address(new PostalCode("30140071"), "Rua Rio de Janeiro", "Belo Horizonte", "202")));
         accountController.getAccountsMap().put("carla@yahoo.com",
                 new Customer("Carla Mendes", "carla@yahoo.com", "carla",
-                        new Address("40020030", "Avenida Sete de Setembro", "Salvador", "305")));
+                        new Address(new PostalCode("40020030"), "Avenida Sete de Setembro", "Salvador", "305")));
         accountController.getAccountsMap().put("pedro@outlook.com",
                 new Customer("Pedro Santos", "pedro@outlook.com", "pedro",
-                        new Address("70040900", "Esplanada dos Ministérios", "Brasília", "1")));
+                        new Address(new PostalCode("70040900"), "Esplanada dos Ministérios", "Brasília", "1")));
         accountController.getAccountsMap().put("juliana@live.com",
                 new Customer("Juliana Ribeiro", "juliana@live.com", "juliana",
-                        new Address("80010010", "Rua XV de Novembro", "Curitiba", "88")));
+                        new Address(new PostalCode("80010010"), "Rua XV de Novembro", "Curitiba", "88")));
 
         //String name, double price, int inStorage, String description, String category
         var product = new Product("playstation 5", 3599.99, 10, "Video Game", "Video Game");

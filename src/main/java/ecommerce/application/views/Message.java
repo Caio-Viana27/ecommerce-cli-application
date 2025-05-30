@@ -5,7 +5,7 @@ import ecommerce.application.interfaces.Menu;
 public class Message {
 
     public static void login() {
-        System.out.println("    Login");
+        System.out.println("    Login\n");
     }
     public static void enterOption(String string) {
         System.out.print("    Enter " + string + " or zero to exit: ");
@@ -76,10 +76,5 @@ public class Message {
     public static void orderFinished() {
         Menu.separator();
         System.out.println("    Order finished!");
-    }
-
-    public static void loginMethod() {
-        Menu.separator();
-        System.out.println("    Do you have a registered account (Y/N)?");
     }
 }

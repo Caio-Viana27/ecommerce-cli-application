@@ -19,7 +19,9 @@ public class AdministratorMenu extends Menu {
         addMenu("0", MenuManager.instance().getMenu(CreateAccountMenu.class)::draw);
         addMenu("1", MenuManager.instance().getMenu(CreateProductMenu.class)::draw);
         addMenu("2", MenuManager.instance().getMenu(ReportMenu.class)::draw);
-        addMenu("3", MenuManager.instance().getMenu(SignInMenu.class)::draw);
+        addMenu("3", () -> {
+            SignInMenu.selectLoginMethod().draw();
+        });
         addMenu("4", () -> Program.Instance().exit());
     }
 

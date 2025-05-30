@@ -1,7 +1,7 @@
 package ecommerce.application.interfaces;
 
 import ecommerce.application.models.account.AccountInfo;
-import ecommerce.application.models.account.Address;
+import ecommerce.application.models.Address;
 
 public abstract class Builder {
     public abstract Builder reset();

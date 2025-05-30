@@ -1,27 +1,27 @@
-package ecommerce.application.models.account;
+package ecommerce.application.models;
 
 import java.io.Serializable;
 
 public class Address implements Serializable {
-    private String postalcode;
+    private PostalCode postalcode;
     private String street;
     private String city;
-    private String apartmentOrHouseNumber;
+    private String houseNumber;
 
-    public Address(String postalcode, String street, String city, String apartmentOrHouseNumber) {
+    public Address(PostalCode postalcode, String street, String city, String houseNumber) {
         this.postalcode = postalcode;
         this.street = street;
         this.city = city;
-        this.apartmentOrHouseNumber = apartmentOrHouseNumber;
+        this.houseNumber = houseNumber;
     }
 
     public String toString() {
         String deliveryAddressInfo;
         deliveryAddressInfo  = "    Delivery address:\n";
-        deliveryAddressInfo += "    Postalcode: " + postalcode + "\n";
+        deliveryAddressInfo += "    Postal Code: " + postalcode + "\n";
         deliveryAddressInfo += "    Street: " + street + "\n";
         deliveryAddressInfo += "    City: " + city + "\n";
-        deliveryAddressInfo += "    House number: " + apartmentOrHouseNumber + "\n";
+        deliveryAddressInfo += "    House number: " + houseNumber + "\n";
         deliveryAddressInfo += "\n";
         return deliveryAddressInfo;
     }

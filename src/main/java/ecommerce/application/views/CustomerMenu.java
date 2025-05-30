@@ -3,6 +3,7 @@ package ecommerce.application.views;
 import ecommerce.application.interfaces.Menu;
 import ecommerce.application.interfaces.OnSelection;
 import ecommerce.application.models.Program;
+import ecommerce.application.models.account.Customer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,8 +17,11 @@ public class CustomerMenu extends Menu {
 
     public void init() {
         addMenu("0", MenuManager.instance().getMenu(OrderMenu.class)::draw);
-        addMenu("1", MenuManager.instance().getMenu(SignInMenu.class)::draw);
-        addMenu("2", Program.Instance()::exit);
+        addMenu("1", this::addNewAddress);
+        addMenu("2", () -> {
+            SignInMenu.selectLoginMethod().draw();
+        });
+        addMenu("3", Program.Instance()::exit);
     }
 
     private void addMenu(String option, OnSelection action) {
@@ -35,8 +39,9 @@ public class CustomerMenu extends Menu {
         separator();
         System.out.println("    Customer Menu\n");
         System.out.println("    0 - New order");
-        System.out.println("    1 - Log out");
-        System.out.println("    2 - Exit program\n");
+        System.out.println("    1 - Add delivery address");
+        System.out.println("    2 - Log out");
+        System.out.println("    3 - Exit program\n");
 
         OnSelection menu = selectOption();
         menu.action();
@@ -54,5 +59,19 @@ public class CustomerMenu extends Menu {
             }
             Message.invalidOption("option");
         }
+    }
+
+    private void addNewAddress() {
+        var addressMenu = (CreateAddressMenu) MenuManager.instance().getMenu(CreateAddressMenu.class);
+        addressMenu.draw();
+
+        var loggedAccount = (Customer) Program.Instance().getLoggedAccount();
+        loggedAccount.addDeliveryAddress(addressMenu.getAddress());
+
+        System.out.println("    Delivery address Added");
+        Message.pressAnyKeyToExit();
+        scanner.nextLine();
+
+        this.draw();
     }
 }

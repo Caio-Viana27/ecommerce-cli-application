@@ -64,7 +64,7 @@ public class SignInMenu extends Menu {
             separator();
             System.out.println("    Select a login method\n");
             System.out.println("    0 - Sign in");
-            System.out.println("    1 - Sing up");
+            System.out.println("    1 - Sign up");
             System.out.println("    2 - Exit\n");
             System.out.print(  "    option: ");
 

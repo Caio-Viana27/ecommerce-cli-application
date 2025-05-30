@@ -94,11 +94,15 @@ public class CreateAccountMenu extends Menu {
         System.out.println("    Menu create customer\n");
 
         AccountInfo accountInfo = createAccountInfo();
-        //Address address = createAddress();
+
+        var addressMenu = (CreateAddressMenu) MenuManager.instance().getMenu(CreateAddressMenu.class);
+        addressMenu.draw();
+
+        Address address = addressMenu.getAddress();
 
         var builder = new CustomerBuilder();
         var director = new AccountsDirector(builder);
-        director.createAccount(accountInfo, null, null);
+        director.createAccount(accountInfo, address,null);
         Customer customer = builder.getCustomer();
 
         Program.Instance().getAccountController().insertNewAccount(customer);
@@ -112,7 +116,7 @@ public class CreateAccountMenu extends Menu {
         System.out.println("    Menu create seller\n");
 
         AccountInfo accountInfo = createAccountInfo();
-        //Address address = createAddress();
+        //CNPJ cnpj = createCNPJ();
 
         var builder = new SellerBuilder();
         var director = new AccountsDirector(builder);

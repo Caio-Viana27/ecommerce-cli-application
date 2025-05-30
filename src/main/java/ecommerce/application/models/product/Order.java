@@ -1,6 +1,6 @@
 package ecommerce.application.models.product;
 
-import ecommerce.application.models.account.Address;
+import ecommerce.application.models.Address;
 import ecommerce.application.models.IdGenerator;
 
 import java.io.Serializable;

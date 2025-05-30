@@ -1,6 +1,7 @@
 package ecommerce.application.models.account;
 
 import ecommerce.application.interfaces.Builder;
+import ecommerce.application.models.Address;
 
 public class AccountsDirector {
 
