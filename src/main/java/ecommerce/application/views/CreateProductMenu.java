@@ -34,6 +34,8 @@ public class CreateProductMenu extends Menu {
         Product newpProduct = new Product(name, price, inventory, description, category);
         Program.Instance().getProductController().insertNewProduct(newpProduct);
 
+        Message.confirmationMessage("New product added", scanner);
+
         MenuManager.instance().getMenu(SignInMenu.class).draw();
     }
 

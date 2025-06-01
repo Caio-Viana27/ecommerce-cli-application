@@ -74,9 +74,7 @@ public class CustomerMenu extends Menu {
         var loggedAccount = (Customer) Program.Instance().getLoggedAccount();
         loggedAccount.addDeliveryAddress(addressMenu.getAddress());
 
-        System.out.println("    Delivery address Added");
-        Message.pressAnyKeyToExit();
-        scanner.nextLine();
+        Message.confirmationMessage("Delivery address added", scanner);
 
         this.draw();
     }

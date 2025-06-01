@@ -32,10 +32,7 @@ public class SignUpMenu extends Menu {
             throw new NullPointerException();
         }
 
-        separator();
-        System.out.println("    Account created!");
-        Message.pressAnyKeyToExit();
-        scanner.nextLine();
+        Message.confirmationMessage("Account created", scanner);
 
         var signIn = (SignInMenu) MenuManager.instance().getMenu(SignInMenu.class);
         signIn.init();

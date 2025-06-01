@@ -29,8 +29,8 @@ public class OrderMenu extends Menu {
             else {
                 Message.noProducts();
             }
-            Message.pressAnyKeyToExit();
-            scanner.nextLine();
+
+            Message.confirmationMessage("Order finished", scanner);
 
             MenuManager.instance().getMenu(CustomerMenu.class).draw();
         });
@@ -85,8 +85,7 @@ public class OrderMenu extends Menu {
 
         display(order);
 
-        Message.pressAnyKeyToExit();
-        scanner.nextLine();
+        Message.pressAnyKeyToExit(scanner);
 
         draw();
     }

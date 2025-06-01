@@ -66,8 +66,7 @@ public class ReportMenu extends Menu {
 
         new ReportMostExpensiveOrder().generate();
 
-        Message.pressAnyKeyToExit();
-        scanner.nextLine();
+        Message.pressAnyKeyToExit(scanner);
 
         draw();
     }
@@ -77,8 +76,7 @@ public class ReportMenu extends Menu {
 
         new ReportLowestInventoryProduct().generate();
 
-        Message.pressAnyKeyToExit();
-        scanner.nextLine();
+        Message.pressAnyKeyToExit(scanner);
 
         draw();
     }
@@ -88,8 +86,7 @@ public class ReportMenu extends Menu {
 
         new FullReport().generate();
 
-        Message.pressAnyKeyToExit();
-        scanner.nextLine();
+        Message.pressAnyKeyToExit(scanner);
 
         draw();
     }
