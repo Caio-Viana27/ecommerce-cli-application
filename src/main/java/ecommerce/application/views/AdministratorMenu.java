@@ -19,10 +19,11 @@ public class AdministratorMenu extends Menu {
         addMenu("0", MenuManager.instance().getMenu(CreateAccountMenu.class)::draw);
         addMenu("1", MenuManager.instance().getMenu(CreateProductMenu.class)::draw);
         addMenu("2", MenuManager.instance().getMenu(ReportMenu.class)::draw);
-        addMenu("3", () -> {
+        addMenu("3", MenuManager.instance().getMenu(ReportMenu.class)::draw);
+        addMenu("4", () -> {
             SignInMenu.selectLoginMethod().draw();
         });
-        addMenu("4", () -> Program.Instance().exit());
+        addMenu("5", () -> Program.Instance().exit());
     }
 
     private void addMenu(String option, OnSelection action) {
@@ -41,9 +42,10 @@ public class AdministratorMenu extends Menu {
         System.out.println("    Administrator Menu\n");
         System.out.println("    0 - Create new account");
         System.out.println("    1 - Create new product");
-        System.out.println("    2 - Generate Report");
-        System.out.println("    3 - Log out");
-        System.out.println("    4 - Exit program\n");
+        System.out.println("    2 - Delete account");
+        System.out.println("    3 - Generate Report");
+        System.out.println("    4 - Log out");
+        System.out.println("    5 - Exit program\n");
 
         OnSelection menu = selectMenuOption();
         menu.action();

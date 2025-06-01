@@ -2,6 +2,8 @@ package ecommerce.application.views;
 
 import ecommerce.application.interfaces.Menu;
 
+import java.util.Scanner;
+
 public class Message {
 
     public static void login() {
@@ -68,13 +70,20 @@ public class Message {
         System.out.println("    No saved data found!");
     }
 
-    public static void pressAnyKeyToExit() {
+    public static void pressAnyKeyToExit(Scanner scanner) {
         Menu.separator();
         System.out.print("    Press enter to exit! ");
+        scanner.nextLine();
     }
 
     public static void orderFinished() {
         Menu.separator();
         System.out.println("    Order finished!");
+    }
+
+    public static void confirmationMessage(String message, Scanner scanner) {
+        Menu.separator();
+        System.out.println("    " + message);
+        Message.pressAnyKeyToExit(scanner);
     }
 }

@@ -21,7 +21,12 @@ public class CustomerMenu extends Menu {
         addMenu("2", () -> {
             SignInMenu.selectLoginMethod().draw();
         });
-        addMenu("3", Program.Instance()::exit);
+        addMenu("3", () -> {
+            var deleteAccountMenu = (DeleteAccountMenu) MenuManager.instance().getMenu(DeleteAccountMenu.class);
+            deleteAccountMenu.deleteAccount(Program.Instance().getLoggedAccount());
+            this.draw();
+        });
+        addMenu("4", Program.Instance()::exit);
     }
 
     private void addMenu(String option, OnSelection action) {
@@ -41,7 +46,8 @@ public class CustomerMenu extends Menu {
         System.out.println("    0 - New order");
         System.out.println("    1 - Add delivery address");
         System.out.println("    2 - Log out");
-        System.out.println("    3 - Exit program\n");
+        System.out.println("    3 - Delete account");
+        System.out.println("    4 - Exit program\n");
 
         OnSelection menu = selectOption();
         menu.action();

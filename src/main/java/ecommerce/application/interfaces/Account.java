@@ -17,9 +17,15 @@ public abstract class Account implements Serializable {
         this.info = info;
     }
 
+    public String getId() {
+        return info.getId();
+    }
+
     public String getEmail() {
         return info.getEmail();
     }
+
+    public String getName() { return info.getName(); }
 
     public boolean passwordMatches(String enteredPassword) {
         return info.passwordMatches(enteredPassword);

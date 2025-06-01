@@ -23,6 +23,7 @@ public class MenuManager {
         menusMap.put(CreateAccountMenu.class, new CreateAccountMenu());
         menusMap.put(CreateAddressMenu.class, new CreateAddressMenu());
         menusMap.put(CreateProductMenu.class, new CreateProductMenu());
+        menusMap.put(DeleteAccountMenu.class, new DeleteAccountMenu());
     }
 
     public static MenuManager instance() {
