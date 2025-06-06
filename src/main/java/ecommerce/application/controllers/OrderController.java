@@ -1,6 +1,5 @@
 package ecommerce.application.controllers;
 
-import ecommerce.application.interfaces.Controller;
 import ecommerce.application.models.Program;
 import ecommerce.application.models.account.Customer;
 import ecommerce.application.models.product.Order;
@@ -9,7 +8,9 @@ import ecommerce.application.models.product.ShoppingCart;
 import ecommerce.application.views.MenuManager;
 import ecommerce.application.views.SignInMenu;
 
-public class OrderController implements Controller {
+public class OrderController {
+
+    public static Long idCounter = 0L;
     private Order order = null;
 
     public OrderController() {}

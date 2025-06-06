@@ -1,10 +1,11 @@
 package ecommerce.application.models.product;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 public record SoldProduct(ProductInfo info, int amount) implements Serializable {
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return info.getPrice();
     }
 

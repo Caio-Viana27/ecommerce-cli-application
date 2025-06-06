@@ -22,7 +22,6 @@ public class Program {
     public void init() throws Exception {
         loadData();
 
-        //Menu loginMenu = MenuManager.instance().getMenu(SignInMenu.class);
         Menu login = SignInMenu.selectLoginMethod();
 
         Thread UIThread = new Thread(login, "UI-Thread");

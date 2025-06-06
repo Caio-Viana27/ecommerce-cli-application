@@ -3,6 +3,7 @@ package ecommerce.application.views;
 import ecommerce.application.interfaces.Account;
 import ecommerce.application.interfaces.Menu;
 import ecommerce.application.interfaces.OnSelection;
+import ecommerce.application.interfaces.UniqueIdentifier;
 import ecommerce.application.models.*;
 import ecommerce.application.models.account.*;
 
@@ -76,11 +77,14 @@ public class CreateAccountMenu extends Menu {
         separator();
         System.out.println("    Menu create administrator\n");
 
-        AccountInfo accountInfo = createAccountInfo();
+        CPF cpf = createAccountCPF();
+        String name = createAccountName();
+        Email email = createAccountEmail();
+        String password = createAccountPassword();
 
         var builder = new AdministratorBuilder();
         var director = new AccountsDirector(builder);
-        director.createAccount(accountInfo, null, null);
+        director.createAccount(cpf,name, email, password, null);
         Administrator administrator = builder.getAdministrator();
 
         Program.Instance().getAccountController().insertNewAccount(administrator);
@@ -93,7 +97,10 @@ public class CreateAccountMenu extends Menu {
         separator();
         System.out.println("    Menu create customer\n");
 
-        AccountInfo accountInfo = createAccountInfo();
+        CPF cpf = createAccountCPF();
+        String name = createAccountName();
+        Email email = createAccountEmail();
+        String password = createAccountPassword();
 
         var addressMenu = (CreateAddressMenu) MenuManager.instance().getMenu(CreateAddressMenu.class);
         addressMenu.draw();
@@ -102,7 +109,7 @@ public class CreateAccountMenu extends Menu {
 
         var builder = new CustomerBuilder();
         var director = new AccountsDirector(builder);
-        director.createAccount(accountInfo, address,null);
+        director.createAccount(cpf,name, email, password, address);
         Customer customer = builder.getCustomer();
 
         Program.Instance().getAccountController().insertNewAccount(customer);
@@ -115,12 +122,14 @@ public class CreateAccountMenu extends Menu {
         separator();
         System.out.println("    Menu create seller\n");
 
-        AccountInfo accountInfo = createAccountInfo();
-        //CNPJ cnpj = createCNPJ();
+        UniqueIdentifier uniqueIdentifier = createUniqueIdentifier();
+        String name = createAccountName();
+        Email email = createAccountEmail();
+        String password = createAccountPassword();
 
         var builder = new SellerBuilder();
         var director = new AccountsDirector(builder);
-        director.createAccount(accountInfo, null, null);
+        director.createAccount(uniqueIdentifier, name, email, password, null);
         Seller seller = builder.getSeller();
 
         Program.Instance().getAccountController().insertNewAccount(seller);
@@ -128,19 +137,25 @@ public class CreateAccountMenu extends Menu {
         return seller;
     }
 
-    private AccountInfo createAccountInfo() {
-        System.out.print("    Name: ");
-        String name = scanner.nextLine();
-
-        String email = createAccountEmail();
-
-        System.out.print("    Password: ");
-        String password = scanner.nextLine();
-
-        return new AccountInfo(name, email, password);
+    private CPF createAccountCPF() {
+        return null;
     }
 
-    private String createAccountEmail() {
+    private UniqueIdentifier createUniqueIdentifier() {
+        return null;
+    }
+
+    private String createAccountName() {
+        System.out.print("    Name: ");
+        return scanner.nextLine();
+    }
+
+    private String createAccountPassword() {
+        System.out.print("    Password: ");
+        return scanner.nextLine();
+    }
+
+    private Email createAccountEmail() {
         Map<String, Account> accounts = Program.Instance().getAccountController().getAccountsMap();
 
         String email;
@@ -155,6 +170,6 @@ public class CreateAccountMenu extends Menu {
 
         } while (accounts.get(email) != null);
 
-        return email;
+        return new Email(email);
     }
 }

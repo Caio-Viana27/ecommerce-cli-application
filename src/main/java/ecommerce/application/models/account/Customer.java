@@ -1,7 +1,9 @@
 package ecommerce.application.models.account;
 
 import ecommerce.application.interfaces.Account;
+import ecommerce.application.interfaces.UniqueIdentifier;
 import ecommerce.application.models.Address;
+import ecommerce.application.models.Email;
 import ecommerce.application.models.product.Order;
 
 import java.util.LinkedList;
@@ -13,16 +15,17 @@ public class Customer extends Account {
 
     public Customer() {}
 
-    public Customer(String name, String email, String password, Address address) {
-        super(name, email, password, "customer");
+    public Customer(UniqueIdentifier uniqueIdentifier, String name, Email email, String password, Address address) {
+        super(uniqueIdentifier, name, email, password);
         this.orderHistory = new LinkedList<>();
         deliveryAddresses = new LinkedList<>();
         deliveryAddresses.add(address);
     }
 
-    public Customer(AccountInfo info) {
+    public Customer(AccountInfo info, Address address) {
         super(info);
-        deliveryAddresses = new LinkedList<>();
+        this.deliveryAddresses = new LinkedList<>();
+        deliveryAddresses.add(address);
         this.orderHistory = new LinkedList<>();
     }
 

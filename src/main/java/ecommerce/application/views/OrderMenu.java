@@ -24,13 +24,11 @@ public class OrderMenu extends Menu {
 
             OrderController controller = Program.instance.getOrderController();
             if (controller.closeOrder()) {
-                Message.orderFinished();
+                Message.confirmationMessage("Order finished", scanner);
             }
             else {
                 Message.noProducts();
             }
-
-            Message.confirmationMessage("Order finished", scanner);
 
             MenuManager.instance().getMenu(CustomerMenu.class).draw();
         });

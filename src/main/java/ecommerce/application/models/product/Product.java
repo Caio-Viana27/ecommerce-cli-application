@@ -1,14 +1,18 @@
 package ecommerce.application.models.product;
 
+import ecommerce.application.controllers.ProductController;
+
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 public class Product implements Serializable {
+
     private ProductInfo info;
     private int inventory;
 
 
-    public Product(String name, double price, int inStorage, String description, String category) {
-        info = new ProductInfo(name, price, description, category);
+    public Product(String name, BigDecimal price, int inStorage, String description, String category) {
+        info = new ProductInfo(ProductController.idCounter++, name, price, description, category);
         this.inventory = inStorage;
     }
 
@@ -36,11 +40,11 @@ public class Product implements Serializable {
         return info;
     }
 
-    public String getId() {
+    public long getId() {
         return info.getId();
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return info.getPrice();
     }
 

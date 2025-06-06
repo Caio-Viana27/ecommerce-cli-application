@@ -1,36 +1,37 @@
 package ecommerce.application.models.account;
 
-import ecommerce.application.models.IdGenerator;
+import ecommerce.application.interfaces.UniqueIdentifier;
+import ecommerce.application.models.Email;
 import ecommerce.application.models.Password;
-
 import java.io.Serializable;
 
 public class AccountInfo implements Serializable {
-    private String id;
+
+    private UniqueIdentifier uniqueIdentifier;
     private String name;
-    private String email;
+    private Email email;
     private Password password;
 
-    public AccountInfo(String name, String email, String password) {
-        id = "account" + IdGenerator.radomIdGenerator();
+    public AccountInfo(UniqueIdentifier uniqueIdentifier, String name, Email email, String password) {
+        this.uniqueIdentifier = uniqueIdentifier;
         this.name = name;
         this.email = email;
         this.password = new Password(password);
     }
 
-    public String getId() {
-        return id;
+    public UniqueIdentifier getUniqueIdentifier() {
+        return uniqueIdentifier;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getEmail() {
+    public Email getEmail() {
         return email;
     }
 
-    public boolean passwordMatches(String enteredPasswod) {
-        return password.passwordMatches(enteredPasswod);
+    public boolean passwordMatches(String enteredPassword) {
+        return password.passwordMatches(enteredPassword);
     }
 }

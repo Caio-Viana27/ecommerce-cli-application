@@ -18,9 +18,8 @@ public class SelectProductMenu extends Menu {
 
     public void menu() {
         clearConsole();
-        separator();
 
-        Map<String, Product> products = Program.Instance().getProductController().getProductsMap();
+        Map<Long, Product> products = Program.Instance().getProductController().getProductsMap();
 
         if (products.isEmpty()) {
             Message.noProductsAvailable();
@@ -52,16 +51,24 @@ public class SelectProductMenu extends Menu {
         MenuManager.instance().getMenu(OrderMenu.class).draw();
     }
 
-    private Product selectProduct(Map<String, Product> products) {
+    private Product selectProduct(Map<Long, Product> products) {
         while (true) {
             System.out.print("    ID: ");
-            String id = scanner.nextLine();
+            String productId = scanner.nextLine();
 
-            if ("0".equals(id)) {
+            if ("0".equals(productId)) {
                 return null;
             }
 
-            Product product = products.get(id);
+            long id;
+            Product product;
+            try {
+                id = Long.parseLong(productId);
+            } catch (NumberFormatException e) {
+                Message.invalidOption("id!");
+                continue;
+            }
+            product = products.get(id);
 
             if (product == null) {
                 Message.invalidOption("id!");

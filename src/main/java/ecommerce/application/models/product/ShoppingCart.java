@@ -1,27 +1,28 @@
 package ecommerce.application.models.product;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 
 public class ShoppingCart implements Serializable {
-    private double value;
-    private List<SoldProduct> cart;
+    private BigDecimal value = BigDecimal.ZERO;
+    private final List<SoldProduct> cart;
 
     public ShoppingCart() {
-        value = 0;
+        value = new BigDecimal(0);
         cart = new LinkedList<>();
     }
 
     public ShoppingCart(Product product, int amount) {
-        value = product.getPrice();
+        this.value = this.value.add(product.getPrice());
 
         cart = new LinkedList<>();
         cart.add(new SoldProduct(product.getInfo(), amount));
     }
 
     public void addProduct(SoldProduct product) {
-        value += (product.info().getPrice() * product.amount());
+        this.value = this.value.add(product.info().getPrice().multiply(new BigDecimal(product.amount())));
         cart.add(product);
     }
 
@@ -35,11 +36,7 @@ public class ShoppingCart implements Serializable {
         return cartInfo.toString();
     }
 
-    public boolean isEmpty() {
-        return cart.isEmpty();
-    }
+    public boolean isEmpty() { return cart.isEmpty(); }
 
-    public double getValue() {
-        return value;
-    }
+    public BigDecimal getValue() { return value; }
 }

@@ -24,7 +24,7 @@ public class DeleteAccountMenu extends Menu {
 
         for (var account : accountController.getAccountsList()) {
             if (!loggedAccount.getEmail().equals(account.getEmail())) {
-                System.out.println(account.getId());
+                System.out.println(account.getUniqueIdentifier());
                 System.out.println(account.getName());
                 System.out.println(account.getEmail());
                 separator();

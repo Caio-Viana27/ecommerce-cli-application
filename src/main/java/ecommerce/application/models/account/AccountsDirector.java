@@ -1,7 +1,9 @@
 package ecommerce.application.models.account;
 
 import ecommerce.application.interfaces.Builder;
+import ecommerce.application.interfaces.UniqueIdentifier;
 import ecommerce.application.models.Address;
+import ecommerce.application.models.Email;
 
 public class AccountsDirector {
 
@@ -11,10 +13,12 @@ public class AccountsDirector {
         this.builder = builder;
     }
 
-    public void createAccount(AccountInfo info, Address address, String cnpj) {
+    public void createAccount(UniqueIdentifier uniqueIdentifier, String name, Email email, String password, Address address) {
         builder.reset()
-                .setAccountInfo(info)
-                .setCNPJ(cnpj)
+                .setUniqueIdentifier(uniqueIdentifier)
+                .setName(name)
+                .setEmail(email)
+                .setPassword(password)
                 .addAddress(address);
     }
 }

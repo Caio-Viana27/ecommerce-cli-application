@@ -76,11 +76,6 @@ public class Message {
         scanner.nextLine();
     }
 
-    public static void orderFinished() {
-        Menu.separator();
-        System.out.println("    Order finished!");
-    }
-
     public static void confirmationMessage(String message, Scanner scanner) {
         Menu.separator();
         System.out.println("    " + message);

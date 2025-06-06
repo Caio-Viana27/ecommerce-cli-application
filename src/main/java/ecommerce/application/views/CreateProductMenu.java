@@ -4,6 +4,8 @@ import ecommerce.application.interfaces.Menu;
 import ecommerce.application.models.product.Product;
 import ecommerce.application.models.Program;
 
+import java.math.BigDecimal;
+
 public class CreateProductMenu extends Menu {
 
     public CreateProductMenu() {
@@ -31,7 +33,7 @@ public class CreateProductMenu extends Menu {
         System.out.print("    Category: ");
         String category = scanner.nextLine();
 
-        Product newpProduct = new Product(name, price, inventory, description, category);
+        Product newpProduct = new Product(name, new BigDecimal(price), inventory, description, category);
         Program.Instance().getProductController().insertNewProduct(newpProduct);
 
         Message.confirmationMessage("New product added", scanner);

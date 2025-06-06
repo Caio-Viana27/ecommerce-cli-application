@@ -1,32 +1,34 @@
 package ecommerce.application.models.product;
 
+import ecommerce.application.controllers.OrderController;
 import ecommerce.application.models.Address;
-import ecommerce.application.models.IdGenerator;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class Order implements Serializable {
-    private String id_Order;
+
+    private final Long id_Order;
     private Address deliveryAddress;
-    private LocalDateTime orderDate;
+    private final LocalDateTime orderDate;
     private ShoppingCart shoppingCart;
-    private double value;
+    private BigDecimal value = BigDecimal.ZERO;
 
     public Order(ShoppingCart shoppingCart) {
-        this.id_Order = new String("order." + IdGenerator.radomIdGenerator());
+        this.id_Order = OrderController.idCounter++;
         this.deliveryAddress = null;
         this.orderDate = LocalDateTime.now();
         this.shoppingCart = shoppingCart;
-        this.value = shoppingCart.getValue();
+        this.value = this.value.add(shoppingCart.getValue());
     }
 
     public Order(ShoppingCart shoppingCart, Address address) {
-        this.id_Order = new String("order." + IdGenerator.radomIdGenerator());
+        this.id_Order = OrderController.idCounter++;
         this.deliveryAddress = address;
         this.orderDate = LocalDateTime.now();
         this.shoppingCart = shoppingCart;
-        this.value = shoppingCart.getValue();
+        this.value = this.value.add(shoppingCart.getValue());
     }
 
     public void addProduct(Product product, int amount) {
@@ -57,6 +59,6 @@ public class Order implements Serializable {
         if (order == null)
             return true;
 
-        return this.value >= order.value;
+        return this.value.compareTo(order.value) >= 0;
     }
 }

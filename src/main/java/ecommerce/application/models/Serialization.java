@@ -1,6 +1,7 @@
 package ecommerce.application.models;
 
 import ecommerce.application.controllers.AccountController;
+import ecommerce.application.controllers.OrderController;
 import ecommerce.application.controllers.ProductController;
 import ecommerce.application.interfaces.Account;
 import ecommerce.application.models.product.Product;
@@ -16,14 +17,17 @@ public class Serialization {
              var in = new ObjectInputStream(loadFile)) {
 
             accountController.setAccounts((HashMap<String, Account>) in.readObject());
-            productController.setProducts((HashMap<String, Product>) in.readObject());
+            productController.setProducts((HashMap<Long, Product>) in.readObject());
+
+            ProductController.idCounter = (Long) in.readObject();
+            OrderController.idCounter = (Long) in.readObject();
 
             return true;
 
         } catch (IOException | ClassNotFoundException e) {
 
             accountController.setAccounts(new HashMap<String, Account>());
-            productController.setProducts(new HashMap<String, Product>());
+            productController.setProducts(new HashMap<Long, Product>());
 
             return false;
         }
@@ -36,6 +40,9 @@ public class Serialization {
 
             out.writeObject(accountController.getAccountsMap());
             out.writeObject(productController.getProductsMap());
+
+            out.writeObject(ProductController.idCounter);
+            out.writeObject(OrderController.idCounter);
 
             return true;
 

@@ -1,12 +1,14 @@
 package ecommerce.application.models.account;
 
 import ecommerce.application.interfaces.Account;
+import ecommerce.application.interfaces.UniqueIdentifier;
+import ecommerce.application.models.Email;
 
 public class Administrator extends Account {
     public Administrator() {}
 
-    public Administrator(String name, String email, String password) {
-        super(name, email, password, "admin");
+    public Administrator(UniqueIdentifier uniqueIdentifier, String name, Email email, String password) {
+        super(uniqueIdentifier, name, email, password);
     }
 
     public Administrator(AccountInfo info) {
