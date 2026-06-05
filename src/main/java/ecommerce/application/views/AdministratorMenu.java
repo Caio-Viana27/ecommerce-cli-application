@@ -13,30 +13,17 @@ public class AdministratorMenu extends Menu {
 
     public AdministratorMenu() {
         menuActions = new HashMap<>();
-    }
 
-    public void init() {
         addMenu("0", MenuManager.instance().getMenu(CreateAccountMenu.class)::draw);
         addMenu("1", MenuManager.instance().getMenu(CreateProductMenu.class)::draw);
         addMenu("2", MenuManager.instance().getMenu(ReportMenu.class)::draw);
         addMenu("3", MenuManager.instance().getMenu(ReportMenu.class)::draw);
-        addMenu("4", () -> {
-            SignInMenu.selectLoginMethod().draw();
-        });
+        addMenu("4", new LoginMenu().selectLoginMethod()::draw);
         addMenu("5", () -> Program.Instance().exit());
-    }
-
-    private void addMenu(String option, OnSelection action) {
-        menuActions.put(option, action);
     }
 
     @Override
     public void draw() {
-        init();
-        menu();
-    }
-
-    private void menu() {
         clearConsole();
         separator();
         System.out.println("    Administrator Menu\n");
@@ -67,5 +54,9 @@ public class AdministratorMenu extends Menu {
                 return menuOption;
             }
         }
+    }
+
+    private void addMenu(String option, OnSelection action) {
+        menuActions.put(option, action);
     }
 }

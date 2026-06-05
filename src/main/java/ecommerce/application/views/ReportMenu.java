@@ -14,9 +14,7 @@ public class ReportMenu extends Menu {
 
     public ReportMenu() {
         menuOptions = new HashMap<>();
-    }
 
-    public void init() {
         addMenu("0", this::drawReportMostExpensiveOrder);
         addMenu("1", this::drawReportProductWithLowestInventory);
         addMenu("2", this::drawFullReport);
@@ -29,11 +27,6 @@ public class ReportMenu extends Menu {
 
     @Override
     public void draw() {
-        init();
-        report();
-    }
-
-    private void report() {
         clearConsole();
         separator();
         System.out.println("    Report Menu\n");

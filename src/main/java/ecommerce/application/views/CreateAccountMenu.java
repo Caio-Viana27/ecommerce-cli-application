@@ -15,9 +15,7 @@ public class CreateAccountMenu extends Menu {
 
     public CreateAccountMenu() {
         menuOptions = new HashMap<>();
-    }
 
-    public void init() {
         addMenu("0", () -> {
             var _ignoreReturn = this.createAdministrator();
             MenuManager.instance().getMenu(SignInMenu.class).draw();
@@ -39,11 +37,6 @@ public class CreateAccountMenu extends Menu {
 
     @Override
     public void draw() {
-        init();
-        menu();
-    }
-
-    public void menu() {
         clearConsole();
         separator();
         System.out.println("    Create Account\n");

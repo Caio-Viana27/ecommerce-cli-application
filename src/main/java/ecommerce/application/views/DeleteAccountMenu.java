@@ -10,10 +10,6 @@ public class DeleteAccountMenu extends Menu {
 
     @Override
     public void draw() {
-        deleteAccount();
-    }
-
-    private void deleteAccount() {
         var accountController = Program.Instance().getAccountController();
         var loggedAccount = Program.Instance().getLoggedAccount();
 

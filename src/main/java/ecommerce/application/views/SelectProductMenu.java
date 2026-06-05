@@ -13,10 +13,6 @@ public class SelectProductMenu extends Menu {
 
     @Override
     public void draw() {
-        menu();
-    }
-
-    public void menu() {
         clearConsole();
 
         Map<Long, Product> products = Program.Instance().getProductController().getProductsMap();

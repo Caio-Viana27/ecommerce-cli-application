@@ -12,10 +12,7 @@ public class CreateAddressMenu extends Menu {
     @Override
     public void draw() {
         createdAddress = null;
-        menu();
-    }
 
-    private void menu() {
         separator();
         System.out.println("    Create Address\n");
 

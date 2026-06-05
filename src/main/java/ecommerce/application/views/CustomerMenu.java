@@ -13,14 +13,10 @@ public class CustomerMenu extends Menu {
 
     public CustomerMenu() {
         menuOptions = new HashMap<>();
-    }
 
-    public void init() {
         addMenu("0", MenuManager.instance().getMenu(OrderMenu.class)::draw);
         addMenu("1", this::addNewAddress);
-        addMenu("2", () -> {
-            SignInMenu.selectLoginMethod().draw();
-        });
+        addMenu("2", new LoginMenu().selectLoginMethod()::draw);
         addMenu("3", () -> {
             var deleteAccountMenu = (DeleteAccountMenu) MenuManager.instance().getMenu(DeleteAccountMenu.class);
             deleteAccountMenu.deleteAccount(Program.Instance().getLoggedAccount());
@@ -35,11 +31,6 @@ public class CustomerMenu extends Menu {
 
     @Override
     public void draw() {
-        init();
-        menu();
-    }
-
-    private void menu() {
         clearConsole();
         separator();
         System.out.println("    Customer Menu\n");

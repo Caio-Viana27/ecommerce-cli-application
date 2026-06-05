@@ -13,10 +13,6 @@ public class CreateProductMenu extends Menu {
 
     @Override
     public void draw() {
-        createProduct();
-    }
-
-    public void createProduct() {
         clearConsole();
         separator();
         System.out.println("    Menu Create product\n");

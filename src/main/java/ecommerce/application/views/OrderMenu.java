@@ -22,7 +22,7 @@ public class OrderMenu extends Menu {
         addMenu("2", () -> {
             clearConsole();
 
-            OrderController controller = Program.instance.getOrderController();
+            OrderController controller = Program.Instance().getOrderController();
             if (controller.closeOrder()) {
                 Message.confirmationMessage("Order finished", scanner);
             }
@@ -74,7 +74,7 @@ public class OrderMenu extends Menu {
         clearConsole();
         separator();
 
-        Order order = Program.instance.getOrderController().getCurrentOrder();
+        Order order = Program.Instance().getOrderController().getCurrentOrder();
 
         if (order == null) {
             Message.thereAreNoOrders();
