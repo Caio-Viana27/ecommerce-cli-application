@@ -1,7 +1,6 @@
 package ecommerce.application.views;
 
-import ecommerce.application.interfaces.Menu;
-import ecommerce.application.models.Program;
+import ecommerce.application.Program;
 
 public class LoginMenu extends Menu {
 
@@ -13,7 +12,6 @@ public class LoginMenu extends Menu {
     public final Menu selectLoginMethod() {
 
         while (true) {
-            clearConsole();
             separator();
             System.out.println("    Select a login method\n");
             System.out.println("    0 - Sign in");

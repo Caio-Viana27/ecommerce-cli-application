@@ -1,6 +1,4 @@
-package ecommerce.application.models;
-
-import ecommerce.application.interfaces.UniqueIdentifier;
+package ecommerce.application.models.account;
 
 public class CNPJ extends UniqueIdentifier {
     private final String cnpj;

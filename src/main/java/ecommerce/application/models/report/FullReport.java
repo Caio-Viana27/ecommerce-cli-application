@@ -1,8 +1,7 @@
-package ecommerce.application;
+package ecommerce.application.models.report;
 
-import ecommerce.application.interfaces.Report;
-import ecommerce.application.interfaces.Menu;
-import ecommerce.application.models.Program;
+import ecommerce.application.views.Menu;
+import ecommerce.application.Program;
 
 public class FullReport implements Report {
 

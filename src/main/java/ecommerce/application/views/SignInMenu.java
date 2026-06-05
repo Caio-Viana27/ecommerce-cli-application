@@ -1,12 +1,11 @@
 package ecommerce.application.views;
 
+import ecommerce.application.Program;
 import ecommerce.application.controllers.AccountController;
-import ecommerce.application.interfaces.Account;
-import ecommerce.application.interfaces.Menu;
-import ecommerce.application.models.*;
-import ecommerce.application.models.account.Administrator;
-import ecommerce.application.models.account.Customer;
-import ecommerce.application.models.account.Seller;
+import ecommerce.application.models.account.Account;
+import ecommerce.application.models.account.admin.Administrator;
+import ecommerce.application.models.account.customer.Customer;
+import ecommerce.application.models.account.seller.Seller;
 
 import java.util.HashMap;
 import java.util.Map;

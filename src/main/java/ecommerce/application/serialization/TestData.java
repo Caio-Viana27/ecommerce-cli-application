@@ -1,9 +1,13 @@
-package ecommerce.application.models;
+package ecommerce.application.serialization;
 
 import ecommerce.application.controllers.AccountController;
 import ecommerce.application.controllers.ProductController;
-import ecommerce.application.models.account.Administrator;
-import ecommerce.application.models.account.Customer;
+import ecommerce.application.models.account.Address;
+import ecommerce.application.models.account.CPF;
+import ecommerce.application.models.account.Email;
+import ecommerce.application.models.account.PostalCode;
+import ecommerce.application.models.account.admin.Administrator;
+import ecommerce.application.models.account.customer.Customer;
 import ecommerce.application.models.product.Product;
 
 import java.math.BigDecimal;

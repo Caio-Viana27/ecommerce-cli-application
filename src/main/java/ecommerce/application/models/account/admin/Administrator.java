@@ -1,8 +1,9 @@
-package ecommerce.application.models.account;
+package ecommerce.application.models.account.admin;
 
-import ecommerce.application.interfaces.Account;
-import ecommerce.application.interfaces.UniqueIdentifier;
-import ecommerce.application.models.Email;
+import ecommerce.application.models.account.Account;
+import ecommerce.application.models.account.AccountInfo;
+import ecommerce.application.models.account.UniqueIdentifier;
+import ecommerce.application.models.account.Email;
 
 public class Administrator extends Account {
     public Administrator() {}

@@ -1,6 +1,4 @@
-package ecommerce.application.models;
-
-import ecommerce.application.interfaces.UniqueIdentifier;
+package ecommerce.application.models.account;
 
 public class CPF extends UniqueIdentifier {
     private final String cpf;

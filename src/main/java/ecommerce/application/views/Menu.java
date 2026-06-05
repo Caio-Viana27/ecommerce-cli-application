@@ -1,4 +1,4 @@
-package ecommerce.application.interfaces;
+package ecommerce.application.views;
 
 import java.util.Scanner;
 

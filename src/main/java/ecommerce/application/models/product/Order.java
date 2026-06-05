@@ -1,7 +1,7 @@
 package ecommerce.application.models.product;
 
 import ecommerce.application.controllers.OrderController;
-import ecommerce.application.models.Address;
+import ecommerce.application.models.account.Address;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

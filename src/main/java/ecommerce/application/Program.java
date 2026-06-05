@@ -1,13 +1,14 @@
-package ecommerce.application.models;
+package ecommerce.application;
 
 import ecommerce.application.controllers.AccountController;
 import ecommerce.application.controllers.OrderController;
 import ecommerce.application.controllers.ProductController;
-import ecommerce.application.interfaces.Account;
-import ecommerce.application.interfaces.Menu;
+import ecommerce.application.models.account.Account;
+import ecommerce.application.serialization.Serialization;
+import ecommerce.application.serialization.TestData;
+import ecommerce.application.views.Menu;
 import ecommerce.application.views.LoginMenu;
 import ecommerce.application.views.Message;
-import ecommerce.application.views.SignInMenu;
 
 public class Program {
     private static Program instance = null;
@@ -20,7 +21,7 @@ public class Program {
 
     private final Serialization data = new Serialization();
 
-    public void init() throws Exception {
+    public void init() {
         loadData();
 
         Menu login = (new LoginMenu().selectLoginMethod());

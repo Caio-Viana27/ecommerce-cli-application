@@ -1,10 +1,8 @@
 package ecommerce.application.views;
 
-import ecommerce.application.FullReport;
-import ecommerce.application.ReportLowestInventoryProduct;
-import ecommerce.application.ReportMostExpensiveOrder;
-import ecommerce.application.interfaces.Menu;
-import ecommerce.application.interfaces.OnSelection;
+import ecommerce.application.models.report.FullReport;
+import ecommerce.application.models.report.ReportLowestInventoryProduct;
+import ecommerce.application.models.report.ReportMostExpensiveOrder;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package ecommerce.application.models;
+package ecommerce.application.models.account;
 
 import java.io.Serializable;
 

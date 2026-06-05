@@ -1,10 +1,9 @@
-package ecommerce.application;
+package ecommerce.application.models.report;
 
-import ecommerce.application.interfaces.Report;
-import ecommerce.application.models.account.Customer;
+import ecommerce.application.models.account.customer.Customer;
 import ecommerce.application.models.product.Order;
-import ecommerce.application.models.Program;
-import ecommerce.application.interfaces.Menu;
+import ecommerce.application.Program;
+import ecommerce.application.views.Menu;
 import ecommerce.application.views.Message;
 
 public class ReportMostExpensiveOrder implements Report {

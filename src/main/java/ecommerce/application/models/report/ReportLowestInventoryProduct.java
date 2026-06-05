@@ -1,9 +1,8 @@
-package ecommerce.application;
+package ecommerce.application.models.report;
 
-import ecommerce.application.interfaces.Report;
+import ecommerce.application.Program;
 import ecommerce.application.models.product.Product;
-import ecommerce.application.interfaces.Menu;
-import ecommerce.application.models.Program;
+import ecommerce.application.views.Menu;
 import ecommerce.application.views.Message;
 
 public class ReportLowestInventoryProduct implements Report {

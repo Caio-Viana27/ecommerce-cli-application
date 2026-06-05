@@ -1,9 +1,9 @@
-package ecommerce.application.models;
+package ecommerce.application.serialization;
 
 import ecommerce.application.controllers.AccountController;
 import ecommerce.application.controllers.OrderController;
 import ecommerce.application.controllers.ProductController;
-import ecommerce.application.interfaces.Account;
+import ecommerce.application.models.account.Account;
 import ecommerce.application.models.product.Product;
 
 import java.io.*;

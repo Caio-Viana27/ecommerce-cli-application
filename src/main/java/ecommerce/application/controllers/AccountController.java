@@ -1,6 +1,6 @@
 package ecommerce.application.controllers;
 
-import ecommerce.application.interfaces.Account;
+import ecommerce.application.models.account.Account;
 
 import java.util.Collection;
 import java.util.Map;

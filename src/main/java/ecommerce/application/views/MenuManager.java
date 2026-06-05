@@ -1,7 +1,5 @@
 package ecommerce.application.views;
 
-import ecommerce.application.interfaces.Menu;
-
 import java.util.HashMap;
 import java.util.Map;
 

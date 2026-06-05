@@ -1,9 +1,6 @@
-package ecommerce.application.models.account;
+package ecommerce.application.models.account.customer;
 
-import ecommerce.application.interfaces.Account;
-import ecommerce.application.interfaces.UniqueIdentifier;
-import ecommerce.application.models.Address;
-import ecommerce.application.models.Email;
+import ecommerce.application.models.account.*;
 import ecommerce.application.models.product.Order;
 
 import java.util.LinkedList;

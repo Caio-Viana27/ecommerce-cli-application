@@ -1,9 +1,7 @@
 package ecommerce.application.views;
 
 import ecommerce.application.controllers.OrderController;
-import ecommerce.application.interfaces.Menu;
-import ecommerce.application.interfaces.OnSelection;
-import ecommerce.application.models.Program;
+import ecommerce.application.Program;
 import ecommerce.application.models.product.Order;
 
 import java.util.HashMap;

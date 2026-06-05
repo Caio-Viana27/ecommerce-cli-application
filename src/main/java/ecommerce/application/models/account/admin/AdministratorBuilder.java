@@ -1,10 +1,11 @@
-package ecommerce.application.models.account;
+package ecommerce.application.models.account.admin;
 
-import ecommerce.application.interfaces.Builder;
-import ecommerce.application.interfaces.UniqueIdentifier;
-import ecommerce.application.models.Email;
+import ecommerce.application.models.account.AccountBuilder;
+import ecommerce.application.models.account.AccountInfo;
+import ecommerce.application.models.account.UniqueIdentifier;
+import ecommerce.application.models.account.Email;
 
-public class AdministratorBuilder extends Builder {
+public class AdministratorBuilder extends AccountBuilder {
 
     private UniqueIdentifier uniqueIdentifier;
     private String name;
@@ -12,7 +13,7 @@ public class AdministratorBuilder extends Builder {
     private String password;
 
     @Override
-    public Builder reset() {
+    public AccountBuilder reset() {
         this.uniqueIdentifier = null;
         this.name = null;
         this.email = null;
@@ -21,25 +22,25 @@ public class AdministratorBuilder extends Builder {
     }
 
     @Override
-    public Builder setUniqueIdentifier(UniqueIdentifier uniqueIdentifier) {
+    public AccountBuilder setUniqueIdentifier(UniqueIdentifier uniqueIdentifier) {
         this.uniqueIdentifier = uniqueIdentifier;
         return this;
     }
 
     @Override
-    public Builder setName(String name) {
+    public AccountBuilder setName(String name) {
         this.name = name;
         return this;
     }
 
     @Override
-    public Builder setEmail(Email email) {
+    public AccountBuilder setEmail(Email email) {
         this.email = email;
         return this;
     }
 
     @Override
-    public Builder setPassword(String password) {
+    public AccountBuilder setPassword(String password) {
         this.password = password;
         return this;
     }

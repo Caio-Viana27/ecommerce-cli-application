@@ -1,11 +1,13 @@
 package ecommerce.application.views;
 
-import ecommerce.application.interfaces.Account;
-import ecommerce.application.interfaces.Menu;
-import ecommerce.application.interfaces.OnSelection;
-import ecommerce.application.interfaces.UniqueIdentifier;
-import ecommerce.application.models.*;
+import ecommerce.application.Program;
 import ecommerce.application.models.account.*;
+import ecommerce.application.models.account.admin.Administrator;
+import ecommerce.application.models.account.admin.AdministratorBuilder;
+import ecommerce.application.models.account.customer.Customer;
+import ecommerce.application.models.account.customer.CustomerBuilder;
+import ecommerce.application.models.account.seller.Seller;
+import ecommerce.application.models.account.seller.SellerBuilder;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,7 +1,7 @@
 package ecommerce.application.controllers;
 
-import ecommerce.application.models.Program;
-import ecommerce.application.models.account.Customer;
+import ecommerce.application.Program;
+import ecommerce.application.models.account.customer.Customer;
 import ecommerce.application.models.product.Order;
 import ecommerce.application.models.product.Product;
 import ecommerce.application.models.product.ShoppingCart;

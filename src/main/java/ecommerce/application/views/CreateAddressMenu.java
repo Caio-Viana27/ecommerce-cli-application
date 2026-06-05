@@ -1,8 +1,7 @@
 package ecommerce.application.views;
 
-import ecommerce.application.interfaces.Menu;
-import ecommerce.application.models.Address;
-import ecommerce.application.models.PostalCode;
+import ecommerce.application.models.account.Address;
+import ecommerce.application.models.account.PostalCode;
 
 public class CreateAddressMenu extends Menu {
     private Address createdAddress;

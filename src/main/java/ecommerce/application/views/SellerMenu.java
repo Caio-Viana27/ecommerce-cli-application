@@ -1,7 +1,5 @@
 package ecommerce.application.views;
 
-import ecommerce.application.interfaces.Menu;
-
 public class SellerMenu extends Menu {
 
     public SellerMenu() {

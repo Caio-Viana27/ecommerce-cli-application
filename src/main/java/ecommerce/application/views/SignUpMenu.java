@@ -1,10 +1,9 @@
 package ecommerce.application.views;
 
-import ecommerce.application.interfaces.Account;
-import ecommerce.application.interfaces.Menu;
-import ecommerce.application.models.Program;
-import ecommerce.application.models.account.Customer;
-import ecommerce.application.models.account.Seller;
+import ecommerce.application.models.account.Account;
+import ecommerce.application.models.account.customer.Customer;
+import ecommerce.application.models.account.seller.Seller;
+import ecommerce.application.Program;
 
 public class SignUpMenu extends Menu {
 

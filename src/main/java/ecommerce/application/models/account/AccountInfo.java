@@ -1,8 +1,5 @@
 package ecommerce.application.models.account;
 
-import ecommerce.application.interfaces.UniqueIdentifier;
-import ecommerce.application.models.Email;
-import ecommerce.application.models.Password;
 import java.io.Serializable;
 
 public class AccountInfo implements Serializable {

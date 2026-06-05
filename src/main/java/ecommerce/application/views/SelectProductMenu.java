@@ -1,8 +1,7 @@
 package ecommerce.application.views;
 
-import ecommerce.application.interfaces.Menu;
 import ecommerce.application.models.product.Product;
-import ecommerce.application.models.Program;
+import ecommerce.application.Program;
 
 import java.util.Map;
 
