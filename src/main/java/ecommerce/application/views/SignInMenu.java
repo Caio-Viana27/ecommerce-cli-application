@@ -16,71 +16,24 @@ public class SignInMenu extends Menu {
 
     public SignInMenu() {
         menus = new HashMap<>();
-    }
-
-    public void init() {
         addMenu(Customer.class, new CustomerMenu());
         addMenu(Administrator.class, new AdministratorMenu());
         addMenu(Seller.class, new SellerMenu());
     }
 
-    private void addMenu(Class<? extends Account> accountClass, Menu menu) {
-        menus.put(accountClass, menu);
-    }
-
-    public Menu getMenu(Class<? extends Account> key) {
-        return menus.get(key);
-    }
-
     @Override
     public void draw() {
-        init();
-        Program.Instance().setLoggedAccount(null);
-        menu();
-    }
-
-    private void menu() {
         AccountController accountController = Program.Instance().getAccountController();
 
         clearConsole();
         separator();
         Message.login();
-
         Account account = selectAccount(accountController.getAccountsMap());
-
         enterPassword(account);
-
         clearConsole();
 
         Program.Instance().setLoggedAccount(account);
-
         menus.get(account.getClass()).draw();
-    }
-
-    public static Menu selectLoginMethod() {
-
-        while (true) {
-            clearConsole();
-            separator();
-            System.out.println("    Select a login method\n");
-            System.out.println("    0 - Sign in");
-            System.out.println("    1 - Sign up");
-            System.out.println("    2 - Exit\n");
-            System.out.print(  "    option: ");
-
-            String option = scanner.nextLine();
-
-            if ("2".equals(option)) {
-                Program.Instance().exit();
-            }
-            if ("1".equals(option)) {
-                return MenuManager.instance().getMenu(SignUpMenu.class);
-            }
-            if ("0".equals(option)) {
-                return MenuManager.instance().getMenu(SignInMenu.class);
-            }
-            Message.invalidOption("option!");
-        }
     }
 
     private Account selectAccount(Map<String, Account> accounts) {
@@ -121,5 +74,13 @@ public class SignInMenu extends Menu {
                 Message.invalidOption("password, Try again!");
             }
         }
+    }
+
+    private void addMenu(Class<? extends Account> accountClass, Menu menu) {
+        menus.put(accountClass, menu);
+    }
+
+    public Menu getMenu(Class<? extends Account> key) {
+        return menus.get(key);
     }
 }

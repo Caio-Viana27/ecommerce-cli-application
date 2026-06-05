@@ -5,11 +5,12 @@ import ecommerce.application.controllers.OrderController;
 import ecommerce.application.controllers.ProductController;
 import ecommerce.application.interfaces.Account;
 import ecommerce.application.interfaces.Menu;
+import ecommerce.application.views.LoginMenu;
 import ecommerce.application.views.Message;
 import ecommerce.application.views.SignInMenu;
 
 public class Program {
-    public static Program instance = null;
+    private static Program instance = null;
 
     private Account loggedAccount = null;
 
@@ -22,7 +23,7 @@ public class Program {
     public void init() throws Exception {
         loadData();
 
-        Menu login = SignInMenu.selectLoginMethod();
+        Menu login = (new LoginMenu().selectLoginMethod());
 
         Thread UIThread = new Thread(login, "UI-Thread");
         UIThread.start();

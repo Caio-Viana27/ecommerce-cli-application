@@ -35,7 +35,6 @@ public class SignUpMenu extends Menu {
         Message.confirmationMessage("Account created", scanner);
 
         var signIn = (SignInMenu) MenuManager.instance().getMenu(SignInMenu.class);
-        signIn.init();
 
         Program.Instance().setLoggedAccount(newAccount);
 
